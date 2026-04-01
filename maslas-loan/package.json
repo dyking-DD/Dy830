@@ -1,0 +1,28 @@
+{
+  "name": "maslas-feishu-app",
+  "version": "1.0.0",
+  "description": "MASLAS - 多节点智能体汽车分期协作系统 - 飞书小程序",
+  "main": "api-server-sqlite.js",
+  "scripts": {
+    "start": "node api-server-sqlite.js",
+    "dev": "nodemon api-server-sqlite.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "maslas",
+    "loan",
+    "feishu",
+    "car"
+  ],
+  "author": "特内斯",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mysql2": "^3.6.0",
+    "cors": "^2.8.5",
+    "body-parser": "^1.20.2",
+    "nodemon": "^3.0.1"
+  }
+}

@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>汽车分期报单系统</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .form {
+            padding: 30px 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .form-group label .required {
+            color: #ef4444;
+            margin-left: 2px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 15px;
+            transition: all 0.3s;
+            background: #f9fafb;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-group select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23666'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 20px;
+            padding-right: 40px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .submit-btn:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .success-message {
+            background: #d1fae5;
+            border: 2px solid #10b981;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            color: #065f46;
+            display: none;
+        }
+
+        .success-message h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .error-message {
+            background: #fee2e2;
+            border: 2px solid #ef4444;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            color: #991b1b;
+            display: none;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .loading::after {
+            content: "提交中...";
+            font-size: 16px;
+            color: #667eea;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .hint {
+            font-size: 12px;
+            color: #6b7280;
+            margin-top: 4px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        @media (max-width: 480px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            body {
+                padding: 10px;
+            }
+
+            .form {
+                padding: 20px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚗 汽车分期报单系统</h1>
+            <p>MASLAS - 多节点智能体汽车分期协作系统</p>
+        </div>
+
+        <div class="form">
+            <form id="loanForm">
+                <!-- 基本信息 -->
+                <div class="form-group">
+                    <label for="name">客户姓名<span class="required">*</span></label>
+                    <input type="text" id="name" name="name" required placeholder="请输入客户姓名">
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">联系电话<span class="required">*</span></label>
+                    <input type="tel" id="phone" name="phone" required placeholder="请输入11位手机号" pattern="[0-9]{11}">
+                    <div class="hint">必须是11位数字</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="idCard">身份证号<span class="required">*</span></label>
+                    <input type="text" id="idCard" name="idCard" required placeholder="请输入18位身份证号" pattern="[0-9X]{18}">
+                    <div class="hint">必须是18位数字或X结尾</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="salesperson">业务员姓名<span class="required">*</span></label>
+                    <input type="text" id="salesperson" name="salesperson" required placeholder="请输入业务员姓名">
+                </div>
+
+                <!-- 车辆信息 -->
+                <div class="form-group">
+                    <label for="carModel">车型<span class="required">*</span></label>
+                    <select id="carModel" name="carModel" required>
+                        <option value="">请选择车型</option>
+                        <option value="奥迪A4">奥迪A4</option>
+                        <option value="奥迪A6">奥迪A6</option>
+                        <option value="奥迪Q5">奥迪Q5</option>
+                        <option value="宝马3系">宝马3系</option>
+                        <option value="宝马5系">宝马5系</option>
+                        <option value="宝马X3">宝马X3</option>
+                        <option value="奔驰C级">奔驰C级</option>
+                        <option value="奔驰E级">奔驰E级</option>
+                        <option value="奔驰GLC">奔驰GLC</option>
+                        <option value="其他">其他</option>
+                    </select>
+                </div>
+
+                <!-- 金融信息 -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="carPrice">车价（万元）<span class="required">*</span></label>
+                        <input type="number" id="carPrice" name="carPrice" required placeholder="车价" step="0.1" min="1">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="downPayment">首付（万元）<span class="required">*</span></label>
+                        <input type="number" id="downPayment" name="downPayment" required placeholder="首付" step="0.1" min="1">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="loanAmount">贷款金额（万元）<span class="required">*</span></label>
+                        <input type="number" id="loanAmount" name="loanAmount" required placeholder="贷款金额" step="0.1" min="1">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="loanTerm">贷款期数<span class="required">*</span></label>
+                        <select id="loanTerm" name="loanTerm" required>
+                            <option value="">请选择期数</option>
+                            <option value="12">12期</option>
+                            <option value="24">24期</option>
+                            <option value="36">36期</option>
+                            <option value="48">48期</option>
+                            <option value="60">60期</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="notes">备注说明</label>
+                    <input type="text" id="notes" name="notes" placeholder="可选：填写备注说明">
+                    <div class="hint">如：特殊要求、附加条件等</div>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submitBtn">提交报单</button>
+            </form>
+
+            <div class="loading" id="loading"></div>
+            <div class="success-message" id="successMessage">
+                <h3>✅ 提交成功！</h3>
+                <p>您的报单已提交，请等待审核</p>
+                <p style="margin-top: 10px; font-size: 14px;">报单编号：<span id="orderId"></span></p>
+            </div>
+            <div class="error-message" id="errorMessage">
+                <h3>❌ 提交失败</h3>
+                <p id="errorText"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 表单提交处理
+        document.getElementById('loanForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            // 获取表单数据
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData.entries());
+
+            // 验证数据
+            if (!data.name || !data.phone || !data.idCard || !data.carModel) {
+                showError('请填写所有必填项');
+                return;
+            }
+
+            // 手机号验证
+            if (!/^1[3-9]\d{9}$/.test(data.phone)) {
+                showError('手机号格式不正确');
+                return;
+            }
+
+            // 身份证验证
+            if (!/^\d{17}[\dX]$/.test(data.idCard)) {
+                showError('身份证号格式不正确');
+                return;
+            }
+
+            // 显示加载状态
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('submitBtn').disabled = true;
+
+            try {
+                // 生成订单号
+                const orderId = 'ORD' + Date.now();
+                data.orderId = orderId;
+                data.submitTime = new Date().toISOString();
+                data.status = 'pending';
+
+                // 发送到后端API
+                const response = await fetch('/api/loan-application', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    // 显示成功消息
+                    document.getElementById('orderId').textContent = orderId;
+                    document.getElementById('successMessage').style.display = 'block';
+                    document.getElementById('loanForm').style.display = 'none';
+
+                    // 3秒后重定向到我的报单页面
+                    setTimeout(() => {
+                        window.location.href = '/my-orders.html';
+                    }, 3000);
+                } else {
+                    showError(result.message || '提交失败，请重试');
+                }
+            } catch (error) {
+                console.error('提交错误:', error);
+                showError('网络错误，请稍后重试');
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('submitBtn').disabled = false;
+            }
+        });
+
+        function showError(message) {
+            document.getElementById('errorText').textContent = message;
+            document.getElementById('errorMessage').style.display = 'block';
+
+            setTimeout(() => {
+                document.getElementById('errorMessage').style.display = 'none';
+            }, 5000);
+        }
+
+        // 自动计算贷款金额
+        document.getElementById('carPrice').addEventListener('input', function() {
+            const carPrice = parseFloat(this.value) || 0;
+            const downPayment = parseFloat(document.getElementById('downPayment').value) || 0;
+            const loanAmount = Math.max(0, carPrice - downPayment);
+            document.getElementById('loanAmount').value = loanAmount.toFixed(1);
+        });
+
+        document.getElementById('downPayment').addEventListener('input', function() {
+            const carPrice = parseFloat(document.getElementById('carPrice').value) || 0;
+            const downPayment = parseFloat(this.value) || 0;
+            const loanAmount = Math.max(0, carPrice - downPayment);
+            document.getElementById('loanAmount').value = loanAmount.toFixed(1);
+        });
+    </script>
+</body>
+</html>
