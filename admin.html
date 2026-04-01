@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MASLAS 汽车分期 - 管理后台</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f5f5; padding: 20px; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        h1 { color: #333; margin-bottom: 20px; }
+        
+        /* 统计卡片 */
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-bottom: 30px; }
+        .stat-card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); text-align: center; }
+        .stat-card .number { font-size: 36px; font-weight: bold; color: #1890ff; }
+        .stat-card .label { color: #666; margin-top: 5px; }
+        .stat-card.today .number { color: #52c41a; }
+        .stat-card.pending .number { color: #faad14; }
+        .stat-card.approved .number { color: #52c41a; }
+        .stat-card.rejected .number { color: #ff4d4f; }
+        
+        /* 刷新按钮 */
+        .refresh-btn { background: #1890ff; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 14px; }
+        .refresh-btn:hover { background: #40a9ff; }
+        
+        /* 报单列表 */
+        .orders { background: white; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); overflow: hidden; }
+        .order-item { padding: 20px; border-bottom: 1px solid #f0f0f0; }
+        .order-item:last-child { border-bottom: none; }
+        .order-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .order-id { font-weight: bold; color: #333; font-size: 14px; }
+        .order-time { color: #999; font-size: 12px; }
+        .order-customer { font-size: 18px; color: #333; margin-bottom: 8px; }
+        .order-details { display: flex; flex-wrap: wrap; gap: 15px; color: #666; font-size: 13px; margin-bottom: 15px; }
+        .order-detail span { color: #333; }
+        .status { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; }
+        .status.pending { background: #fffbe6; color: #faad14; }
+        .status.approved { background: #f6ffed; color: #52c41a; }
+        .status.rejected { background: #fff1f0; color: #ff4d4f; }
+        
+        /* 操作按钮 */
+        .actions { display: flex; gap: 10px; }
+        .btn { padding: 8px 16px; border: none; border-radius: 5px; cursor: pointer; font-size: 13px; }
+        .btn-approve { background: #52c41a; color: white; }
+        .btn-approve:hover { background: #73d13d; }
+        .btn-reject { background: #ff4d4f; color: white; }
+        .btn-reject:hover { background: #ff7875; }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        
+        /* 空状态 */
+        .empty { text-align: center; padding: 60px 20px; color: #999; }
+        
+        /* 风险等级 */
+        .risk-level { font-size: 12px; padding: 2px 8px; border-radius: 3px; }
+        .risk-level.low { background: #f6ffed; color: #52c41a; }
+        .risk-level.medium { background: #fffbe6; color: #faad14; }
+        .risk-level.high { background: #fff1f0; color: #ff4d4f; }
+        
+        /* 加载状态 */
+        .loading { text-align: center; padding: 40px; color: #999; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚗 MASLAS 汽车分期 - 管理后台</h1>
+        
+        <!-- 统计 -->
+        <div class="stats">
+            <div class="stat-card today">
+                <div class="number" id="stat-today">-</div>
+                <div class="label">今日新增</div>
+            </div>
+            <div class="stat-card pending">
+                <div class="number" id="stat-pending">-</div>
+                <div class="label">待审批</div>
+            </div>
+            <div class="stat-card approved">
+                <div class="number" id="stat-approved">-</div>
+                <div class="label">已通过</div>
+            </div>
+            <div class="stat-card rejected">
+                <div class="number" id="stat-rejected">-</div>
+                <div class="label">已拒绝</div>
+            </div>
+            <div class="stat-card">
+                <div class="number" id="stat-total">-</div>
+                <div class="label">总报单</div>
+            </div>
+        </div>
+        
+        <div style="margin-bottom: 15px;">
+            <button class="refresh-btn" onclick="loadData()">🔄 刷新数据</button>
+            <span style="color: #999; margin-left: 15px; font-size: 13px;">自动刷新: 30秒</span>
+        </div>
+        
+        <!-- 报单列表 -->
+        <div class="orders" id="orders-list">
+            <div class="loading">加载中...</div>
+        </div>
+    </div>
+    
+    <script>
+        const API_BASE = '';
+        let autoRefresh;
+        
+        async function loadData() {
+            await Promise.all([loadStats(), loadOrders()]);
+        }
+        
+        async function loadStats() {
+            try {
+                const res = await fetch(API_BASE + '/api/statistics');
+                const data = await res.json();
+                if (data.success) {
+                    document.getElementById('stat-today').textContent = data.statistics.today;
+                    document.getElementById('stat-pending').textContent = data.statistics.pending;
+                    document.getElementById('stat-approved').textContent = data.statistics.approved;
+                    document.getElementById('stat-rejected').textContent = data.statistics.rejected;
+                    document.getElementById('stat-total').textContent = data.statistics.total;
+                }
+            } catch (e) {
+                console.error('统计加载失败:', e);
+            }
+        }
+        
+        async function loadOrders() {
+            const container = document.getElementById('orders-list');
+            container.innerHTML = '<div class="loading">加载中...</div>';
+            
+            try {
+                const res = await fetch(API_BASE + '/api/all-orders');
+                const data = await res.json();
+                
+                if (!data.success || !data.orders || data.orders.length === 0) {
+                    container.innerHTML = '<div class="empty">暂无报单数据</div>';
+                    return;
+                }
+                
+                container.innerHTML = data.orders.map(order => `
+                    <div class="order-item">
+                        <div class="order-header">
+                            <span class="order-id">${order.order_id}</span>
+                            <span class="order-time">${new Date(order.submit_time).toLocaleString('zh-CN')}</span>
+                        </div>
+                        <div class="order-customer">👤 ${order.name} <span style="font-size:14px;color:#666;">📱 ${order.phone}</span></div>
+                        <div class="order-details">
+                            <div class="order-detail">车型: <span>${order.car_model}</span></div>
+                            <div class="order-detail">车价: <span>${order.car_price}万</span></div>
+                            <div class="order-detail">首付: <span>${order.down_payment}万</span></div>
+                            <div class="order-detail">贷款: <span>${order.loan_amount}万</span></div>
+                            <div class="order-detail">期数: <span>${order.loan_term}期</span></div>
+                            <div class="order-detail">业务员: <span>${order.salesperson}</span></div>
+                            ${order.risk_level ? `<div class="order-detail">风险: <span class="risk-level ${order.risk_level}">${order.risk_level === 'low' ? '低' : order.risk_level === 'medium' ? '中' : '高'}</span></div>` : ''}
+                        </div>
+                        <div style="display:flex;justify-content:space-between;align-items:center;">
+                            <span class="status ${order.status}">${order.status === 'pending' ? '待审批' : order.status === 'approved' ? '已通过' : '已拒绝'}</span>
+                            <div class="actions">
+                                ${order.status === 'pending' ? `
+                                    <button class="btn btn-approve" onclick="approveOrder('${order.order_id}')">✅ 通过</button>
+                                    <button class="btn btn-reject" onclick="rejectOrder('${order.order_id}')">❌ 拒绝</button>
+                                ` : `<span style="color:#999;font-size:13px;">${order.remarks || ''} ${order.approver ? '• 审批人: ' + order.approver : ''}</span>`}
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (e) {
+                container.innerHTML = '<div class="empty">加载失败，请刷新重试</div>';
+                console.error(e);
+            }
+        }
+        
+        async function approveOrder(orderId) {
+            if (!confirm('确认通过此报单？')) return;
+            const remarks = prompt('审批备注（可选）:', '');
+            
+            try {
+                const res = await fetch(API_BASE + '/api/approve-order', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        orderId, 
+                        status: 'approved',
+                        riskLevel: 'low',
+                        remarks: remarks || '审批通过'
+                    })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    alert('审批成功！');
+                    loadData();
+                } else {
+                    alert('审批失败: ' + data.message);
+                }
+            } catch (e) {
+                alert('审批失败');
+            }
+        }
+        
+        async function rejectOrder(orderId) {
+            if (!confirm('确认拒绝此报单？')) return;
+            const remarks = prompt('拒绝原因:', '');
+            if (remarks === null) return;
+            
+            try {
+                const res = await fetch(API_BASE + '/api/approve-order', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        orderId, 
+                        status: 'rejected',
+                        riskLevel: 'high',
+                        remarks: remarks || '审批拒绝'
+                    })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    alert('已拒绝！');
+                    loadData();
+                } else {
+                    alert('操作失败: ' + data.message);
+                }
+            } catch (e) {
+                alert('操作失败');
+            }
+        }
+        
+        // 初始加载
+        loadData();
+        
+        // 每30秒自动刷新
+        autoRefresh = setInterval(loadData, 30000);
+    </script>
+</body>
+</html>
