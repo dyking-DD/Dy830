@@ -1,52 +1,54 @@
-# daily_stock_analysis
-# A股实时量化交易系统
+# 量化交易系统
 
-## 项目结构
+个人量化交易工作站，支持股票分析、策略回测、模拟交易和飞书通知。
 
-```
-daily_stock_analysis/
-├── config/              # 配置文件
-│   ├── database.yaml   # 数据库配置
-│   ├── tushare.yaml    # Tushare API配置
-│   └── strategy.yaml   # 策略参数
-├── data/               # 数据目录
-│   ├── raw/           # 原始数据
-│   ├── processed/     # 清洗后数据
-│   └── backtest/      # 回测数据
-├── strategies/         # 策略目录
-│   ├── base.py        # 策略基类
-│   └── examples/      # 示例策略
-├── execution/          # 交易执行
-│   ├── paper_trading.py  # 模拟交易
-│   └── live_trading.py   # 实盘交易
-├── risk/              # 风控模块
-│   └── risk_manager.py
-├── notebooks/         # Jupyter分析
-├── logs/             # 日志文件
-└── utils/            # 工具函数
-```
+## 功能模块
+
+- **数据采集**：A股实时数据、历史K线、新闻舆情
+- **策略框架**：MA交叉、Minervini SEPA、市场择时
+- **回测引擎**：完整回测+可视化报告
+- **风控系统**：仓位控制、熔断机制、黑名单
+- **模拟交易**：纸面交易+飞书实时通知
+- **定时任务**：每日15:00自动扫描+推送
+
+## 技术栈
+
+- Python 3.12
+- FastAPI + WebSocket
+- SQLite + SQLAlchemy
+- AKShare/Tushare 数据源
+- 飞书机器人通知
+- ECharts 可视化
 
 ## 快速开始
 
-1. 安装依赖: `pip install -r requirements.txt`
-2. 配置Tushare token: 修改 `config/tushare.yaml`
-3. 初始化数据库: `python scripts/init_db.py`
-4. 下载历史数据: `python scripts/download_history.py`
-5. 运行回测: `python backtest.py --strategy ma_cross`
+```bash
+pip install -r requirements.txt
+python trading_desk.py
+```
 
-## 数据源
+## 目录结构
 
-- **Tushare Pro**: 股票列表、日线、分钟线、财务数据
-- **AkShare**: 实时行情（备选）
-- **东财**: 实时资金流（爬虫）
+```
+daily_stock_analysis/
+├── backtest/          # 回测系统
+├── strategies/        # 策略模块
+├── data/             # 数据存储
+├── database/         # 数据库
+├── execution/        # 交易执行
+├── risk/             # 风险管理
+├── utils/            # 工具函数
+├── scripts/          # 脚本工具
+├── reports/          # 报告输出
+└── visualization/    # 可视化
+```
 
-## 风控规则
+## 配置
 
-- 单票最大仓位: 10%
-- 单日最大亏损: 3%
-- 最大回撤: 15%
-- 连续亏损3天暂停
+复制 `.env.example` 为 `.env`，填入：
+- 飞书 webhook 地址
+- 数据源 API Key
 
-## 免责声明
+## 作者
 
-本系统仅供学习研究，不构成投资建议。股市有风险，投资需谨慎。
+dyking999
