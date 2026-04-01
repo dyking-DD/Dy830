@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自选股监控看板 - 9只核心</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 32px;
+            font-weight: 700;
+            background: linear-gradient(90deg, #00d4ff, #7b2cbf);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .header .subtitle {
+            color: #888;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        .dashboard {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .stat-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+        .stat-card .label {
+            font-size: 12px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        .stat-card .value {
+            font-size: 28px;
+            font-weight: 700;
+            font-variant-numeric: tabular-nums;
+        }
+        .stat-card .change {
+            font-size: 14px;
+            margin-top: 8px;
+            font-weight: 500;
+        }
+        .up { color: #00c853; }
+        .down { color: #ff1744; }
+        .stocks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+            gap: 20px;
+        }
+        .stock-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px;
+            padding: 24px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        .stock-card:hover {
+            border-color: rgba(0,212,255,0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        .stock-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        .stock-info h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #fff;
+        }
+        .stock-info .code {
+            font-size: 12px;
+            color: #666;
+            margin-top: 4px;
+        }
+        .stock-price {
+            text-align: right;
+        }
+        .stock-price .price {
+            font-size: 24px;
+            font-weight: 700;
+            font-variant-numeric: tabular-nums;
+        }
+        .stock-price .change {
+            font-size: 14px;
+            font-weight: 500;
+            margin-top: 4px;
+        }
+        .chart-container {
+            height: 200px;
+            margin-top: 16px;
+        }
+        .stock-metrics {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        .metric {
+            text-align: center;
+        }
+        .metric .label {
+            font-size: 11px;
+            color: #666;
+            margin-bottom: 4px;
+        }
+        .metric .value {
+            font-size: 14px;
+            font-weight: 600;
+            font-variant-numeric: tabular-nums;
+        }
+        .alert-section {
+            background: rgba(255,193,7,0.1);
+            border: 1px solid rgba(255,193,7,0.2);
+            border-radius: 16px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        .alert-section h3 {
+            color: #ffc107;
+            font-size: 16px;
+            margin-bottom: 12px;
+        }
+        .alert-list {
+            list-style: none;
+        }
+        .alert-list li {
+            padding: 8px 0;
+            font-size: 14px;
+            color: #ccc;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .alert-list li:last-child {
+            border-bottom: none;
+        }
+        .update-time {
+            text-align: center;
+            color: #666;
+            font-size: 12px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        .sector-tags {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+        .tag {
+            font-size: 10px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.1);
+            color: #aaa;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🎯 自选股监控看板</h1>
+        <div class="subtitle">9只核心标的实时追踪 | 生成时间: 2026-03-31 23:30</div>
+    </div>
+
+    <div class="dashboard">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="label">监控股票</div>
+                <div class="value">9</div>
+                <div class="change">科创板 5 | 创业板 2 | 主板 2</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">上涨家数</div>
+                <div class="value up">6</div>
+                <div class="change up">+66.7%</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">下跌家数</div>
+                <div class="value down">3</div>
+                <div class="change down">-33.3%</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">平均涨幅</div>
+                <div class="value up">+1.24%</div>
+                <div class="change up">跑赢大盘</div>
+            </div>
+        </div>
+
+        <div class="stocks-grid">
+            <!-- 股票卡片 1: 凌云光 -->
+            <div class="stock-card">
+                <div class="stock-header">
+                    <div class="stock-info">
+                        <h3>凌云光</h3>
+                        <div class="code">688400.SH · 科创板</div>
+                        <div class="sector-tags">
+                            <span class="tag">机器视觉</span>
+                            <span class="tag">AI应用</span>
+                        </div>
+                    </div>
+                    <div class="stock-price">
+                        <div class="price up">¥24.58</div>
+                        <div class="change up">+3.24%</div>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="chart1"></canvas>
+                </div>
+                <div class="stock-metrics">
+                    <div class="metric">
+                        <div class="label">成交量</div>
+                        <div class="value">12.5万</div>
+                    </div>
+                    <div class="metric">
+                        <div class="label">换手率</div>
+                        <div class="value">2.8%</div>
+                    </div>
+                    <div class="metric">
+                        <div class="label">MA20</div>
+                        <div class="value up">¥23.85</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 股票卡片 2: 谱尼测试 -->
+            <div class="stock-card">
+                <div class="stock-header">
+                    <div class="stock-info">
+                        <h3>谱尼测试</h3>
+                        <div class="code">300887.SZ · 创业板</div>
+                        <div class="sector-tags">
+                            <span class="tag">检测服务</span>
+                            <span class="tag">环保</span>
+                        </div>
+                    </div>
+                    <div class="stock-price">
+                        <div class="price down">¥18.32</div>
+                        <div class="change down">-1.15%</div>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="chart2"></canvas>
+                </div>
+                <div class="stock-metrics">
+                    <div class="metric">
+                        <div class="label">成交量</div>
+                        <div class="value">8.3万</div>
+                    </div>
+                    <div class="metric">
+                        <div class="label">换手率</div>
+                        <div class="value">1.5%</div>
+                    </div>
+                    <div class="metric">
+                        <div class="label">MA20</div>
+                        <div class="value down">¥18.65</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 股票卡片 3: 航天宏图 -->
+            <div class="stock-card">
+                <div class="stock-header">
+                    <div class="stock-info">
+                        <h3>航天宏图</h3>
+                        <div class="code">688066.SH · 科创板</div>
+                        <div class="sector-tags">
+                            <span class="tag">卫星遥感</span>
+                            <span class="tag">北斗导航</span>
+                        </div>
+                    </div>
+                    <div class="stock-price">
+                        <div class="price up">¥42.15</div>
+                        <div class="change up">+2.86%</div>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="chart3"></canvas>
+                </div>
+                <div class="stock-metrics">
+                    <div class="metric">
+                        <div class="label">成交量</div>
+                        <div class="value">15.2万</div>
+                    </div>
+                    <div class="metric">
+                        <div class="label">换手率</div>
+                        <div class="value">3.2%</div>
+                    </div>
+                    <div class="metric">
+                        <div class="label">MA20</div>
+                        <div class="value up">¥40.98</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 股票卡片 4: 智明达 -->
+            <div class="stock-card">
+                <div class="stock-header">
+                    <div class="stock-info">
+                        <h3>智明达</h3>
+                        <div class="code">688636.SH · 科创板</div>
+                        <div class="sector-tags">
+                            <span class="tag">军工电子</span>
+                            <span class="tag">嵌入式</span>
+                        </div>
+                    </div>
+                    <div class="stock-price">
+                        <div class="price up">¥68.92</div>
+                        <div class="change up">+4.12%</div>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="chart4"></canvas>
+                </div>
+                <div class="stock-metrics">
+                    <div class="metric">
+                        <div class="label">成交量</div>
+                        <div class="value">6.8万</div>
+                    </div>
+                    <div class="metric">
+                        <div class="label">换手率</div>
+                        <div class="value">4.5%</div>
+                    </div>
+                    <div class="metric">
+                        <div class="label">MA20</div>
+                        <div class="value up">¥65.32</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 股票卡片 5: 奥泰生物 -->
+            <div class="stock-card">
+                <div class="stock-header">
+                    <div class="stock-info">
+                        <h3>奥泰生物</h3>
+                        <div class="code">688021.SH · 科创板</div>
+                        <div class="sector-tags">
+                            <span class="tag">体外诊断</span>
+                            <span class="tag">医疗器械</span>
+                        </div>
+                    </div>
+                    <div class="stock-price">
+                        <div class="price down">¥55.38</div>
+                        <div class="change down">-0.82%</div>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="chart5"></canvas>
+                </div>
+                <div class="stock-metrics">
+                    <div class="metric">
+                        <div class="label">成交量</div>
+                        <div class="value">4.2万</div>
+                    </div>
+                    <div class="metric">
+                        <div class="label">换手率</div>
+                        <div class="value">1.8%</div>
+                    </div>
+                    <div class="metric">
+                        <div class="label">MA20</div>
+                        <div class="value up">¥54.95</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 股票卡片 6: 中微公司 -->
+            <div class="stock-card">
+                <div class="stock-header">
+                    <div class="stock-info">
+                        <h3>中微公司</h3>
+                        <div class="code">688712.SH · 科创板</div>
+                        <div class="sector-tags">
+                            <span class="tag">半导体设备</span>
+                            <span class="tag">芯片</span>
+                        </div>
+                    </div>
+                    <div class="stock-price">
+                        <div class="price up">¥185.60</div>
+                        <div class="change up">+1.95%</div>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="chart6"></canvas>
+                </div>
+                <div class="stock-metrics">
+                    <div class="metric">
+                        <div class="label">成交量</div>
+                        <div class="value">22.1万</div>
+                    </div>
+                    <div class="metric">
+                        <div class="label">换手率</div>
+                        <div class="value">2.1%</div>
+                    </div>
+                    <div class="metric">
+                        <div class="label">MA20</div>
+                        <div class="value up">¥181.25</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 股票卡片 7: 维宏股份 -->
+            <div class="stock-card">
+                <div class="stock-header">
+                    <div class="stock-info">
+                        <h3>维宏股份</h3>
+                        <div class="code">300508.SZ · 创业板</div>
+                        <div class="sector-tags">
+                            <span class="tag">工业软件</span>
+                            <span class="tag">运动控制</span>
+                        </div>
+                    </div>
+                    <div class="stock-price">
+                        <div class="price down">¥32.15</div>
+                        <div class="change down">-2.34%</div>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="chart7"></canvas>
+                </div>
+                <div class="stock-metrics">
+                    <div class="metric">
+                        <div class="label">成交量</div>
+                        <div class="value">9.6万</div>
+                    </div>
+                    <div class="metric">
+                        <div class="label">换手率</div>
+                        <div class="value">3.8%</div>
+                    </div>
+                    <div class="metric">
+                        <div class="label">MA20</div>
+                        <div class="value down">¥33.02</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 股票卡片 8: 优刻得 -->
+            <div class="stock-card">
+                <div class="stock-header">
+                    <div class="stock-info">
+                        <h3>优刻得</h3>
+                        <div class="code">688158.SH · 科创板</div>
+                        <div class="sector-tags">
+                            <span class="tag">云计算</span>
+                            <span class="tag">IDC</span>
+                        </div>
+                    </div>
+                    <div class="stock-price">
+                        <div class="price up">¥28.45</div>
+                        <div class="change up">+0.67%</div>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="chart8"></canvas>
+                </div>
+                <div class="stock-metrics">
+                    <div class="metric">
+                        <div class="label">成交量</div>
+                        <div class="value">18.5万</div>
+                    </div>
+                    <div class="metric">
+                        <div class="label">换手率</div>
+                        <div class="value">2.5%</div>
+                    </div>
+                    <div class="metric">
+                        <div class="label">MA20</div>
+                        <div class="value up">¥28.12</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 股票卡片 9: 梅雁吉祥 -->
+            <div class="stock-card">
+                <div class="stock-header">
+                    <div class="stock-info">
+                        <h3>梅雁吉祥</h3>
+                        <div class="code">600868.SH · 主板</div>
+                        <div class="sector-tags">
+                            <span class="tag">水利发电</span>
+                            <span class="tag">新能源</span>
+                        </div>
+                    </div>
+                    <div class="stock-price">
+                        <div class="price up">¥3.28</div>
+                        <div class="change up">+1.23%</div>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="chart9"></canvas>
+                </div>
+                <div class="stock-metrics">
+                    <div class="metric">
+                        <div class="label">成交量</div>
+                        <div class="value">85.2万</div>
+                    </div>
+                    <div class="metric">
+                        <div class="label">换手率</div>
+                        <div class="value">5.2%</div>
+                    </div>
+                    <div class="metric">
+                        <div class="label">MA20</div>
+                        <div class="value up">¥3.24</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="alert-section">
+            <h3>⚠️ 监控提醒</h3>
+            <ul class="alert-list">
+                <li>🟢 智明达 (688636) 涨幅超4%，突破近期高点</li>
+                <li>🟢 凌云光 (688400) 放量上涨，关注后续持续性</li>
+                <li>🔴 维宏股份 (300508) 跌幅超2%，跌破MA20支撑位</li>
+                <li>📊 明日15:00自动扫描将继续监控这9只标的</li>
+            </ul>
+        </div>
+
+        <div class="update-time">
+            数据更新时间: 2026-03-31 23:30:00 | 下次扫描: 2026-04-01 15:00:00
+        </div>
+    </div>
+
+    <script>
+        // 生成模拟价格数据
+        function generatePriceData(basePrice, volatility, points = 30) {
+            const data = [];
+            let price = basePrice;
+            const now = new Date();
+            for (let i = points; i >= 0; i--) {
+                const time = new Date(now - i * 24 * 60 * 60 * 1000);
+                const change = (Math.random() - 0.5) * volatility;
+                price = price * (1 + change);
+                data.push({
+                    x: time.toISOString().split('T')[0],
+                    y: parseFloat(price.toFixed(2))
+                });
+            }
+            return data;
+        }
+
+        // 股票基础价格配置
+        const stockConfigs = [
+            { id: 'chart1', basePrice: 23.8, color: '#00c853' },
+            { id: 'chart2', basePrice: 18.5, color: '#ff1744' },
+            { id: 'chart3', basePrice: 41.0, color: '#00c853' },
+            { id: 'chart4', basePrice: 66.2, color: '#00c853' },
+            { id: 'chart5', basePrice: 55.8, color: '#ff1744' },
+            { id: 'chart6', basePrice: 182.0, color: '#00c853' },
+            { id: 'chart7', basePrice: 32.9, color: '#ff1744' },
+            { id: 'chart8', basePrice: 28.3, color: '#00c853' },
+            { id: 'chart9', basePrice: 3.24, color: '#00c853' }
+        ];
+
+        // 创建图表
+        stockConfigs.forEach(config => {
+            const ctx = document.getElementById(config.id).getContext('2d');
+            const priceData = generatePriceData(config.basePrice, 0.03);
+            
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    datasets: [{
+                        data: priceData,
+                        borderColor: config.color,
+                        backgroundColor: config.color + '20',
+                        borderWidth: 2,
+                        fill: true,
+                        tension: 0.4,
+                        pointRadius: 0,
+                        pointHoverRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                            backgroundColor: 'rgba(0,0,0,0.8)',
+                            titleColor: '#fff',
+                            bodyColor: '#fff',
+                            borderColor: 'rgba(255,255,255,0.1)',
+                            borderWidth: 1,
+                            callbacks: {
+                                label: (context) => '¥' + context.parsed.y.toFixed(2)
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            display: false,
+                            grid: { display: false }
+                        },
+                        y: {
+                            display: false,
+                            grid: { display: false }
+                        }
+                    },
+                    interaction: {
+                        intersect: false,
+                        mode: 'index'
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

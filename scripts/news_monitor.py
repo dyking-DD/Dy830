@@ -1,0 +1,532 @@
+#!/usr/bin/env python3
+"""
+24小时新闻监控系统 - News Monitor
+实时监控自选股票的新闻、公告、政策变化
+即时推送重大事件和卖出信号
+
+用法:
+    python3 scripts/news_monitor.py [--watchlist] [--interval 60]
+"""
+
+import sys
+import os
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+import argparse
+import json
+import logging
+import re
+import time
+from datetime import datetime, timedelta
+from typing import List, Dict, Optional, Set
+from dataclasses import dataclass, asdict
+from pathlib import Path
+import hashlib
+
+import akshare as ak
+import pandas as pd
+
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
+
+from execution.notifier import NotificationManager
+
+
+@dataclass
+class NewsAlert:
+    """新闻警报"""
+    ts_code: str
+    stock_name: str
+    alert_type: str  # 'sell', 'warning', 'info'
+    title: str
+    content: str
+    source: str
+    publish_time: str
+    severity: int  # 1-5, 5最高
+    keywords: List[str]
+    
+    def to_feishu_card(self) -> Dict:
+        """转换为飞书卡片格式"""
+        colors = {
+            'sell': 'red',
+            'warning': 'orange', 
+            'info': 'blue'
+        }
+        
+        icons = {
+            'sell': '🚨',
+            'warning': '⚠️',
+            'info': 'ℹ️'
+        }
+        
+        return {
+            "msg_type": "interactive",
+            "card": {
+                "config": {"wide_screen_mode": True},
+                "header": {
+                    "title": {
+                        "tag": "plain_text",
+                        "content": f"{icons.get(self.alert_type, '🔔')} {self.stock_name} ({self.ts_code})"
+                    },
+                    "template": colors.get(self.alert_type, 'blue')
+                },
+                "elements": [
+                    {
+                        "tag": "div",
+                        "text": {
+                            "tag": "lark_md",
+                            "content": f"**{self.title}**\n\n{self.content[:200]}..."
+                        }
+                    },
+                    {
+                        "tag": "div",
+                        "text": {
+                            "tag": "lark_md",
+                            "content": f"来源: {self.source} | 时间: {self.publish_time}\n关键词: {', '.join(self.keywords[:5])}"
+                        }
+                    }
+                ]
+            }
+        }
+
+
+class NewsMonitor:
+    """新闻监控器"""
+    
+    # 重大风险关键词（触发卖出警报）
+    SELL_KEYWORDS = {
+        '监管': ['立案调查', '监管处罚', '违规', '信披违规', '财务造假', '被调查', '监管函', '警示函'],
+        '经营': ['停产', '停工', '重大亏损', '业绩暴雷', '亏损扩大', '订单取消', '大客户流失'],
+        '财务': ['债务违约', '破产', '资不抵债', '流动性危机', '无法偿还', '逾期', '违约'],
+        '法律': ['诉讼', '仲裁', '败诉', '赔偿', '重大事故', '安全事故', '环保处罚'],
+        '人事': ['高管离职', '董事长辞职', '核心人员离职', '实控人变更', '股权冻结', '减持'],
+        '政策': ['政策打压', '行业整顿', '限令', '禁令', '出口管制', '制裁'],
+    }
+    
+    # 警告关键词（需密切关注）
+    WARNING_KEYWORDS = [
+        '业绩下滑', '营收下降', '利润下降', '毛利率下降', '现金流紧张',
+        '竞争加剧', '价格战', '原材料涨价', '汇率损失', '减持计划',
+        '解禁', '股权质押', '负债率高', '应收账款', '存货跌价'
+    ]
+    
+    # 正面关键词（抵消部分负面）
+    POSITIVE_KEYWORDS = [
+        '业绩预增', '中标', '重大合同', '新产品', '技术突破', '产能扩张',
+        '收购', '战略合作', '回购', '增持', '股权激励'
+    ]
+    
+    def __init__(self, webhook_url: str = None, data_dir: str = "data/news"):
+        self.webhook_url = webhook_url
+        self.notifier = NotificationManager(webhook_url=webhook_url) if webhook_url else None
+        
+        self.data_dir = Path(data_dir)
+        self.data_dir.mkdir(parents=True, exist_ok=True)
+        
+        # 已处理的新闻ID（去重）
+        self.processed_news_file = self.data_dir / "processed_news.json"
+        self.processed_ids: Set[str] = self._load_processed_ids()
+        
+        # 监控记录
+        self.monitor_log = self.data_dir / "monitor_log.jsonl"
+        
+    def _load_processed_ids(self) -> Set[str]:
+        """加载已处理的新闻ID"""
+        if self.processed_news_file.exists():
+            try:
+                with open(self.processed_news_file, 'r') as f:
+                    return set(json.load(f))
+            except:
+                return set()
+        return set()
+    
+    def _save_processed_ids(self):
+        """保存已处理的新闻ID"""
+        with open(self.processed_news_file, 'w') as f:
+            json.dump(list(self.processed_ids), f)
+    
+    def _generate_news_id(self, title: str, publish_time: str) -> str:
+        """生成新闻唯一ID"""
+        content = f"{title}_{publish_time}"
+        return hashlib.md5(content.encode()).hexdigest()[:16]
+    
+    def fetch_stock_news(self, symbol: str) -> List[Dict]:
+        """获取个股新闻"""
+        try:
+            symbol_clean = symbol.replace('.SZ', '').replace('.SH', '')
+            df = ak.stock_news_em(symbol=symbol_clean)
+            
+            if df is None or df.empty:
+                return []
+            
+            # 只取最近24小时的新闻
+            news_list = []
+            for _, row in df.iterrows():
+                try:
+                    # 解析时间
+                    pub_time = row.get('发布时间', '')
+                    if not pub_time:
+                        continue
+                    
+                    news_item = {
+                        'symbol': symbol,
+                        'title': row.get('标题', ''),
+                        'content': row.get('内容', ''),
+                        'source': row.get('来源', ''),
+                        'publish_time': pub_time,
+                        'url': row.get('链接', '')
+                    }
+                    news_list.append(news_item)
+                except:
+                    continue
+            
+            return news_list
+            
+        except Exception as e:
+            logger.error(f"获取 {symbol} 新闻失败: {e}")
+            return []
+    
+    def fetch_market_news(self) -> List[Dict]:
+        """获取市场要闻（政策类）"""
+        try:
+            # 获取宏观新闻
+            df = ak.stock_news_em()
+            
+            if df is None or df.empty:
+                return []
+            
+            news_list = []
+            for _, row in df.head(50).iterrows():  # 取前50条
+                try:
+                    news_item = {
+                        'symbol': 'MARKET',
+                        'title': row.get('标题', ''),
+                        'content': row.get('内容', ''),
+                        'source': row.get('来源', ''),
+                        'publish_time': row.get('发布时间', ''),
+                        'url': row.get('链接', '')
+                    }
+                    news_list.append(news_item)
+                except:
+                    continue
+            
+            return news_list
+            
+        except Exception as e:
+            logger.error(f"获取市场新闻失败: {e}")
+            return []
+    
+    def analyze_sentiment(self, title: str, content: str) -> tuple:
+        """
+        分析新闻情绪
+        
+        Returns:
+            (alert_type, severity, keywords)
+            alert_type: 'sell', 'warning', 'info'
+            severity: 1-5
+            keywords: 匹配到的关键词列表
+        """
+        text = f"{title} {content}".lower()
+        
+        matched_keywords = []
+        severity = 0
+        
+        # 检查卖出关键词（最高优先级）
+        for category, keywords in self.SELL_KEYWORDS.items():
+            for keyword in keywords:
+                if keyword in text:
+                    matched_keywords.append(keyword)
+                    severity = max(severity, 5)  # 最高级别
+        
+        if severity >= 5:
+            return 'sell', 5, matched_keywords
+        
+        # 检查警告关键词
+        for keyword in self.WARNING_KEYWORDS:
+            if keyword in text:
+                matched_keywords.append(keyword)
+                severity = max(severity, 3)
+        
+        # 检查正面关键词（降低严重程度）
+        positive_count = 0
+        for keyword in self.POSITIVE_KEYWORDS:
+            if keyword in text:
+                positive_count += 1
+        
+        # 调整严重程度
+        if positive_count > 0:
+            severity = max(1, severity - positive_count)
+        
+        if severity >= 3:
+            return 'warning', severity, matched_keywords
+        
+        return 'info', 1, matched_keywords
+    
+    def check_news(self, news_item: Dict, stock_name: str = "") -> Optional[NewsAlert]:
+        """检查单条新闻，返回警报（如有）"""
+        news_id = self._generate_news_id(
+            news_item.get('title', ''),
+            news_item.get('publish_time', '')
+        )
+        
+        # 去重
+        if news_id in self.processed_ids:
+            return None
+        
+        self.processed_ids.add(news_id)
+        
+        # 分析情绪
+        alert_type, severity, keywords = self.analyze_sentiment(
+            news_item.get('title', ''),
+            news_item.get('content', '')
+        )
+        
+        # 只处理警告及以上级别
+        if severity < 3:
+            return None
+        
+        return NewsAlert(
+            ts_code=news_item.get('symbol', ''),
+            stock_name=stock_name or news_item.get('symbol', ''),
+            alert_type=alert_type,
+            title=news_item.get('title', ''),
+            content=news_item.get('content', ''),
+            source=news_item.get('source', ''),
+            publish_time=news_item.get('publish_time', ''),
+            severity=severity,
+            keywords=keywords
+        )
+    
+    def send_alert(self, alert: NewsAlert):
+        """发送警报"""
+        if not self.notifier:
+            logger.warning("未配置飞书通知，跳过发送")
+            return
+        
+        try:
+            # 使用飞书卡片格式
+            import requests
+            
+            message = alert.to_feishu_card()
+            response = requests.post(
+                self.webhook_url,
+                json=message,
+                headers={"Content-Type": "application/json"},
+                timeout=10
+            )
+            
+            result = response.json()
+            if result.get("code") == 0:
+                logger.info(f"✅ 警报发送成功: {alert.ts_code} - {alert.title[:30]}")
+            else:
+                logger.error(f"❌ 警报发送失败: {result.get('msg')}")
+                
+        except Exception as e:
+            logger.error(f"发送警报异常: {e}")
+    
+    def monitor_watchlist(self, watchlist: List[str], stock_names: Dict[str, str] = None):
+        """监控自选股票列表"""
+        if stock_names is None:
+            stock_names = {}
+        
+        logger.info(f"开始监控 {len(watchlist)} 只股票的 news...")
+        
+        alerts = []
+        
+        # 1. 监控个股新闻
+        for symbol in watchlist:
+            try:
+                stock_name = stock_names.get(symbol, symbol)
+                logger.info(f"检查 {stock_name} ({symbol}) 的新闻...")
+                
+                news_list = self.fetch_stock_news(symbol)
+                
+                for news in news_list:
+                    alert = self.check_news(news, stock_name)
+                    if alert:
+                        alerts.append(alert)
+                        self.send_alert(alert)
+                
+                # 避免请求过快
+                time.sleep(0.5)
+                
+            except Exception as e:
+                logger.error(f"监控 {symbol} 失败: {e}")
+        
+        # 2. 监控市场新闻（政策类）
+        logger.info("检查市场新闻（政策类）...")
+        market_news = self.fetch_market_news()
+        
+        for news in market_news:
+            # 检查是否涉及监控的股票
+            title_content = f"{news.get('title', '')} {news.get('content', '')}"
+            
+            for symbol in watchlist:
+                stock_name = stock_names.get(symbol, symbol)
+                # 检查新闻中是否提到该股票
+                if stock_name in title_content or symbol.split('.')[0] in title_content:
+                    alert = self.check_news(news, stock_name)
+                    if alert:
+                        alert.ts_code = symbol
+                        alerts.append(alert)
+                        self.send_alert(alert)
+        
+        # 保存处理记录
+        self._save_processed_ids()
+        
+        # 记录日志
+        self._log_monitor_session(watchlist, alerts)
+        
+        logger.info(f"监控完成，发现 {len(alerts)} 条警报")
+        return alerts
+    
+    def _log_monitor_session(self, watchlist: List[str], alerts: List[NewsAlert]):
+        """记录监控会话"""
+        log_entry = {
+            'timestamp': datetime.now().isoformat(),
+            'watchlist_count': len(watchlist),
+            'alert_count': len(alerts),
+            'alerts': [asdict(a) for a in alerts]
+        }
+        
+        with open(self.monitor_log, 'a') as f:
+            f.write(json.dumps(log_entry, ensure_ascii=False) + '\n')
+
+
+def load_watchlist(watchlist_file: str = "config/watchlist.txt") -> tuple:
+    """加载自选列表，返回(代码列表, 名称字典)"""
+    if not os.path.exists(watchlist_file):
+        return [], {}
+    
+    symbols = []
+    names = {}
+    
+    with open(watchlist_file, 'r') as f:
+        for line in f:
+            line = line.strip()
+            if not line or line.startswith('#'):
+                continue
+            
+            parts = line.split()
+            symbol = parts[0]
+            symbols.append(symbol)
+            
+            if len(parts) > 1:
+                names[symbol] = parts[1]
+    
+    return symbols, names
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description='24小时新闻监控系统',
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+监控内容:
+  - 个股新闻、公告
+  - 行业政策变化
+  - 重大经营事件
+  - 监管处罚、法律诉讼
+
+警报级别:
+  🚨 卖出警报: 重大负面事件，建议立即卖出
+  ⚠️  警告: 需密切关注，可能影响股价
+  ℹ️  信息: 一般性新闻
+        """
+    )
+    parser.add_argument('--watchlist', action='store_true',
+                       help='监控自选列表(config/watchlist.txt)')
+    parser.add_argument('--webhook', type=str,
+                       help='飞书Webhook地址')
+    parser.add_argument('--interval', type=int, default=0,
+                       help='循环监控间隔(分钟)，0表示只运行一次')
+    parser.add_argument('--test', action='store_true',
+                       help='发送测试警报')
+    
+    args = parser.parse_args()
+    
+    # 获取webhook
+    webhook = args.webhook or os.environ.get('FEISHU_WEBHOOK', '')
+    
+    # 初始化监控器
+    monitor = NewsMonitor(webhook_url=webhook if webhook else None)
+    
+    print("=" * 70)
+    print("🔔 24小时新闻监控系统")
+    print("=" * 70)
+    print()
+    
+    # 测试模式
+    if args.test:
+        print("发送测试警报...")
+        test_alert = NewsAlert(
+            ts_code='000001.SZ',
+            stock_name='平安银行',
+            alert_type='sell',
+            title='测试：重大负面事件警报',
+            content='这是测试消息，验证飞书通知是否正常工作。',
+            source='测试',
+            publish_time=datetime.now().strftime('%Y-%m-%d %H:%M'),
+            severity=5,
+            keywords=['测试', '警报']
+        )
+        monitor.send_alert(test_alert)
+        print("测试警报已发送")
+        return
+    
+    # 加载自选列表
+    if args.watchlist:
+        watchlist, stock_names = load_watchlist()
+        print(f"📋 加载自选列表: {len(watchlist)} 只股票")
+        for s, n in stock_names.items():
+            print(f"  - {s}: {n}")
+    else:
+        print("请使用 --watchlist 指定监控自选列表")
+        return
+    
+    if not watchlist:
+        print("自选列表为空，退出")
+        return
+    
+    print()
+    
+    # 运行监控
+    if args.interval > 0:
+        print(f"🔄 进入循环监控模式，每 {args.interval} 分钟检查一次")
+        print("按 Ctrl+C 停止")
+        print()
+        
+        try:
+            while True:
+                logger.info(f"{'='*50}")
+                logger.info(f"开始新一轮监控: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+                
+                monitor.monitor_watchlist(watchlist, stock_names)
+                
+                logger.info(f"本轮监控完成，{args.interval}分钟后下次检查...")
+                time.sleep(args.interval * 60)
+                
+        except KeyboardInterrupt:
+            print("\n监控已停止")
+    else:
+        # 单次运行
+        print("🔍 开始单次监控扫描...")
+        alerts = monitor.monitor_watchlist(watchlist, stock_names)
+        
+        if alerts:
+            print(f"\n🚨 发现 {len(alerts)} 条警报:")
+            for alert in alerts:
+                icon = '🚨' if alert.alert_type == 'sell' else '⚠️'
+                print(f"  {icon} [{alert.alert_type.upper()}] {alert.stock_name}: {alert.title[:50]}...")
+        else:
+            print("\n✅ 未发现重大警报")
+    
+    print()
+    print("=" * 70)
+
+
+if __name__ == "__main__":
+    main()

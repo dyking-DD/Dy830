@@ -1,0 +1,6367 @@
+{
+  "strategy": "MA_Cross_Volume",
+  "initial_capital": 100000,
+  "final_value": 99429.76331000001,
+  "total_return": -0.005702366899999907,
+  "annual_return": -0.0018435089429414964,
+  "annual_volatility": 0.007779099878340235,
+  "sharpe_ratio": -2.807973838176516,
+  "max_drawdown": -0.014354667670067878,
+  "total_trades": 10,
+  "win_rate": 0.0,
+  "profit_loss_ratio": 0,
+  "total_commission": 50.0,
+  "total_tax": 53.25669,
+  "daily_stats": [
+    {
+      "date": "20230103",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230104",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230105",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230106",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230109",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230110",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230111",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230112",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230113",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230116",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230117",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230118",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230119",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230120",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230130",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230131",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230201",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230202",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230203",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230206",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230207",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230208",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230209",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230210",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230213",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230214",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230215",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230216",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230217",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230220",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230221",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230222",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230223",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230224",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230227",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230228",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230301",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230302",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230303",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230306",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230307",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230308",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230309",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230310",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230313",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230314",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230315",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230316",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230317",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230320",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230321",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230322",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230323",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230324",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230327",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230328",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230329",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230330",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230331",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230403",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230404",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230406",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230407",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230410",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230411",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230412",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230413",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230414",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230417",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230418",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230419",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230420",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230421",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230424",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230425",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230426",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230427",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230428",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230504",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230505",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230508",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230509",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230510",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230511",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230512",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230515",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230516",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230517",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230518",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230519",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230522",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230523",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230524",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230525",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230526",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230529",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230530",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230531",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230601",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230602",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230605",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230606",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230607",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230608",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230609",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230612",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230613",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230614",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230615",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230616",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230619",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230620",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230621",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230626",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230627",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230628",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230629",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230630",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230703",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230704",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230705",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230706",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230707",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230710",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230711",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230712",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230713",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230714",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230717",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230718",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230719",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230720",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230721",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230724",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230725",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230726",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230727",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230728",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230731",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230801",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230802",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230803",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230804",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230807",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230808",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230809",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230810",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230811",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230814",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230815",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230816",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230817",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230818",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230821",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230822",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230823",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230824",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230825",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230828",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230829",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230830",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230831",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230901",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230904",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230905",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230906",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230907",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230908",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230911",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230912",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230913",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230914",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230915",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230918",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230919",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230920",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230921",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230922",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230925",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230926",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230927",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20230928",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231009",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231010",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231011",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231012",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231013",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231016",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231017",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231018",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231019",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231020",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231023",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231024",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231025",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231026",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231027",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231030",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231031",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231101",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231102",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231103",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231106",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231107",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231108",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231109",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231110",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231113",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231114",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231115",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231116",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231117",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231120",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231121",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231122",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231123",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231124",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231127",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231128",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231129",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231130",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231201",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231204",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231205",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231206",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231207",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231208",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231211",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231212",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231213",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231214",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231215",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231218",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231219",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231220",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231221",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231222",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231225",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231226",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231227",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231228",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20231229",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240102",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240103",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240104",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240105",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240108",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240109",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240110",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240111",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240112",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240115",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240116",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240117",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240118",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240119",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240122",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240123",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240124",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240125",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240126",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240129",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240130",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240131",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240201",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240202",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240205",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240206",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240207",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240208",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240219",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240220",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240221",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240222",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240223",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240226",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240227",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240228",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240229",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240301",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240304",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240305",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240306",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240307",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240308",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240311",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240312",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240313",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240314",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240315",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240318",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240319",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240320",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240321",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240322",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240325",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240326",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240327",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240328",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240329",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240401",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240402",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240403",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240408",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240409",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240410",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240411",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240412",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240415",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240416",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240417",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240418",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240419",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240422",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240423",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240424",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240425",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240426",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240429",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240430",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240506",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240507",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240508",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240509",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240510",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240513",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240514",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240515",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240516",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240517",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240520",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240521",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240522",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240523",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240524",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240527",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240528",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240529",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240530",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240531",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240603",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240604",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240605",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240606",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240607",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240611",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240612",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240613",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240614",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240617",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240618",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240619",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240620",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240621",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240624",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240625",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240626",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240627",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240628",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240701",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240702",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240703",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240704",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240705",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240708",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240709",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240710",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240711",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240712",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240715",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240716",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240717",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240718",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240719",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240722",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240723",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240724",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240725",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240726",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240729",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240730",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240731",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240801",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240802",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240805",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240806",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240807",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240808",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240809",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240812",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240813",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240814",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240815",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240816",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240819",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240820",
+      "total_value": 100000.0,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0,
+      "cummax": 1.0,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240821",
+      "total_value": 99985.49,
+      "daily_return": -0.0001450999999999476,
+      "cumulative_return": -0.0001450999999999476,
+      "cummax": 1.0,
+      "drawdown": -0.0001450999999998981
+    },
+    {
+      "date": "20240822",
+      "total_value": 100015.49,
+      "daily_return": 0.0003000435363171196,
+      "cumulative_return": 0.0001549000000000524,
+      "cummax": 1.0001549,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240823",
+      "total_value": 100105.49,
+      "daily_return": 0.0008998606115912644,
+      "cumulative_return": 0.0010549000000000524,
+      "cummax": 1.0010549,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240826",
+      "total_value": 100125.49,
+      "daily_return": 0.0001997892423282679,
+      "cumulative_return": 0.0012549000000000525,
+      "cummax": 1.0012549,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20240827",
+      "total_value": 100065.49,
+      "daily_return": -0.0005992480036801817,
+      "cumulative_return": 0.0006549000000000524,
+      "cummax": 1.0012549,
+      "drawdown": -0.000599248003680164
+    },
+    {
+      "date": "20240828",
+      "total_value": 99965.49,
+      "daily_return": -0.0009993455286133111,
+      "cumulative_return": -0.0003450999999999476,
+      "cummax": 1.0012549,
+      "drawdown": -0.0015979946764804742
+    },
+    {
+      "date": "20240829",
+      "total_value": 99765.49,
+      "daily_return": -0.0020006904382702468,
+      "cumulative_return": -0.0023450999999999477,
+      "cummax": 1.0012549,
+      "drawdown": -0.0035954880220809837
+    },
+    {
+      "date": "20240830",
+      "total_value": 99795.49,
+      "daily_return": 0.0003007051837263567,
+      "cumulative_return": -0.0020450999999999477,
+      "cummax": 1.0012549,
+      "drawdown": -0.0032958640202408462
+    },
+    {
+      "date": "20240902",
+      "total_value": 99745.49,
+      "daily_return": -0.0005010246455025172,
+      "cumulative_return": -0.0025450999999999478,
+      "cummax": 1.0012549,
+      "drawdown": -0.0037952373566411124
+    },
+    {
+      "date": "20240903",
+      "total_value": 99715.49,
+      "daily_return": -0.00030076547821861416,
+      "cumulative_return": -0.0028450999999999477,
+      "cummax": 1.0012549,
+      "drawdown": -0.004094861358481139
+    },
+    {
+      "date": "20240904",
+      "total_value": 99655.49,
+      "daily_return": -0.0006017119306137893,
+      "cumulative_return": -0.0034450999999999475,
+      "cummax": 1.0012549,
+      "drawdown": -0.004694109362161303
+    },
+    {
+      "date": "20240905",
+      "total_value": 99705.49,
+      "daily_return": 0.000501728504872135,
+      "cumulative_return": -0.0029450999999999475,
+      "cummax": 1.0012549,
+      "drawdown": -0.004194736025761148
+    },
+    {
+      "date": "20240906",
+      "total_value": 99715.49,
+      "daily_return": 0.00010029537992341243,
+      "cumulative_return": -0.0028450999999999477,
+      "cummax": 1.0012549,
+      "drawdown": -0.004094861358481139
+    },
+    {
+      "date": "20240909",
+      "total_value": 99462.47901000001,
+      "daily_return": -0.0025373288543233874,
+      "cumulative_return": -0.0053752098999999,
+      "cummax": 1.0012549,
+      "drawdown": -0.006621800202925243
+    },
+    {
+      "date": "20240910",
+      "total_value": 99462.47901000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.0053752098999999,
+      "cummax": 1.0012549,
+      "drawdown": -0.006621800202925243
+    },
+    {
+      "date": "20240911",
+      "total_value": 99462.47901000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.0053752098999999,
+      "cummax": 1.0012549,
+      "drawdown": -0.006621800202925243
+    },
+    {
+      "date": "20240912",
+      "total_value": 99462.47901000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.0053752098999999,
+      "cummax": 1.0012549,
+      "drawdown": -0.006621800202925243
+    },
+    {
+      "date": "20240913",
+      "total_value": 99462.47901000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.0053752098999999,
+      "cummax": 1.0012549,
+      "drawdown": -0.006621800202925243
+    },
+    {
+      "date": "20240918",
+      "total_value": 99462.47901000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.0053752098999999,
+      "cummax": 1.0012549,
+      "drawdown": -0.006621800202925243
+    },
+    {
+      "date": "20240919",
+      "total_value": 99462.47901000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.0053752098999999,
+      "cummax": 1.0012549,
+      "drawdown": -0.006621800202925243
+    },
+    {
+      "date": "20240920",
+      "total_value": 99462.47901000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.0053752098999999,
+      "cummax": 1.0012549,
+      "drawdown": -0.006621800202925243
+    },
+    {
+      "date": "20240923",
+      "total_value": 99462.47901000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.0053752098999999,
+      "cummax": 1.0012549,
+      "drawdown": -0.006621800202925243
+    },
+    {
+      "date": "20240924",
+      "total_value": 99462.47901000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.0053752098999999,
+      "cummax": 1.0012549,
+      "drawdown": -0.006621800202925243
+    },
+    {
+      "date": "20240925",
+      "total_value": 99462.47901000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.0053752098999999,
+      "cummax": 1.0012549,
+      "drawdown": -0.006621800202925243
+    },
+    {
+      "date": "20240926",
+      "total_value": 99462.47901000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.0053752098999999,
+      "cummax": 1.0012549,
+      "drawdown": -0.006621800202925243
+    },
+    {
+      "date": "20240927",
+      "total_value": 99446.89901000001,
+      "daily_return": -0.00015664198354070107,
+      "cumulative_return": -0.005531009899999917,
+      "cummax": 1.0012549,
+      "drawdown": -0.006777404934547482
+    },
+    {
+      "date": "20240930",
+      "total_value": 100236.89901000001,
+      "daily_return": 0.007943937999721444,
+      "cumulative_return": 0.002368990100000083,
+      "cummax": 1.0023689901000001,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20241008",
+      "total_value": 100877.83105000001,
+      "daily_return": 0.006394172668251218,
+      "cumulative_return": 0.008778310500000079,
+      "cummax": 1.0087783105,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20241009",
+      "total_value": 100877.83105000001,
+      "daily_return": 0.0,
+      "cumulative_return": 0.008778310500000079,
+      "cummax": 1.0087783105,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20241010",
+      "total_value": 100877.83105000001,
+      "daily_return": 0.0,
+      "cumulative_return": 0.008778310500000079,
+      "cummax": 1.0087783105,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20241011",
+      "total_value": 100877.83105000001,
+      "daily_return": 0.0,
+      "cumulative_return": 0.008778310500000079,
+      "cummax": 1.0087783105,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20241014",
+      "total_value": 100877.83105000001,
+      "daily_return": 0.0,
+      "cumulative_return": 0.008778310500000079,
+      "cummax": 1.0087783105,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20241015",
+      "total_value": 100877.83105000001,
+      "daily_return": 0.0,
+      "cumulative_return": 0.008778310500000079,
+      "cummax": 1.0087783105,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20241016",
+      "total_value": 100877.83105000001,
+      "daily_return": 0.0,
+      "cumulative_return": 0.008778310500000079,
+      "cummax": 1.0087783105,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20241017",
+      "total_value": 100877.83105000001,
+      "daily_return": 0.0,
+      "cumulative_return": 0.008778310500000079,
+      "cummax": 1.0087783105,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20241018",
+      "total_value": 100877.83105000001,
+      "daily_return": 0.0,
+      "cumulative_return": 0.008778310500000079,
+      "cummax": 1.0087783105,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20241021",
+      "total_value": 100877.83105000001,
+      "daily_return": 0.0,
+      "cumulative_return": 0.008778310500000079,
+      "cummax": 1.0087783105,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20241022",
+      "total_value": 100877.83105000001,
+      "daily_return": 0.0,
+      "cumulative_return": 0.008778310500000079,
+      "cummax": 1.0087783105,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20241023",
+      "total_value": 100877.83105000001,
+      "daily_return": 0.0,
+      "cumulative_return": 0.008778310500000079,
+      "cummax": 1.0087783105,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20241024",
+      "total_value": 100877.83105000001,
+      "daily_return": 0.0,
+      "cumulative_return": 0.008778310500000079,
+      "cummax": 1.0087783105,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20241025",
+      "total_value": 100877.83105000001,
+      "daily_return": 0.0,
+      "cumulative_return": 0.008778310500000079,
+      "cummax": 1.0087783105,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20241028",
+      "total_value": 100877.83105000001,
+      "daily_return": 0.0,
+      "cumulative_return": 0.008778310500000079,
+      "cummax": 1.0087783105,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20241029",
+      "total_value": 100877.83105000001,
+      "daily_return": 0.0,
+      "cumulative_return": 0.008778310500000079,
+      "cummax": 1.0087783105,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20241030",
+      "total_value": 100877.83105000001,
+      "daily_return": 0.0,
+      "cumulative_return": 0.008778310500000079,
+      "cummax": 1.0087783105,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20241031",
+      "total_value": 100877.83105000001,
+      "daily_return": 0.0,
+      "cumulative_return": 0.008778310500000079,
+      "cummax": 1.0087783105,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20241101",
+      "total_value": 100877.83105000001,
+      "daily_return": 0.0,
+      "cumulative_return": 0.008778310500000079,
+      "cummax": 1.0087783105,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20241104",
+      "total_value": 100877.83105000001,
+      "daily_return": 0.0,
+      "cumulative_return": 0.008778310500000079,
+      "cummax": 1.0087783105,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20241105",
+      "total_value": 100877.83105000001,
+      "daily_return": 0.0,
+      "cumulative_return": 0.008778310500000079,
+      "cummax": 1.0087783105,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20241106",
+      "total_value": 100877.83105000001,
+      "daily_return": 0.0,
+      "cumulative_return": 0.008778310500000079,
+      "cummax": 1.0087783105,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20241107",
+      "total_value": 100877.83105000001,
+      "daily_return": 0.0,
+      "cumulative_return": 0.008778310500000079,
+      "cummax": 1.0087783105,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20241108",
+      "total_value": 100877.83105000001,
+      "daily_return": 0.0,
+      "cumulative_return": 0.008778310500000079,
+      "cummax": 1.0087783105,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20241111",
+      "total_value": 100877.83105000001,
+      "daily_return": 0.0,
+      "cumulative_return": 0.008778310500000079,
+      "cummax": 1.0087783105,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20241112",
+      "total_value": 100877.83105000001,
+      "daily_return": 0.0,
+      "cumulative_return": 0.008778310500000079,
+      "cummax": 1.0087783105,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20241113",
+      "total_value": 100877.83105000001,
+      "daily_return": 0.0,
+      "cumulative_return": 0.008778310500000079,
+      "cummax": 1.0087783105,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20241114",
+      "total_value": 100877.83105000001,
+      "daily_return": 0.0,
+      "cumulative_return": 0.008778310500000079,
+      "cummax": 1.0087783105,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20241115",
+      "total_value": 100877.83105000001,
+      "daily_return": 0.0,
+      "cumulative_return": 0.008778310500000079,
+      "cummax": 1.0087783105,
+      "drawdown": 0.0
+    },
+    {
+      "date": "20241118",
+      "total_value": 100861.68105000001,
+      "daily_return": -0.0001600946395446334,
+      "cumulative_return": 0.008616810500000138,
+      "cummax": 1.0087783105,
+      "drawdown": -0.00016009463954458347
+    },
+    {
+      "date": "20241119",
+      "total_value": 100791.68105000001,
+      "daily_return": -0.0006940197632171033,
+      "cumulative_return": 0.007916810500000138,
+      "cummax": 1.0087783105,
+      "drawdown": -0.0008540032939180486
+    },
+    {
+      "date": "20241120",
+      "total_value": 100751.68105000001,
+      "daily_return": -0.00039685814923710904,
+      "cumulative_return": 0.007516810500000138,
+      "cummax": 1.0087783105,
+      "drawdown": -0.0012505225249884733
+    },
+    {
+      "date": "20241121",
+      "total_value": 100701.68105000001,
+      "daily_return": -0.0004962696351953325,
+      "cumulative_return": 0.007016810500000138,
+      "cummax": 1.0087783105,
+      "drawdown": -0.001746171563826393
+    },
+    {
+      "date": "20241122",
+      "total_value": 100391.68105000001,
+      "daily_return": -0.0030783994543852745,
+      "cumulative_return": 0.003916810500000138,
+      "cummax": 1.0087783105,
+      "drawdown": -0.004819195604622517
+    },
+    {
+      "date": "20241125",
+      "total_value": 100265.53163000001,
+      "daily_return": -0.0012565724438579021,
+      "cumulative_return": 0.0026553163000001224,
+      "cummax": 1.0087783105,
+      "drawdown": -0.006069712380082026
+    },
+    {
+      "date": "20241126",
+      "total_value": 100265.53163000001,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0026553163000001224,
+      "cummax": 1.0087783105,
+      "drawdown": -0.006069712380082026
+    },
+    {
+      "date": "20241127",
+      "total_value": 100265.53163000001,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0026553163000001224,
+      "cummax": 1.0087783105,
+      "drawdown": -0.006069712380082026
+    },
+    {
+      "date": "20241128",
+      "total_value": 100265.53163000001,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0026553163000001224,
+      "cummax": 1.0087783105,
+      "drawdown": -0.006069712380082026
+    },
+    {
+      "date": "20241129",
+      "total_value": 100265.53163000001,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0026553163000001224,
+      "cummax": 1.0087783105,
+      "drawdown": -0.006069712380082026
+    },
+    {
+      "date": "20241202",
+      "total_value": 100265.53163000001,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0026553163000001224,
+      "cummax": 1.0087783105,
+      "drawdown": -0.006069712380082026
+    },
+    {
+      "date": "20241203",
+      "total_value": 100265.53163000001,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0026553163000001224,
+      "cummax": 1.0087783105,
+      "drawdown": -0.006069712380082026
+    },
+    {
+      "date": "20241204",
+      "total_value": 100265.53163000001,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0026553163000001224,
+      "cummax": 1.0087783105,
+      "drawdown": -0.006069712380082026
+    },
+    {
+      "date": "20241205",
+      "total_value": 100265.53163000001,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0026553163000001224,
+      "cummax": 1.0087783105,
+      "drawdown": -0.006069712380082026
+    },
+    {
+      "date": "20241206",
+      "total_value": 100265.53163000001,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0026553163000001224,
+      "cummax": 1.0087783105,
+      "drawdown": -0.006069712380082026
+    },
+    {
+      "date": "20241209",
+      "total_value": 100265.53163000001,
+      "daily_return": 0.0,
+      "cumulative_return": 0.0026553163000001224,
+      "cummax": 1.0087783105,
+      "drawdown": -0.006069712380082026
+    },
+    {
+      "date": "20241210",
+      "total_value": 100249.34163000001,
+      "daily_return": -0.00016147124277709598,
+      "cumulative_return": 0.002493416300000099,
+      "cummax": 1.0087783105,
+      "drawdown": -0.006230203538857726
+    },
+    {
+      "date": "20241211",
+      "total_value": 100189.34163000001,
+      "daily_return": -0.0005985076712169126,
+      "cumulative_return": 0.001893416300000099,
+      "cummax": 1.0087783105,
+      "drawdown": -0.006824982385463363
+    },
+    {
+      "date": "20241212",
+      "total_value": 100309.34163000001,
+      "daily_return": 0.0011977321943402014,
+      "cumulative_return": 0.003093416300000099,
+      "cummax": 1.0087783105,
+      "drawdown": -0.005635424692252089
+    },
+    {
+      "date": "20241213",
+      "total_value": 100019.34163000001,
+      "daily_return": -0.002891056757900884,
+      "cumulative_return": 0.000193416300000099,
+      "cummax": 1.0087783105,
+      "drawdown": -0.008510189117512668
+    },
+    {
+      "date": "20241216",
+      "total_value": 100029.34163000001,
+      "daily_return": 9.998066211026308e-05,
+      "cumulative_return": 0.000293416300000099,
+      "cummax": 1.0087783105,
+      "drawdown": -0.008411059309745172
+    },
+    {
+      "date": "20241217",
+      "total_value": 99989.34163000001,
+      "daily_return": -0.00039988266790714854,
+      "cumulative_return": -0.000106583699999901,
+      "cummax": 1.0087783105,
+      "drawdown": -0.008807578540815597
+    },
+    {
+      "date": "20241218",
+      "total_value": 100109.34163000001,
+      "daily_return": 0.0012001279140735552,
+      "cumulative_return": 0.001093416300000099,
+      "cummax": 1.0087783105,
+      "drawdown": -0.007618020847604323
+    },
+    {
+      "date": "20241219",
+      "total_value": 100049.34163000001,
+      "daily_return": -0.0005993446667720333,
+      "cumulative_return": 0.000493416300000099,
+      "cummax": 1.0087783105,
+      "drawdown": -0.00821279969420996
+    },
+    {
+      "date": "20241220",
+      "total_value": 100079.34163000001,
+      "daily_return": 0.0002998520481118732,
+      "cumulative_return": 0.000793416300000099,
+      "cummax": 1.0087783105,
+      "drawdown": -0.007915410270907142
+    },
+    {
+      "date": "20241223",
+      "total_value": 100189.34163000001,
+      "daily_return": 0.0010991279339813938,
+      "cumulative_return": 0.001893416300000099,
+      "cummax": 1.0087783105,
+      "drawdown": -0.006824982385463363
+    },
+    {
+      "date": "20241224",
+      "total_value": 100319.34163000001,
+      "daily_return": 0.0012975432105352181,
+      "cumulative_return": 0.003193416300000099,
+      "cummax": 1.0087783105,
+      "drawdown": -0.005536294884484483
+    },
+    {
+      "date": "20241225",
+      "total_value": 100379.34163000001,
+      "daily_return": 0.0005980900494871,
+      "cumulative_return": 0.003793416300000099,
+      "cummax": 1.0087783105,
+      "drawdown": -0.004941516037878735
+    },
+    {
+      "date": "20241226",
+      "total_value": 100319.34163000001,
+      "daily_return": -0.0005977325515957361,
+      "cumulative_return": 0.003193416300000099,
+      "cummax": 1.0087783105,
+      "drawdown": -0.005536294884484483
+    },
+    {
+      "date": "20241227",
+      "total_value": 100289.34163000001,
+      "daily_return": -0.00029904502474355,
+      "cumulative_return": 0.002893416300000099,
+      "cummax": 1.0087783105,
+      "drawdown": -0.005833684307787301
+    },
+    {
+      "date": "20241230",
+      "total_value": 100409.34163000001,
+      "daily_return": 0.0011965379176854009,
+      "cumulative_return": 0.004093416300000099,
+      "cummax": 1.0087783105,
+      "drawdown": -0.004644126614575916
+    },
+    {
+      "date": "20241231",
+      "total_value": 100159.34163000001,
+      "daily_return": -0.0024898081786177725,
+      "cumulative_return": 0.001593416300000099,
+      "cummax": 1.0087783105,
+      "drawdown": -0.00712237180876607
+    },
+    {
+      "date": "20250102",
+      "total_value": 99889.34163000001,
+      "daily_return": -0.002695704620318,
+      "cumulative_return": -0.001106583699999901,
+      "cummax": 1.0087783105,
+      "drawdown": -0.00979887661849177
+    },
+    {
+      "date": "20250103",
+      "total_value": 99839.34163000001,
+      "daily_return": -0.0005005539047920141,
+      "cumulative_return": -0.001606583699999901,
+      "cummax": 1.0087783105,
+      "drawdown": -0.01029452565732969
+    },
+    {
+      "date": "20250106",
+      "total_value": 99899.34163000001,
+      "daily_return": 0.0006009655013787774,
+      "cumulative_return": -0.001006583699999901,
+      "cummax": 1.0087783105,
+      "drawdown": -0.009699746810724164
+    },
+    {
+      "date": "20250107",
+      "total_value": 99969.34163000001,
+      "daily_return": 0.0007007053185521579,
+      "cumulative_return": -0.000306583699999901,
+      "cummax": 1.0087783105,
+      "drawdown": -0.00900583815635081
+    },
+    {
+      "date": "20250108",
+      "total_value": 99932.55253000002,
+      "daily_return": -0.0003680038239739131,
+      "cumulative_return": -0.0006744746999998461,
+      "cummax": 1.0087783105,
+      "drawdown": -0.009370527797445072
+    },
+    {
+      "date": "20250109",
+      "total_value": 99932.55253000002,
+      "daily_return": 0.0,
+      "cumulative_return": -0.0006744746999998461,
+      "cummax": 1.0087783105,
+      "drawdown": -0.009370527797445072
+    },
+    {
+      "date": "20250110",
+      "total_value": 99932.55253000002,
+      "daily_return": 0.0,
+      "cumulative_return": -0.0006744746999998461,
+      "cummax": 1.0087783105,
+      "drawdown": -0.009370527797445072
+    },
+    {
+      "date": "20250113",
+      "total_value": 99932.55253000002,
+      "daily_return": 0.0,
+      "cumulative_return": -0.0006744746999998461,
+      "cummax": 1.0087783105,
+      "drawdown": -0.009370527797445072
+    },
+    {
+      "date": "20250114",
+      "total_value": 99932.55253000002,
+      "daily_return": 0.0,
+      "cumulative_return": -0.0006744746999998461,
+      "cummax": 1.0087783105,
+      "drawdown": -0.009370527797445072
+    },
+    {
+      "date": "20250115",
+      "total_value": 99932.55253000002,
+      "daily_return": 0.0,
+      "cumulative_return": -0.0006744746999998461,
+      "cummax": 1.0087783105,
+      "drawdown": -0.009370527797445072
+    },
+    {
+      "date": "20250116",
+      "total_value": 99932.55253000002,
+      "daily_return": 0.0,
+      "cumulative_return": -0.0006744746999998461,
+      "cummax": 1.0087783105,
+      "drawdown": -0.009370527797445072
+    },
+    {
+      "date": "20250117",
+      "total_value": 99932.55253000002,
+      "daily_return": 0.0,
+      "cumulative_return": -0.0006744746999998461,
+      "cummax": 1.0087783105,
+      "drawdown": -0.009370527797445072
+    },
+    {
+      "date": "20250120",
+      "total_value": 99932.55253000002,
+      "daily_return": 0.0,
+      "cumulative_return": -0.0006744746999998461,
+      "cummax": 1.0087783105,
+      "drawdown": -0.009370527797445072
+    },
+    {
+      "date": "20250121",
+      "total_value": 99932.55253000002,
+      "daily_return": 0.0,
+      "cumulative_return": -0.0006744746999998461,
+      "cummax": 1.0087783105,
+      "drawdown": -0.009370527797445072
+    },
+    {
+      "date": "20250122",
+      "total_value": 99932.55253000002,
+      "daily_return": 0.0,
+      "cumulative_return": -0.0006744746999998461,
+      "cummax": 1.0087783105,
+      "drawdown": -0.009370527797445072
+    },
+    {
+      "date": "20250123",
+      "total_value": 99932.55253000002,
+      "daily_return": 0.0,
+      "cumulative_return": -0.0006744746999998461,
+      "cummax": 1.0087783105,
+      "drawdown": -0.009370527797445072
+    },
+    {
+      "date": "20250124",
+      "total_value": 99932.55253000002,
+      "daily_return": 0.0,
+      "cumulative_return": -0.0006744746999998461,
+      "cummax": 1.0087783105,
+      "drawdown": -0.009370527797445072
+    },
+    {
+      "date": "20250127",
+      "total_value": 99932.55253000002,
+      "daily_return": 0.0,
+      "cumulative_return": -0.0006744746999998461,
+      "cummax": 1.0087783105,
+      "drawdown": -0.009370527797445072
+    },
+    {
+      "date": "20250205",
+      "total_value": 99932.55253000002,
+      "daily_return": 0.0,
+      "cumulative_return": -0.0006744746999998461,
+      "cummax": 1.0087783105,
+      "drawdown": -0.009370527797445072
+    },
+    {
+      "date": "20250206",
+      "total_value": 99932.55253000002,
+      "daily_return": 0.0,
+      "cumulative_return": -0.0006744746999998461,
+      "cummax": 1.0087783105,
+      "drawdown": -0.009370527797445072
+    },
+    {
+      "date": "20250207",
+      "total_value": 99932.55253000002,
+      "daily_return": 0.0,
+      "cumulative_return": -0.0006744746999998461,
+      "cummax": 1.0087783105,
+      "drawdown": -0.009370527797445072
+    },
+    {
+      "date": "20250210",
+      "total_value": 99932.55253000002,
+      "daily_return": 0.0,
+      "cumulative_return": -0.0006744746999998461,
+      "cummax": 1.0087783105,
+      "drawdown": -0.009370527797445072
+    },
+    {
+      "date": "20250211",
+      "total_value": 99932.55253000002,
+      "daily_return": 0.0,
+      "cumulative_return": -0.0006744746999998461,
+      "cummax": 1.0087783105,
+      "drawdown": -0.009370527797445072
+    },
+    {
+      "date": "20250212",
+      "total_value": 99932.55253000002,
+      "daily_return": 0.0,
+      "cumulative_return": -0.0006744746999998461,
+      "cummax": 1.0087783105,
+      "drawdown": -0.009370527797445072
+    },
+    {
+      "date": "20250213",
+      "total_value": 99932.55253000002,
+      "daily_return": 0.0,
+      "cumulative_return": -0.0006744746999998461,
+      "cummax": 1.0087783105,
+      "drawdown": -0.009370527797445072
+    },
+    {
+      "date": "20250214",
+      "total_value": 99932.55253000002,
+      "daily_return": 0.0,
+      "cumulative_return": -0.0006744746999998461,
+      "cummax": 1.0087783105,
+      "drawdown": -0.009370527797445072
+    },
+    {
+      "date": "20250217",
+      "total_value": 99932.55253000002,
+      "daily_return": 0.0,
+      "cumulative_return": -0.0006744746999998461,
+      "cummax": 1.0087783105,
+      "drawdown": -0.009370527797445072
+    },
+    {
+      "date": "20250218",
+      "total_value": 99932.55253000002,
+      "daily_return": 0.0,
+      "cumulative_return": -0.0006744746999998461,
+      "cummax": 1.0087783105,
+      "drawdown": -0.009370527797445072
+    },
+    {
+      "date": "20250219",
+      "total_value": 99932.55253000002,
+      "daily_return": 0.0,
+      "cumulative_return": -0.0006744746999998461,
+      "cummax": 1.0087783105,
+      "drawdown": -0.009370527797445072
+    },
+    {
+      "date": "20250220",
+      "total_value": 99932.55253000002,
+      "daily_return": 0.0,
+      "cumulative_return": -0.0006744746999998461,
+      "cummax": 1.0087783105,
+      "drawdown": -0.009370527797445072
+    },
+    {
+      "date": "20250221",
+      "total_value": 99932.55253000002,
+      "daily_return": 0.0,
+      "cumulative_return": -0.0006744746999998461,
+      "cummax": 1.0087783105,
+      "drawdown": -0.009370527797445072
+    },
+    {
+      "date": "20250224",
+      "total_value": 99932.55253000002,
+      "daily_return": 0.0,
+      "cumulative_return": -0.0006744746999998461,
+      "cummax": 1.0087783105,
+      "drawdown": -0.009370527797445072
+    },
+    {
+      "date": "20250225",
+      "total_value": 99932.55253000002,
+      "daily_return": 0.0,
+      "cumulative_return": -0.0006744746999998461,
+      "cummax": 1.0087783105,
+      "drawdown": -0.009370527797445072
+    },
+    {
+      "date": "20250226",
+      "total_value": 99932.55253000002,
+      "daily_return": 0.0,
+      "cumulative_return": -0.0006744746999998461,
+      "cummax": 1.0087783105,
+      "drawdown": -0.009370527797445072
+    },
+    {
+      "date": "20250227",
+      "total_value": 99932.55253000002,
+      "daily_return": 0.0,
+      "cumulative_return": -0.0006744746999998461,
+      "cummax": 1.0087783105,
+      "drawdown": -0.009370527797445072
+    },
+    {
+      "date": "20250228",
+      "total_value": 99932.55253000002,
+      "daily_return": 0.0,
+      "cumulative_return": -0.0006744746999998461,
+      "cummax": 1.0087783105,
+      "drawdown": -0.009370527797445072
+    },
+    {
+      "date": "20250303",
+      "total_value": 99932.55253000002,
+      "daily_return": 0.0,
+      "cumulative_return": -0.0006744746999998461,
+      "cummax": 1.0087783105,
+      "drawdown": -0.009370527797445072
+    },
+    {
+      "date": "20250304",
+      "total_value": 99932.55253000002,
+      "daily_return": 0.0,
+      "cumulative_return": -0.0006744746999998461,
+      "cummax": 1.0087783105,
+      "drawdown": -0.009370527797445072
+    },
+    {
+      "date": "20250305",
+      "total_value": 99932.55253000002,
+      "daily_return": 0.0,
+      "cumulative_return": -0.0006744746999998461,
+      "cummax": 1.0087783105,
+      "drawdown": -0.009370527797445072
+    },
+    {
+      "date": "20250306",
+      "total_value": 99932.55253000002,
+      "daily_return": 0.0,
+      "cumulative_return": -0.0006744746999998461,
+      "cummax": 1.0087783105,
+      "drawdown": -0.009370527797445072
+    },
+    {
+      "date": "20250307",
+      "total_value": 99932.55253000002,
+      "daily_return": 0.0,
+      "cumulative_return": -0.0006744746999998461,
+      "cummax": 1.0087783105,
+      "drawdown": -0.009370527797445072
+    },
+    {
+      "date": "20250310",
+      "total_value": 99932.55253000002,
+      "daily_return": 0.0,
+      "cumulative_return": -0.0006744746999998461,
+      "cummax": 1.0087783105,
+      "drawdown": -0.009370527797445072
+    },
+    {
+      "date": "20250311",
+      "total_value": 99932.55253000002,
+      "daily_return": 0.0,
+      "cumulative_return": -0.0006744746999998461,
+      "cummax": 1.0087783105,
+      "drawdown": -0.009370527797445072
+    },
+    {
+      "date": "20250312",
+      "total_value": 99932.55253000002,
+      "daily_return": 0.0,
+      "cumulative_return": -0.0006744746999998461,
+      "cummax": 1.0087783105,
+      "drawdown": -0.009370527797445072
+    },
+    {
+      "date": "20250313",
+      "total_value": 99916.31253000001,
+      "daily_return": -0.00016250960861957317,
+      "cumulative_return": -0.0008368746999998985,
+      "cummax": 1.0087783105,
+      "drawdown": -0.009531514605259805
+    },
+    {
+      "date": "20250314",
+      "total_value": 100046.31253000001,
+      "daily_return": 0.0013010888483396274,
+      "cumulative_return": 0.0004631253000001016,
+      "cummax": 1.0087783105,
+      "drawdown": -0.008242827104280925
+    },
+    {
+      "date": "20250317",
+      "total_value": 99576.31253000001,
+      "daily_return": -0.004697824318703053,
+      "cumulative_return": -0.004236874699999898,
+      "cummax": 1.0087783105,
+      "drawdown": -0.012901928069358526
+    },
+    {
+      "date": "20250318",
+      "total_value": 99566.31253000001,
+      "daily_return": -0.00010042549021874288,
+      "cumulative_return": -0.0043368746999998984,
+      "cummax": 1.0087783105,
+      "drawdown": -0.013001057877126132
+    },
+    {
+      "date": "20250319",
+      "total_value": 99596.31253000001,
+      "daily_return": 0.00030130672953224813,
+      "cumulative_return": -0.0040368746999998985,
+      "cummax": 1.0087783105,
+      "drawdown": -0.012703668453823314
+    },
+    {
+      "date": "20250320",
+      "total_value": 99566.31253000001,
+      "daily_return": -0.0003012159711331031,
+      "cumulative_return": -0.0043368746999998984,
+      "cummax": 1.0087783105,
+      "drawdown": -0.013001057877126132
+    },
+    {
+      "date": "20250321",
+      "total_value": 99496.31253000001,
+      "daily_return": -0.0007030490355752456,
+      "cumulative_return": -0.0050368746999998985,
+      "cummax": 1.0087783105,
+      "drawdown": -0.013694966531499375
+    },
+    {
+      "date": "20250324",
+      "total_value": 99456.31253000001,
+      "daily_return": -0.00040202494929587716,
+      "cumulative_return": -0.005436874699999899,
+      "cummax": 1.0087783105,
+      "drawdown": -0.0140914857625698
+    },
+    {
+      "date": "20250325",
+      "total_value": 99506.31253000001,
+      "daily_return": 0.0005027332979484635,
+      "cumulative_return": -0.004936874699999898,
+      "cummax": 1.0087783105,
+      "drawdown": -0.013595836723731769
+    },
+    {
+      "date": "20250326",
+      "total_value": 99429.76331000001,
+      "daily_return": -0.000769290088776248,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250327",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250328",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250331",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250401",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250402",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250403",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250407",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250408",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250409",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250410",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250411",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250414",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250415",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250416",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250417",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250418",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250421",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250422",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250423",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250424",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250425",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250428",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250429",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250430",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250506",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250507",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250508",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250509",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250512",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250513",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250514",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250515",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250516",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250519",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250520",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250521",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250522",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250523",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250526",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250527",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250528",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250529",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250530",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250603",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250604",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250605",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250606",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250609",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250610",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250611",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250612",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250613",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250616",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250617",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250618",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250619",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250620",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250623",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250624",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250625",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250626",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250627",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250630",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250701",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250702",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250703",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250704",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250707",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250708",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250709",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250710",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250711",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250714",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250715",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250716",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250717",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250718",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250721",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250722",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250723",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250724",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250725",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250728",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250729",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250730",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250731",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250801",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250804",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250805",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250806",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250807",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250808",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250811",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250812",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250813",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250814",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250815",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250818",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250819",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250820",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250821",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250822",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250825",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250826",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250827",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250828",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250829",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250901",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250902",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250903",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250904",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250905",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250908",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250909",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250910",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250911",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250912",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250915",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250916",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250917",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250918",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250919",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250922",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250923",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250924",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250925",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250926",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250929",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20250930",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251009",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251010",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251013",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251014",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251015",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251016",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251017",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251020",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251021",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251022",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251023",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251024",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251027",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251028",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251029",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251030",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251031",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251103",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251104",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251105",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251106",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251107",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251110",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251111",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251112",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251113",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251114",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251117",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251118",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251119",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251120",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251121",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251124",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251125",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251126",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251127",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251128",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251201",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251202",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251203",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251204",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251205",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251208",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251209",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251210",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251211",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251212",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251215",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251216",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251217",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251218",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251219",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251222",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251223",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251224",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251225",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251226",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251229",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251230",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20251231",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20260105",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20260106",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20260107",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20260108",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20260109",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20260112",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20260113",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20260114",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20260115",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20260116",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20260119",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20260120",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20260121",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20260122",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20260123",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20260126",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20260127",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20260128",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20260129",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20260130",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20260202",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20260203",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20260204",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20260205",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20260206",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20260209",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20260210",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20260211",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20260212",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20260213",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20260224",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20260225",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20260226",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20260227",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20260302",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20260303",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20260304",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20260305",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20260306",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20260309",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20260310",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20260311",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20260312",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20260313",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20260316",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20260317",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20260318",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20260319",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20260320",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20260323",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20260324",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20260325",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20260326",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    },
+    {
+      "date": "20260327",
+      "total_value": 99429.76331000001,
+      "daily_return": 0.0,
+      "cumulative_return": -0.005702366899999907,
+      "cummax": 1.0087783105,
+      "drawdown": -0.014354667670067878
+    }
+  ],
+  "trades": [
+    {
+      "id": 1,
+      "date": "20240821",
+      "code": "000001.SZ",
+      "action": "buy",
+      "price": 9.519509999999999,
+      "volume": 1000,
+      "amount": 9519.509999999998,
+      "reason": "金叉买入: MA10上穿MA20, 放量1.2倍"
+    },
+    {
+      "id": 2,
+      "date": "20240909",
+      "code": "000001.SZ",
+      "action": "sell",
+      "price": 9.00099,
+      "volume": 1000,
+      "amount": 9000.99,
+      "reason": "止损卖出: 亏损-5.4%"
+    },
+    {
+      "id": 3,
+      "date": "20240927",
+      "code": "000001.SZ",
+      "action": "buy",
+      "price": 10.59058,
+      "volume": 1000,
+      "amount": 10590.58,
+      "reason": "金叉买入: MA10上穿MA20, 放量3.1倍"
+    },
+    {
+      "id": 4,
+      "date": "20241008",
+      "code": "000001.SZ",
+      "action": "sell",
+      "price": 12.027959999999998,
+      "volume": 1000,
+      "amount": 12027.96,
+      "reason": "止盈卖出: 盈利13.7%"
+    },
+    {
+      "id": 5,
+      "date": "20241118",
+      "code": "000001.SZ",
+      "action": "buy",
+      "price": 11.16115,
+      "volume": 1000,
+      "amount": 11161.15,
+      "reason": "金叉买入: MA10上穿MA20, 放量2.5倍"
+    },
+    {
+      "id": 6,
+      "date": "20241125",
+      "code": "000001.SZ",
+      "action": "sell",
+      "price": 10.569420000000001,
+      "volume": 1000,
+      "amount": 10569.42,
+      "reason": "止损卖出: 亏损-5.2%"
+    },
+    {
+      "id": 7,
+      "date": "20241210",
+      "code": "000001.SZ",
+      "action": "buy",
+      "price": 11.201189999999999,
+      "volume": 1000,
+      "amount": 11201.189999999999,
+      "reason": "金叉买入: MA10上穿MA20, 放量1.6倍"
+    },
+    {
+      "id": 8,
+      "date": "20250108",
+      "code": "000001.SZ",
+      "action": "sell",
+      "price": 10.889100000000001,
+      "volume": 1000,
+      "amount": 10889.1,
+      "reason": "死叉卖出: MA10下穿MA20"
+    },
+    {
+      "id": 9,
+      "date": "20250313",
+      "code": "000001.SZ",
+      "action": "buy",
+      "price": 11.25124,
+      "volume": 1000,
+      "amount": 11251.24,
+      "reason": "金叉买入: MA10上穿MA20, 放量1.2倍"
+    },
+    {
+      "id": 10,
+      "date": "20250326",
+      "code": "000001.SZ",
+      "action": "sell",
+      "price": 10.769219999999999,
+      "volume": 1000,
+      "amount": 10769.22,
+      "reason": "死叉卖出: MA10下穿MA20"
+    }
+  ]
+}

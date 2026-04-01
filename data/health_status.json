@@ -1,0 +1,36 @@
+{
+  "timestamp": "2026-04-01T18:00:02.066570",
+  "date": "2026-04-01 18:00",
+  "checks": {
+    "磁盘空间": true,
+    "内存使用": true,
+    "CPU负载": true,
+    "文件完整性": true,
+    "定时任务": true,
+    "日志文件": true,
+    "环境配置": true,
+    "数据新鲜度": true
+  },
+  "issues": [],
+  "warnings": [
+    "⚠️ 数据更新不够频繁，建议检查数据源"
+  ],
+  "stats": {
+    "disk": {
+      "free_gb": 7.79,
+      "total_gb": 19.32,
+      "used_percent": 59.7
+    },
+    "memory": {
+      "total_gb": 3.43,
+      "available_gb": 1.43,
+      "percent": 58.4
+    },
+    "cpu": {
+      "percent": 4.8,
+      "core_count": 2
+    }
+  },
+  "healthy": true,
+  "has_warnings": true
+}

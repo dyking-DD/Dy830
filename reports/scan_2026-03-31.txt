@@ -1,0 +1,19 @@
+📊 每日量化扫描报告
+扫描日期: 2026-03-31
+市场状态: neutral ✅
+扫描股票: 0 只 (自选股 0)
+生成信号: 0 个
+模拟持仓: 1 只, 现金: ¥16,450.00
+
+📝 今日无符合条件的信号
+---
+策略权重:
+  rsi: 20.00%
+  macd: 20.00%
+  bollinger: 20.00%
+  momentum: 20.00%
+  combined: 20.00%
+
+📁 数据已记录到数据库，可执行以下命令查看:
+  python -c "from utils.trading_db import TradingDB; db=TradingDB(); print(db.get_performance_summary())"
+  python scripts/generate_report.py

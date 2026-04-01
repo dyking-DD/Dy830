@@ -1,0 +1,29 @@
+# 风控配置
+# 仓位控制
+max_position_per_stock: 0.10      # 单票最大仓位 10%
+max_position_per_sector: 0.30     # 板块最大仓位 30%
+max_total_position: 0.80          # 总仓位上限 80%
+min_cash_ratio: 0.10              # 最小现金比例 10%
+
+# 熔断机制
+daily_drawdown_limit: 0.05        # 日内回撤限制 5%
+total_drawdown_limit: 0.15        # 总回撤限制 15%
+circuit_breaker_duration_minutes: 30  # 熔断冷却时间 30分钟
+
+# 交易频率限制
+max_trades_per_day: 20            # 日最大交易次数
+min_trade_interval_seconds: 60    # 最小交易间隔 60秒
+
+# 黑名单设置
+auto_blacklist_st: true           # 自动拉黑ST股
+auto_blacklist_delisting: true    # 自动拉黑退市股
+blacklist_update_interval_days: 1 # 黑名单更新间隔（天）
+
+# 价格限制
+max_order_price_deviation: 0.05   # 下单价格偏离限制 5%
+min_stock_price: 1.0              # 最低股价 1元
+max_stock_price: 1000.0           # 最高股价 1000元
+
+# 流动性限制
+min_daily_volume: 1000000         # 最小日成交额 100万
+min_market_cap: 1000000000        # 最小市值 10亿

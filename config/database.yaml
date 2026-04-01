@@ -1,0 +1,167 @@
+# 数据库配置
+# Database Configuration
+
+# ============================================
+# SQLite (默认，轻量级)
+# ============================================
+sqlite:
+  enabled: true
+  path: "data/database/trading.db"
+  
+  # 连接池配置
+  pool_size: 5
+  max_overflow: 10
+  pool_timeout: 30
+  pool_recycle: 3600
+
+# ============================================
+# PostgreSQL (生产环境推荐)
+# ============================================
+postgresql:
+  enabled: false
+  host: "localhost"
+  port: 5432
+  database: "stock_trading"
+  username: "trading_user"
+  password: ""  # 从环境变量 DB_PASSWORD 读取
+  
+  # SSL配置
+  ssl_mode: "prefer"  # disable, allow, prefer, require, verify-ca, verify-full
+  ssl_cert: null
+  ssl_key: null
+  ssl_root_cert: null
+
+# ============================================
+# Redis (缓存和消息队列)
+# ============================================
+redis:
+  enabled: false
+  host: "localhost"
+  port: 6379
+  database: 0
+  password: null
+  
+  # 连接池
+  max_connections: 50
+  socket_timeout: 5
+  socket_connect_timeout: 5
+  
+  # 缓存配置
+  cache_ttl: 3600  # 默认缓存1小时
+  
+  # 频道配置
+  channels:
+    signals: "trading:signals"
+    alerts: "trading:alerts"
+    market_data: "trading:market_data"
+
+# ============================================
+# InfluxDB (时序数据，可选)
+# ============================================
+influxdb:
+  enabled: false
+  url: "http://localhost:8086"
+  token: ""  # 从环境变量 INFLUXDB_TOKEN 读取
+  org: "trading"
+  bucket: "stock_data"
+  
+  # 数据保留策略
+  retention_days: 365
+
+# ============================================
+# 表结构配置
+# ============================================
+tables:
+  # 股票基本信息
+  stocks:
+    - symbol
+    - name
+    - exchange
+    - industry
+    - market_cap
+    - listing_date
+    - created_at
+    - updated_at
+  
+  # 价格数据
+  prices:
+    - symbol
+    - date
+    - open
+    - high
+    - low
+    - close
+    - volume
+    - amount
+    - adjusted
+  
+  # 交易记录
+  trades:
+    - trade_id
+    - order_id
+    - symbol
+    - action
+    - quantity
+    - price
+    - amount
+    - commission
+    - timestamp
+  
+  # 持仓记录
+  positions:
+    - position_id
+    - symbol
+    - quantity
+    - avg_cost
+    - current_price
+    - market_value
+    - unrealized_pnl
+    - realized_pnl
+    - opened_at
+    - updated_at
+  
+  # 账户资金
+  account:
+    - date
+    - initial_capital
+    - cash
+    - total_value
+    - total_pnl
+    - total_return_pct
+  
+  # 策略信号
+  signals:
+    - signal_id
+    - strategy
+    - symbol
+    - signal_type  # buy, sell, hold
+    - strength     # 1-100
+    - reason
+    - created_at
+    - executed
+    - executed_at
+  
+  # 系统日志
+  logs:
+    - timestamp
+    - level
+    - module
+    - message
+    - extra_data
+
+# ============================================
+# 数据同步配置
+# ============================================
+sync:
+  # 自动同步间隔（秒）
+  interval: 300  # 5分钟
+  
+  # 批量插入大小
+  batch_size: 1000
+  
+  # 数据保留策略
+  retention:
+    tick_data: 7          # Tick数据保留7天
+    minute_data: 90       # 分钟数据保留90天
+    daily_data: 3650      # 日数据保留10年
+    logs: 30              # 日志保留30天

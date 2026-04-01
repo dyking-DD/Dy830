@@ -1,0 +1,124 @@
+{
+  "initial_capital": 1000000.0,
+  "cash": 101116.3,
+  "positions": [
+    {
+      "ts_code": "600519.SH",
+      "name": "\u8d35\u5dde\u8305\u53f0",
+      "volume": 200,
+      "avg_cost": 1650.0,
+      "current_price": 1680.0,
+      "market_value": 336000.0,
+      "pnl": 6000.0,
+      "pnl_pct": 1.82,
+      "open_date": "2026-03-28"
+    },
+    {
+      "ts_code": "300750.SZ",
+      "name": "\u5b81\u5fb7\u65f6\u4ee3",
+      "volume": 1000,
+      "avg_cost": 182.0,
+      "current_price": 185.0,
+      "market_value": 185000.0,
+      "pnl": 3000.0,
+      "pnl_pct": 1.65,
+      "open_date": "2026-03-29"
+    },
+    {
+      "ts_code": "000002.SZ",
+      "name": "\u4e07\u79d1A",
+      "volume": 5000,
+      "avg_cost": 14.8,
+      "current_price": 15.2,
+      "market_value": 76000.0,
+      "pnl": 2000.0,
+      "pnl_pct": 2.7,
+      "open_date": "2026-03-30"
+    },
+    {
+      "ts_code": "601318.SH",
+      "name": "\u4e2d\u56fd\u5e73\u5b89",
+      "volume": 2700,
+      "avg_cost": 45.66,
+      "current_price": 45.66,
+      "market_value": 123282.0,
+      "pnl": 0,
+      "pnl_pct": 0,
+      "open_date": "2026-03-31"
+    },
+    {
+      "ts_code": "002594.SZ",
+      "name": "\u6bd4\u4e9a\u8fea",
+      "volume": 100,
+      "avg_cost": 223.27,
+      "current_price": 223.27,
+      "market_value": 22327.0,
+      "pnl": 0,
+      "pnl_pct": 0,
+      "open_date": "2026-03-31"
+    }
+  ],
+  "trades": [
+    {
+      "trade_id": "T202603281030251234",
+      "ts_code": "600519.SH",
+      "name": "\u8d35\u5dde\u8305\u53f0",
+      "action": "BUY",
+      "price": 1650.0,
+      "volume": 200,
+      "amount": 330000.0,
+      "fee": 99.0,
+      "timestamp": "2026-03-28T10:30:25",
+      "pnl": 0
+    },
+    {
+      "trade_id": "T202603291425308765",
+      "ts_code": "300750.SZ",
+      "name": "\u5b81\u5fb7\u65f6\u4ee3",
+      "action": "BUY",
+      "price": 182.0,
+      "volume": 1000,
+      "amount": 182000.0,
+      "fee": 54.6,
+      "timestamp": "2026-03-29T14:25:30",
+      "pnl": 0
+    },
+    {
+      "trade_id": "T202603300915124321",
+      "ts_code": "000002.SZ",
+      "name": "\u4e07\u79d1A",
+      "action": "BUY",
+      "price": 14.8,
+      "volume": 5000,
+      "amount": 74000.0,
+      "fee": 22.2,
+      "timestamp": "2026-03-30T09:15:12",
+      "pnl": 0
+    },
+    {
+      "trade_id": "T202603311356202021",
+      "ts_code": "601318.SH",
+      "name": "\u4e2d\u56fd\u5e73\u5b89",
+      "action": "BUY",
+      "price": 45.66,
+      "volume": 2700,
+      "amount": 123282.0,
+      "fee": 36.98,
+      "timestamp": "2026-03-31T13:56:20",
+      "pnl": 0
+    },
+    {
+      "trade_id": "T202603311428231581",
+      "ts_code": "002594.SZ",
+      "name": "\u6bd4\u4e9a\u8fea",
+      "action": "BUY",
+      "price": 223.27,
+      "volume": 100,
+      "amount": 22327.0,
+      "fee": 6.7,
+      "timestamp": "2026-03-31T14:28:23.440080",
+      "pnl": 0
+    }
+  ],
+  "updated_at": "2026-03-31T14:28:23.440130"
+}

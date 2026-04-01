@@ -1,0 +1,27 @@
+{
+  "cash": 80015.75571,
+  "positions": {
+    "688710.SH": {
+      "symbol": "688710.SH",
+      "quantity": 151,
+      "cost_basis": 9974.454489999998,
+      "avg_price": 66.05599,
+      "current_price": 0.0,
+      "market_value": 0.0,
+      "unrealized_pnl": 0.0,
+      "unrealized_pnl_pct": 0.0
+    },
+    "688066.SH": {
+      "symbol": "688066.SH",
+      "quantity": 502,
+      "cost_basis": 9999.789799999997,
+      "avg_price": 19.919899999999995,
+      "current_price": 0.0,
+      "market_value": 0.0,
+      "unrealized_pnl": 0.0,
+      "unrealized_pnl_pct": 0.0
+    }
+  },
+  "equity": 100000.0,
+  "updated_at": "2026-03-29T21:25:21.584549"
+}
