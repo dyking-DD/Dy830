@@ -509,11 +509,30 @@ async def delete_order(order_id: str, authorization: Optional[str] = Header(None
     conn = database.get_db_connection()
     cursor = conn.cursor()
     try:
-        cursor.execute("DELETE FROM orders WHERE order_id = ?", (order_id,))
-        if cursor.rowcount == 0:
+        cursor.execute("SELECT customer_id FROM orders WHERE order_id = ?", (order_id,))
+        row = cursor.fetchone()
+        if not row:
             raise HTTPException(status_code=404, detail="订单不存在")
+        customer_id = row[0]
+
+        # 级联删除关联数据
+        cursor.execute("DELETE FROM advances WHERE order_id = ?", (order_id,))
+        cursor.execute("DELETE FROM gps_devices WHERE order_id = ?", (order_id,))
+        cursor.execute("DELETE FROM repayment_plans WHERE order_id = ?", (order_id,))
+        cursor.execute("DELETE FROM archive_checklists WHERE order_id = ?", (order_id,))
+        cursor.execute("DELETE FROM mortgage WHERE order_id = ?", (order_id,))
+        cursor.execute("DELETE FROM notification_logs WHERE order_id = ?", (order_id,))
+        cursor.execute("DELETE FROM vehicles WHERE order_id = ?", (order_id,))
+        # 客户：如果没有其他订单则删除
+        if customer_id:
+            cursor.execute("SELECT COUNT(*) FROM orders WHERE customer_id = ? AND order_id != ?", (customer_id, order_id))
+            if cursor.fetchone()[0] == 0:
+                cursor.execute("DELETE FROM customers WHERE customer_id = ?", (customer_id,))
+                cursor.execute("DELETE FROM customer_accounts WHERE customer_id = ?", (customer_id,))
+        # 最后删除订单
+        cursor.execute("DELETE FROM orders WHERE order_id = ?", (order_id,))
         conn.commit()
-        return api_response(message="订单删除成功")
+        return api_response(message="订单删除成功（含关联数据）")
     except Exception as e:
         conn.rollback()
         raise HTTPException(status_code=500, detail=f"删除失败: {str(e)}")
