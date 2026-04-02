@@ -121,7 +121,7 @@ td { padding: 10px 12px; }
         <h3>📋 全部订单</h3>
         <div class="table-wrap">
           <table>
-            <thead><tr><th>订单号</th><th>客户</th><th>车辆</th><th>贷款金额</th><th>月供</th><th>阶段</th><th>GPS</th><th>垫资</th><th>报单员</th><th>操作</th></tr></thead>
+            <thead><tr><th>订单号</th><th>客户</th><th>车辆</th><th>贷款金额</th><th>月供</th><th>阶段</th><th>GPS</th><th>垫资</th><th>报单员</th><th>照片</th><th>操作</th></tr></thead>
             <tbody id="ordersBody"></tbody>
           </table>
         </div>
@@ -134,7 +134,7 @@ td { padding: 10px 12px; }
         <h3>💰 垫资单列表</h3>
         <div class="table-wrap">
           <table>
-            <thead><tr><th>垫资号</th><th>订单号</th><th>客户</th><th>金额</th><th>利率</th><th>状态</th><th>操作</th></tr></thead>
+            <thead><tr><th>垫资号</th><th>订单号</th><th>客户</th><th>金额</th><th>利率</th><th>状态</th><th>照片</th><th>操作</th></tr></thead>
             <tbody id="advancesBody"></tbody>
           </table>
         </div>
@@ -173,7 +173,7 @@ td { padding: 10px 12px; }
         <h3>🏦 抵押登记列表</h3>
         <div class="table-wrap">
           <table>
-            <thead><tr><th>抵押号</th><th>订单号</th><th>银行</th><th>抵押日期</th><th>证号</th><th>状态</th><th>操作</th></tr></thead>
+            <thead><tr><th>抵押号</th><th>订单号</th><th>银行</th><th>抵押日期</th><th>证号</th><th>状态</th><th>照片</th><th>操作</th></tr></thead>
             <tbody id="mortgageBody"></tbody>
           </table>
         </div>
@@ -427,8 +427,8 @@ async function loadMortgages() {
   tb.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:30px;color:#888">加载中...</td></tr>';
   try {
     const token = await getToken();
-    const res = await fetch(API + '/api/v1/mortgage', { headers: {'Authorization': 'Bearer ' + token} }).then(r => r.json());
-    let items = res.data ? (Array.isArray(res.data) ? res.data : (res.data.items||[])) : [];
+    const res = await fetch(API + '/api/v1/mortgage-list-sql', { headers: {'Authorization': 'Bearer ' + token} }).then(r => r.json());
+    let items = res.data && res.data.items ? res.data.items : [];
     if (!items.length) { tb.innerHTML = '<tr><td colspan="7" class="empty">暂无抵押记录</td></tr>'; return; }
     tb.innerHTML = items.map(m => {
       const sc = m.status && (m.status.includes('已解除')||m.status.includes('已结清')) ? 'status-done' : 'status-doing';

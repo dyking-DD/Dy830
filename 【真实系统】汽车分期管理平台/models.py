@@ -329,6 +329,7 @@ class MortgageCreate(BaseModel):
     register_date: str = Field(..., description="登记日期")
     expire_date: Optional[str] = Field(None, description="到期日期")
     certificate_number: Optional[str] = Field(None, description="登记证编号")
+    person_car_photo: Optional[str] = Field(None, description="人车合影照片Base64")
 
 
 class MortgageRelease(BaseModel):

@@ -566,6 +566,28 @@ async def update_vehicle(vehicle_id: str, update: models.VehicleUpdate, authoriz
         conn.close()
 
 
+@app.get("/api/v1/mortgage-list-sql", tags=["抵押管理"], summary="抵押列表（直接SQL，含照片）")
+async def get_mortgage_list_sql(authorization: Optional[str] = Header(None)):
+    verify_admin_token(authorization)
+    conn = database.get_db_connection()
+    cursor = conn.cursor()
+    try:
+        cursor.execute("""
+            SELECT m.mortgage_id, m.order_id, m.bank_name, m.mortgage_date,
+                   m.certificate_no, m.status, m.person_car_photo,
+                   o.stage_remark, o.stage
+            FROM mortgage m
+            LEFT JOIN orders o ON m.order_id = o.order_id
+            ORDER BY m.mortgage_date DESC, m.created_at DESC
+        """)
+        rows = cursor.fetchall()
+        cols = [d[0] for d in cursor.description]
+        items = [dict(zip(cols, row)) for row in rows]
+        return api_response(message="OK", data={"items": items, "total": len(items)})
+    finally:
+        conn.close()
+
+
 # ==================== 垫资管理路由 ====================
 
 @app.post("/api/v1/advances", tags=["垫资管理"], summary="创建垫资单")
