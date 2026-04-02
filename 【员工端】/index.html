@@ -486,6 +486,11 @@ async function submitOrder() {
       method: 'POST', headers,
       body: JSON.stringify({
         customer_id: customerId,
+        customer_name: name,
+        customer_phone: phone,
+        car_brand: brand,
+        car_model: model,
+        car_price: price,
         loan_amount: loan,
         down_payment: downAmt,
         loan_period: 60,
