@@ -669,6 +669,9 @@ function viewOrder(id) {
           <div class="detail-item"><div class="detail-label">月供（60期）</div><div class="detail-value" style="color:var(--accent)">¥${o.monthly_payment ? o.monthly_payment.toLocaleString()+'元' : '-'}</div></div>
           <div class="detail-item"><div class="detail-label">创建时间</div><div class="detail-value">${o.created_at ? o.created_at.slice(0,19) : '-'}</div></div>
         </div>
+        <div style="margin-top:16px;padding-top:14px;border-top:2px solid #e8d48a;text-align:center">
+          <button onclick="deleteOrder('${o.order_id}');closeOrderModal();" style="background:#dc2626;color:white;border:none;padding:10px 24px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600">🗑 删除此订单</button>
+        </div>
       `;
     }).catch(() => {
       document.getElementById('orderDetailContent').innerHTML = '<div style="padding:20px;color:var(--danger)">加载失败</div>';
