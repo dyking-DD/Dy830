@@ -246,20 +246,49 @@ textarea.form-control { width: 100%; padding: 10px 12px; border: 1px solid #ddd;
               <option>其他</option>
             </select>
           </div>
-          <div class="form-group">
-            <label>首付比例 <span>*</span></label>
-            <select id="fDownPct" onchange="calcLoan()">
-              <option value="0.15" selected>首付15% · 贷85%</option>
-              <option value="0.20">首付20% · 贷80%</option>
-            </select>
+          <div class="form-group form-full">
+            <label>首付方式 <span>*</span></label>
+            <div style="display:flex;gap:8px">
+              <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:13px;flex:1;padding:8px 12px;border:2px solid #ddd;border-radius:8px;transition:all 0.2s" id="modeAutoLabel">
+                <input type="radio" name="downMode" value="auto" checked onclick="switchDownMode('auto')" style="accent-color:#D4AF37">
+                <span>按比例计算</span>
+              </label>
+              <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:13px;flex:1;padding:8px 12px;border:2px solid #ddd;border-radius:8px;transition:all 0.2s" id="modeManualLabel">
+                <input type="radio" name="downMode" value="manual" onclick="switchDownMode('manual')" style="accent-color:#D4AF37">
+                <span>手动输入金额</span>
+              </label>
+            </div>
           </div>
-          <div class="form-group">
-            <label>首付金额（元）</label>
-            <input id="fDownAmt" placeholder="自动计算" readonly style="background:#f0f0f0">
+          <!-- 按比例模式 -->
+          <div id="autoDownSection">
+            <div class="form-group">
+              <label>首付比例 <span>*</span></label>
+              <select id="fDownPct" onchange="calcLoan()">
+                <option value="0.15" selected>15%（贷85%）</option>
+                <option value="0.20">20%（贷80%）</option>
+                <option value="0.25">25%（贷75%）</option>
+                <option value="0.30">30%（贷70%）</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>首付金额（元）</label>
+              <input id="fDownAmt" placeholder="自动计算" readonly style="background:#f5f5f5;color:#888">
+            </div>
+          </div>
+          <!-- 手动模式 -->
+          <div id="manualDownSection" style="display:none">
+            <div class="form-group">
+              <label>首付金额（元）<span>*</span></label>
+              <input id="fDownManual" placeholder="请输入首付金额" type="number" oninput="calcFromManual()">
+            </div>
+            <div class="form-group">
+              <label>实际首付比例</label>
+              <input id="fDownPctReal" placeholder="自动计算" readonly style="background:#f5f5f5;color:#888">
+            </div>
           </div>
           <div class="form-group">
             <label>贷款金额（元）</label>
-            <input id="fLoanAmt" placeholder="自动计算" readonly style="background:#f0f0f0;color:var(--accent);font-weight:700">
+            <input id="fLoanAmt" placeholder="自动计算" readonly style="background:#f5f5f5;color:#D4AF37;font-weight:700">
           </div>
           <div class="form-group">
             <label>GPS安装</label>
@@ -390,20 +419,80 @@ function switchTab(name) {
 function showToast(msg, isError) {
   const t = document.getElementById('toast');
   t.textContent = msg; t.className = 'toast ' + (isError ? 'error' : '');
-  t.style.display = 'block'; setTimeout(() => t.style.display = 'none', 3500);
+  t.style.display = 'block'; setTimeout(() => t.style.display = 'none', 4000);
 }
 
-// 选择费率方案（独立4档，5年期）
-// 总费率 = 选定方案（10%/13.5%/15%/15.84%）
-// 一次性费用 = 贷款金额 × 总费率
-// 月供（60期）= (贷款金额 + 一次性费用) / 60
+// 切换首付方式
+function switchDownMode(mode) {
+  const autoSection = document.getElementById('autoDownSection');
+  const manualSection = document.getElementById('manualDownSection');
+  const autoLabel = document.getElementById('modeAutoLabel');
+  const manualLabel = document.getElementById('modeManualLabel');
+  const goldStyle = '2px solid #D4AF37; background: linear-gradient(135deg,#fffdf0,#fff8e1); box-shadow: 0 2px 8px rgba(212,175,55,0.15);';
+  const defaultStyle = '2px solid #ddd; background: white;';
+
+  if (mode === 'auto') {
+    autoSection.style.display = '';
+    manualSection.style.display = 'none';
+    autoLabel.style.cssText = goldStyle;
+    manualLabel.style.cssText = defaultStyle;
+    document.getElementById('fDownManual').value = '';
+    calcLoan();
+  } else {
+    autoSection.style.display = 'none';
+    manualSection.style.display = '';
+    autoLabel.style.cssText = defaultStyle;
+    manualLabel.style.cssText = goldStyle;
+    document.getElementById('fDownPct').value = '';
+    calcFromManual();
+  }
+}
+
+// 初始化模式样式
+function initDownModeUI() {
+  const autoLabel = document.getElementById('modeAutoLabel');
+  const manualLabel = document.getElementById('modeManualLabel');
+  autoLabel.style.cssText = '2px solid #D4AF37; background: linear-gradient(135deg,#fffdf0,#fff8e1); box-shadow: 0 2px 8px rgba(212,175,55,0.15);';
+  manualLabel.style.cssText = '2px solid #ddd; background: white;';
+}
+
+// 按比例计算（手动输入首付金额时）
+function calcFromManual() {
+  const price = parseFloat(document.getElementById('fPrice').value) || 0;
+  const manualDown = parseFloat(document.getElementById('fDownManual').value) || 0;
+
+  if (price > 0 && manualDown > 0 && manualDown < price) {
+    const pct = manualDown / price;
+    const loan = price - manualDown;
+    document.getElementById('fDownPctReal').value = (pct * 100).toFixed(1) + '%';
+    document.getElementById('fLoanAmt').value = loan.toLocaleString();
+    // 更新计算结果
+    const totalFeeRate = window._selectedFeeRate || 0.10;
+    const totalInterest = loan * totalFeeRate;
+    const monthly = (loan + totalInterest) / 60;
+    document.getElementById('rLoan').textContent = loan.toLocaleString();
+    document.getElementById('rInterest').textContent = Math.round(totalInterest).toLocaleString();
+    document.getElementById('rMonthly').textContent = Math.round(monthly).toLocaleString();
+    document.getElementById('rTotal').textContent = Math.round(loan + totalInterest).toLocaleString();
+  } else if (manualDown >= price) {
+    document.getElementById('fDownPctReal').value = '非法';
+    document.getElementById('fLoanAmt').value = '0';
+  } else {
+    document.getElementById('fDownPctReal').value = '';
+    document.getElementById('fLoanAmt').value = '';
+  }
+}
+
+// 选择费率方案
 let _selectedFeeRate = 0.10;
 
 function selectRate(el, feeRate) {
   document.querySelectorAll('.rate-card').forEach(c => c.classList.remove('selected'));
   el.classList.add('selected');
   _selectedFeeRate = feeRate;
-  calcLoan();
+  window._selectedFeeRate = feeRate;
+  const mode = document.querySelector('input[name="downMode"]:checked').value;
+  if (mode === 'auto') calcLoan(); else calcFromManual();
 }
 
 function calcLoan() {
@@ -429,11 +518,11 @@ function calcLoan() {
   const monthlyPayment = (loan + totalInterest) / 60;
   const totalRepayment = loan + totalInterest;
 
-  document.getElementById('rLoan').textContent = loan.toLocaleString('zh-CN', {maximumFractionDigits: 0});
+  document.getElementById('rLoan').textContent = loan.toLocaleString();
   document.getElementById('rRate').textContent = (totalFeeRate * 100).toFixed(2) + '%';
-  document.getElementById('rInterest').textContent = Math.round(totalInterest).toLocaleString('zh-CN');
-  document.getElementById('rMonthly').textContent = Math.round(monthlyPayment).toLocaleString('zh-CN');
-  document.getElementById('rTotal').textContent = Math.round(totalRepayment).toLocaleString('zh-CN');
+  document.getElementById('rInterest').textContent = Math.round(totalInterest).toLocaleString();
+  document.getElementById('rMonthly').textContent = Math.round(monthlyPayment).toLocaleString();
+  document.getElementById('rTotal').textContent = Math.round(totalRepayment).toLocaleString();
 }
 
 async function getToken() {
@@ -452,14 +541,34 @@ async function submitOrder() {
   const brand = document.getElementById('fBrand').value.trim();
   const model = document.getElementById('fModel').value.trim();
   const price = parseFloat(document.getElementById('fPrice').value);
-  const down = parseFloat(document.getElementById('fDown').value);
+  const mode = document.querySelector('input[name="downMode"]:checked').value;
+
+  // 获取贷款金额和首付金额
+  let downAmt = 0;
+  let downPct = 0;
+  let loan = 0;
+
+  if (mode === 'auto') {
+    downPct = parseFloat(document.getElementById('fDownPct').value) || 0.15;
+    downAmt = Math.round(price * downPct);
+  } else {
+    downAmt = parseFloat(document.getElementById('fDownManual').value) || 0;
+    downPct = price > 0 ? downAmt / price : 0;
+  }
+  loan = Math.max(0, price - downAmt);
+
   const monthly = parseFloat(document.getElementById('rMonthly').textContent.replace(/,/g,'')) || 0;
 
-  if (!reporter || !phone || !name || !brand || !model || !price || !down) {
-    showToast('请填写必填项（*标记）', true); return;
-  }
-  if (phone.length !== 11) { showToast('手机号格式不正确', true); return; }
-  if (downAmt >= price) { showToast('首付金额不能大于车价', true); return; }
+  // 必填校验
+  if (!reporter) { showToast('请选择报单员！', true); return; }
+  if (!phone) { showToast('请填写手机号码！', true); return; }
+  if (phone.length !== 11) { showToast('手机号格式不正确（需11位）！', true); return; }
+  if (!name) { showToast('请填写客户姓名！', true); return; }
+  if (!brand) { showToast('请填写汽车品牌！', true); return; }
+  if (!model) { showToast('请填写车型！', true); return; }
+  if (!price || price <= 0) { showToast('请填写正确的车价！', true); return; }
+  if (downAmt <= 0) { showToast('首付金额必须大于0！', true); return; }
+  if (downAmt >= price) { showToast('首付金额不能大于等于车价！', true); return; }
 
   const btn = document.getElementById('submitBtn');
   btn.disabled = true; btn.textContent = '提交中...';
@@ -468,7 +577,7 @@ async function submitOrder() {
     const token = await getToken();
     const headers = {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token};
 
-    // 查询是否已存在该手机号客户
+    // 查找或创建客户
     let customerId = '';
     const existRes = await fetch(API + '/api/v1/customers?phone=' + phone, {headers}).then(r => r.json());
     if (existRes.data && existRes.data.items && existRes.data.items.length > 0) {
@@ -483,6 +592,9 @@ async function submitOrder() {
       }
     }
 
+    if (!customerId) { showToast('客户创建失败，请重试！', true); btn.disabled=false; btn.textContent='提 交 订 单'; return; }
+
+    // 创建车辆
     if (document.getElementById('fPlate').value || document.getElementById('fIdNum').value) {
       await fetch(API + '/api/v1/vehicles', {
         method: 'POST', headers,
@@ -491,9 +603,6 @@ async function submitOrder() {
       });
     }
 
-    const downPct = parseFloat(document.getElementById('fDownPct').value) || 0.15;
-    const downAmt = Math.round(price * downPct);
-    const loan = Math.max(0, price - downAmt);
     const totalFeeRate = _selectedFeeRate;
     const totalInterest = loan * totalFeeRate;
     const staffInfo = STAFF_LIST.find(s => s.name === reporter) || {};
@@ -517,7 +626,7 @@ async function submitOrder() {
         created_by: reporter + '(' + staffCode + ')',
         stage_remark: '员工:' + reporter + '|工号:' + staffCode +
           '|费率:' + (totalFeeRate*100).toFixed(2) + '%' +
-          '|首付:' + (downPct*100).toFixed(0) + '%' +
+          '|首付:' + (downPct*100).toFixed(1) + '%' +
           '|GPS:' + document.getElementById('fGPS').value +
           '|垫资:' + document.getElementById('fAdvance').value +
           '|总利息:' + Math.round(totalInterest).toLocaleString() +
@@ -526,18 +635,21 @@ async function submitOrder() {
     }).then(r => r.json());
 
     if (orderRes.code === 200) {
-      showToast('订单提交成功！');
-      document.querySelectorAll('#newTab input, #newTab textarea').forEach(i => i.value = '');
+      showToast('✅ 订单提交成功！订单号：' + (orderRes.data && orderRes.data.order && orderRes.data.order.order_id || '') );
+      // 清空表单
+      document.querySelectorAll('#newTab input:not([type=radio]), #newTab textarea').forEach(i => i.value = '');
       document.getElementById('fReporter').value = '';
+      document.getElementById('fDownPct').value = '0.15';
       document.getElementById('fGPS').value = '否';
       document.getElementById('fAdvance').value = '否';
+      switchDownMode('auto');
       calcLoan();
       switchTab('my');
     } else {
-      showToast(orderRes.message || '提交失败', true);
+      showToast('提交失败：' + (orderRes.message || orderRes.detail || '未知错误'), true);
     }
   } catch(e) {
-    showToast('提交失败，请检查后端是否启动', true);
+    showToast('提交失败：网络错误，后端可能未启动！', true);
   }
   btn.disabled = false; btn.textContent = '提 交 订 单';
 }
@@ -553,8 +665,8 @@ async function loadMyOrders() {
     list.innerHTML = orders.map(o => {
       const remark = o.stage_remark || '';
       const reporter = remark.includes('员工:') ? remark.split('员工:')[1].split('|')[0] : (o.created_by || '-');
-      const gps = remark.includes('GPS:') ? '|GPS:' + remark.split('GPS:')[1].split('|')[0] : '';
-      const advance = remark.includes('垫资:') ? '|垫资:' + remark.split('垫资:')[1].split('|')[0] : '';
+      const gps = remark.includes('GPS:') ? remark.split('GPS:')[1].split('|')[0] : '-';
+      const advance = remark.includes('垫资:') ? remark.split('垫资:')[1].split('|')[0] : '-';
       return '<div class="order-item ' + (o.stage && o.stage.includes('逾期') ? 'overdue' : '') + '">' +
         '<div class="order-item-header">' +
           '<span class="order-item-id">' + (o.order_id || '-') + '</span>' +
@@ -566,8 +678,7 @@ async function loadMyOrders() {
           '<div>贷款：<strong>' + (o.loan_amount ? o.loan_amount.toLocaleString()+'元' : '-') + '</strong></div>' +
           '<div>月供：<strong>' + (o.monthly_payment ? o.monthly_payment.toLocaleString()+'元' : '-') + '</strong></div>' +
           '<div>期数：<strong>' + (o.loan_period||'-') + '期</strong></div>' +
-          '<div>银行：<strong>' + (o.bank_name||'-') + '</strong></div>' +
-          '<div>GPS:' + gps.split(':')[1] + ' 垫资:' + advance.split(':')[1] + ' <strong></strong></div>' +
+          '<div>GPS:' + gps + ' 垫资:' + advance + '</div>' +
           '<div>时间：<strong>' + (o.created_at||'').slice(0,10) + '</strong></div>' +
         '</div>' +
       '</div>';
@@ -595,19 +706,13 @@ async function loadStaffStats() {
     const token = await getToken();
     const res = await fetch(API + '/api/v1/orders', {headers: {'Authorization': 'Bearer ' + token}}).then(r => r.json());
     const orders = res.data ? (res.data.items || []) : [];
-
     const stats = {};
     STAFF_LIST.forEach(s => { stats[s.name] = {name:s.name, code:s.code, count:0, totalLoan:0}; });
-
     orders.forEach(o => {
       const remark = o.stage_remark || '';
       const reporter = remark.includes('员工:') ? remark.split('员工:')[1].split('|')[0] : '';
-      if (stats[reporter]) {
-        stats[reporter].count++;
-        stats[reporter].totalLoan += o.loan_amount || 0;
-      }
+      if (stats[reporter]) { stats[reporter].count++; stats[reporter].totalLoan += o.loan_amount || 0; }
     });
-
     const rows = STAFF_LIST.map(s => {
       const st = stats[s.name];
       return '<div style="background:#f8f9fa;border-radius:8px;padding:14px;margin-bottom:10px;">' +
@@ -629,6 +734,7 @@ function getStatusClass(stage) {
 }
 
 window._selectedFeeRate = 0.10;
+initDownModeUI();
 calcLoan();
 </script>
 </body>
