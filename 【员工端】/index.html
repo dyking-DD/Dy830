@@ -328,8 +328,8 @@ textarea.form-control { width: 100%; padding: 10px 12px; border: 1px solid #ddd;
 const API = 'http://localhost:8899';
 const STAFF_PASSWORD = '888888';
 
-let selectedRate = 0.10;
-let selectedPeriod = 12;
+let selectedAnnualFeeRate = 10.0; // 年费率（表中年利率）
+let selectedPeriods = 12;
 
 // 登录
 function staffLogin() {
@@ -370,11 +370,11 @@ function showToast(msg, isError) {
 }
 
 // 选择费率方案
-function selectRate(el, rate, periods) {
+function selectRate(el, annualFeeRate, periods) {
   document.querySelectorAll('.rate-card').forEach(c => c.classList.remove('selected'));
   el.classList.add('selected');
-  selectedRate = rate;
-  selectedPeriod = periods;
+  selectedAnnualFeeRate = annualFeeRate;
+  selectedPeriods = periods;
   document.getElementById('fPeriod').value = periods;
   calcLoan();
 }
@@ -382,6 +382,7 @@ function selectRate(el, rate, periods) {
 // 期数变化时自动匹配最接近的费率方案
 function onPeriodChange() {
   const periods = parseInt(document.getElementById('fPeriod').value);
+  const annualFeeRate = getAnnualFeeRate(periods);
   const cards = document.querySelectorAll('.rate-card');
   let closest = cards[0];
   let minDiff = 999;
@@ -391,56 +392,61 @@ function onPeriodChange() {
   });
   cards.forEach(c => c.classList.remove('selected'));
   closest.classList.add('selected');
-  selectedRate = parseFloat(closest.dataset.rate || closest.getAttribute('onclick').match(/0\.\d+/)[0]);
-  selectedPeriod = periods;
+  selectedAnnualFeeRate = annualFeeRate;
+  selectedPeriods = periods;
   calcLoan();
 }
 
-// 计算贷款（等额本息费率模式）
-// 费率模式下：利息 = 贷款金额 × 费率
-// 月供 = (贷款金额 + 利息) / 期数
+// 根据期数返回年费率（表中年利率）
+function getAnnualFeeRate(periods) {
+  if (periods <= 12) return 10.0;
+  if (periods <= 24) return 13.5;
+  if (periods <= 36) return 15.0;
+  if (periods <= 48) return 15.84;
+  return 15.84;
+}
+
+// 计算贷款
+// 年费率 ÷ 5 = 年利率，再按等额本息标准公式计算月供
+// 例如：60期10% → 年利率=10%/5=2%/年
+// 月供 = 本金 × [r(1+r)^n] / [(1+r)^n-1]，其中 r=年利率/12
 function calcLoan() {
   const price = parseFloat(document.getElementById('fPrice').value) || 0;
   const down = parseFloat(document.getElementById('fDown').value) || 0;
-  const periods = parseInt(document.getElementById('fPeriod').value) || selectedPeriod;
-
-  // 如果用自定义期数，重新匹配费率
-  if (periods !== selectedPeriod) {
-    selectedPeriod = periods;
-    selectedRate = getRateForPeriod(periods);
-  }
+  const periods = parseInt(document.getElementById('fPeriod').value) || selectedPeriods;
 
   const loan = Math.max(0, price - down);
-  const totalInterest = loan * selectedRate;
-  const monthlyPayment = periods > 0 ? (loan + totalInterest) / periods : 0;
-  const totalRepayment = loan + totalInterest;
+  if (loan <= 0 || periods <= 0) {
+    document.getElementById('rLoan').textContent = '0';
+    document.getElementById('rRate').textContent = '-';
+    document.getElementById('rInterest').textContent = '0';
+    document.getElementById('rMonthly').textContent = '0';
+    document.getElementById('rTotal').textContent = '0';
+    return;
+  }
+
+  // 年利率 = 年费率 ÷ 5
+  const annualRate = selectedAnnualFeeRate / 5 / 100;
+  const monthlyRate = annualRate / 12;
+
+  let monthlyPayment, totalInterest, totalRepayment;
+  if (monthlyRate <= 0.00001) {
+    // 零利率：直接平分本金
+    monthlyPayment = loan / periods;
+    totalInterest = 0;
+  } else {
+    // 等额本息标准公式：月供 = 本金×[r(1+r)^n]/[(1+r)^n-1]
+    const factor = Math.pow(1 + monthlyRate, periods);
+    monthlyPayment = loan * (monthlyRate * factor) / (factor - 1);
+    totalInterest = monthlyPayment * periods - loan;
+  }
+  totalRepayment = loan + totalInterest;
 
   document.getElementById('rLoan').textContent = loan.toLocaleString('zh-CN', {minimumFractionDigits: 0, maximumFractionDigits: 2});
-  document.getElementById('rRate').textContent = (selectedRate * 100).toFixed(2) + '%';
-  document.getElementById('rInterest').textContent = totalInterest.toLocaleString('zh-CN', {minimumFractionDigits: 0, maximumFractionDigits: 2});
-  document.getElementById('rMonthly').textContent = monthlyPayment.toLocaleString('zh-CN', {minimumFractionDigits: 0, maximumFractionDigits: 2});
-  document.getElementById('rTotal').textContent = totalRepayment.toLocaleString('zh-CN', {minimumFractionDigits: 0, maximumFractionDigits: 2});
-}
-
-// 根据期数返回费率（线性插值）
-function getRateForPeriod(periods) {
-  const table = [
-    {p: 12, r: 0.10},
-    {p: 24, r: 0.135},
-    {p: 36, r: 0.15},
-    {p: 48, r: 0.1584},
-    {p: 60, r: 0.1584},
-  ];
-  if (periods <= 12) return 0.10;
-  if (periods >= 60) return 0.1584;
-  // 线性插值
-  for (let i = 0; i < table.length - 1; i++) {
-    if (periods >= table[i].p && periods <= table[i+1].p) {
-      const t = (periods - table[i].p) / (table[i+1].p - table[i].p);
-      return table[i].r + t * (table[i+1].r - table[i].r);
-    }
-  }
-  return 0.1584;
+  document.getElementById('rRate').textContent = selectedAnnualFeeRate.toFixed(1) + '%（年费率）= ' + (selectedAnnualFeeRate / 5).toFixed(2) + '%（年利率）';
+  document.getElementById('rInterest').textContent = Math.round(totalInterest).toLocaleString('zh-CN');
+  document.getElementById('rMonthly').textContent = Math.round(monthlyPayment).toLocaleString('zh-CN');
+  document.getElementById('rTotal').textContent = Math.round(totalRepayment).toLocaleString('zh-CN');
 }
 
 async function getToken() {
@@ -476,7 +482,6 @@ async function submitOrder() {
     const token = await getToken();
     const headers = {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token};
 
-    // 创建客户
     const customerRes = await fetch(API + '/api/v1/customers', {
       method: 'POST', headers,
       body: JSON.stringify({name, phone, id_number: document.getElementById('fIdNum').value, address: ''})
@@ -487,19 +492,20 @@ async function submitOrder() {
       customerId = (exist.data && exist.data.items && exist.data.items[0] && exist.data.items[0].customer_id) || '';
     }
 
-    // 创建车辆
     if (document.getElementById('fPlate').value || document.getElementById('fIdNum').value) {
       await fetch(API + '/api/v1/vehicles', {
         method: 'POST', headers,
         body: JSON.stringify({customer_id: customerId, brand, model,
-          plate_number: document.getElementById('fPlate').value,
-          vin: '', price})
+          plate_number: document.getElementById('fPlate').value, vin: '', price})
       });
     }
 
-    // 创建订单（报单员记录在remark里）
     const loan = price - down;
-    const totalInterest = loan * selectedRate;
+    const annualRate = selectedAnnualFeeRate / 5 / 100;
+    const monthlyRate2 = annualRate / 12;
+    const factor = Math.pow(1 + monthlyRate2, periods);
+    const totalInterest = monthlyRate2 > 0.00001 ? (loan * (monthlyRate2 * factor) / (factor - 1)) * periods - loan : 0;
+
     const orderRes = await fetch(API + '/api/v1/orders', {
       method: 'POST', headers,
       body: JSON.stringify({
@@ -508,15 +514,15 @@ async function submitOrder() {
         down_payment: down,
         loan_period: periods,
         monthly_payment: monthly,
-        interest_rate: selectedRate,
+        interest_rate: selectedAnnualFeeRate / 100,
         bank_name: document.getElementById('fBank').value,
         created_by: reporter,
-        stage_remark: `报单员:${reporter}|费率:${(selectedRate*100).toFixed(2)}%|利息:${totalInterest.toFixed(2)}`
+        stage_remark: '报单员:' + reporter + '|年费率:' + selectedAnnualFeeRate.toFixed(1) + '%|年利率:' + (selectedAnnualFeeRate/5).toFixed(2) + '%|利息:' + Math.round(totalInterest).toLocaleString()
       })
     }).then(r => r.json());
 
     if (orderRes.code === 200) {
-      showToast('✅ 订单提交成功！');
+      showToast('订单提交成功！');
       document.querySelectorAll('#newTab input, #newTab textarea').forEach(i => i.value = '');
       document.getElementById('fPeriod').value = '36';
       calcLoan();
@@ -530,7 +536,6 @@ async function submitOrder() {
   btn.disabled = false; btn.textContent = '提 交 订 单';
 }
 
-// 我的订单
 async function loadMyOrders() {
   const list = document.getElementById('myOrdersList');
   list.innerHTML = '<div class="empty">加载中...</div>';
@@ -542,26 +547,25 @@ async function loadMyOrders() {
     list.innerHTML = orders.map(o => {
       const remark = o.stage_remark || '';
       const reporter = remark.includes('报单员:') ? remark.split('报单员:')[1].split('|')[0] : '-';
-      return `<div class="order-item ${o.stage && o.stage.includes('逾期') ? 'overdue' : ''}">
-        <div class="order-item-header">
-          <span class="order-item-id">${o.order_id || '-'}</span>
-          <span class="order-item-status ${getStatusClass(o.stage)}">${o.stage || '未知'}</span>
-        </div>
-        <div class="order-item-name">${o.customer_name || name} <span style="font-size:12px;color:var(--text-light);font-weight:400">报单:${reporter}</span></div>
-        <div class="order-item-info">
-          <div>车型：<strong>${o.car_brand||'-'} ${o.car_model||'-'}</strong></div>
-          <div>贷款：<strong>${o.loan_amount ? o.loan_amount.toLocaleString()+'元' : '-'}</strong></div>
-          <div>月供：<strong>${o.monthly_payment ? o.monthly_payment.toLocaleString()+'元' : '-'}</strong></div>
-          <div>期数：<strong>${o.loan_period||'-'}期</strong></div>
-          <div>银行：<strong>${o.bank_name||'-'}</strong></div>
-          <div>时间：<strong>${(o.created_at||'').slice(0,10)}</strong></div>
-        </div>
-      </div>`;
+      return '<div class="order-item ' + (o.stage && o.stage.includes('逾期') ? 'overdue' : '') + '">' +
+        '<div class="order-item-header">' +
+          '<span class="order-item-id">' + (o.order_id || '-') + '</span>' +
+          '<span class="order-item-status ' + getStatusClass(o.stage) + '">' + (o.stage || '未知') + '</span>' +
+        '</div>' +
+        '<div class="order-item-name">' + (o.customer_name || '-') + ' <span style="font-size:12px;color:var(--text-light);font-weight:400">报单:' + reporter + '</span></div>' +
+        '<div class="order-item-info">' +
+          '<div>车型：<strong>' + (o.car_brand||'-') + ' ' + (o.car_model||'-') + '</strong></div>' +
+          '<div>贷款：<strong>' + (o.loan_amount ? o.loan_amount.toLocaleString()+'元' : '-') + '</strong></div>' +
+          '<div>月供：<strong>' + (o.monthly_payment ? o.monthly_payment.toLocaleString()+'元' : '-') + '</strong></div>' +
+          '<div>期数：<strong>' + (o.loan_period||'-') + '期</strong></div>' +
+          '<div>银行：<strong>' + (o.bank_name||'-') + '</strong></div>' +
+          '<div>时间：<strong>' + (o.created_at||'').slice(0,10) + '</strong></div>' +
+        '</div>' +
+      '</div>';
     }).join('');
   } catch(e) { list.innerHTML = '<div class="empty">加载失败</div>'; }
 }
 
-// 业绩统计
 async function loadMyStats() {
   try {
     const token = await getToken();
@@ -575,9 +579,9 @@ async function loadMyStats() {
     const totalLoan = orders.reduce((s,o) => s+(o.loan_amount||0), 0);
     const totalMonthly = orders.reduce((s,o) => s+(o.monthly_payment||0), 0);
     document.getElementById('statDetail').innerHTML =
-      `<p>📊 总贷款额：<strong style="color:var(--primary)">¥${totalLoan.toLocaleString()}</strong></p>
-       <p>📊 月供总额：<strong style="color:var(--accent)">¥${totalMonthly.toLocaleString()}/月</strong></p>
-       <p>📊 平均贷款：<strong>¥${total>0?Math.round(totalLoan/total).toLocaleString():0}</strong></p>`;
+      '<p>总贷款额：<strong style="color:var(--primary)">¥' + totalLoan.toLocaleString() + '</strong></p>' +
+      '<p>月供总额：<strong style="color:var(--accent)">¥' + totalMonthly.toLocaleString() + '/月</strong></p>' +
+      '<p>平均贷款：<strong>¥' + (total>0?Math.round(totalLoan/total).toLocaleString():0) + '</strong></p>';
   } catch(e) {}
 }
 
@@ -588,8 +592,8 @@ function getStatusClass(stage) {
   return 'status-doing';
 }
 
-// 初始化计算
+// 初始化
 calcLoan();
 </script>
 </body>
-</html>
+</html></html>
