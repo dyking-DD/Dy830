@@ -222,10 +222,23 @@ tr:hover td { background: #fafafa; }
     <!-- 标签页 -->
     <div class="tabs">
       <button class="tab-btn active" onclick="switchTab('orders')">📋 订单管理</button>
+      <button class="tab-btn" onclick="switchTab('stats')">📊 统计报表</button>
       <button class="tab-btn" onclick="switchTab('advances')">💰 垫资管理</button>
       <button class="tab-btn" onclick="switchTab('gps')">🛰️ GPS设备</button>
       <button class="tab-btn" onclick="switchTab('repayments')">💳 还款管理</button>
       <button class="tab-btn" onclick="switchTab('add')">➕ 添加订单</button>
+    </div>
+
+    <!-- 统计报表 -->
+    <div id="statsTab" style="display:none">
+      <div class="card" style="padding:20px">
+        <h3 style="font-size:15px;color:#0f1f3d;font-weight:700;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid #D4AF37">📊 本月业务统计</h3>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px" id="overallStats"></div>
+        <h3 style="font-size:14px;color:#0f1f3d;font-weight:700;margin-bottom:12px">👥 员工业务明细（本月）</h3>
+        <div id="adminStaffStats" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px"></div>
+        <h3 style="font-size:14px;color:#0f1f3d;font-weight:700;margin-bottom:12px;padding-top:12px;border-top:1px solid #eee">📋 费率分布（本月）</h3>
+        <div id="feeRateStats" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px"></div>
+      </div>
     </div>
 
     <!-- 订单列表 -->
@@ -406,6 +419,8 @@ if (token) {
 function switchTab(name) {
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   event.target.classList.add('active');
+  document.getElementById('statsTab').style.display = name === 'stats' ? 'block' : 'none';
+  if (name === 'stats') loadAdminStats();
   document.getElementById('ordersTab').style.display = name === 'orders' ? 'block' : 'none';
   document.getElementById('advancesTab').style.display = name === 'advances' ? 'block' : 'none';
   document.getElementById('gpsTab').style.display = name === 'gps' ? 'block' : 'none';
@@ -669,6 +684,91 @@ function closeOrderModal() {
 document.addEventListener('click', function(e) {
   if (e.target.classList.contains('modal-overlay')) closeOrderModal();
 });
+
+// ========== 删除订单 ==========
+async function deleteOrder(orderId) {
+  if (!confirm('确认删除订单 ' + orderId + '？删除后无法恢复。')) return;
+  try {
+    const token = await getToken();
+    const res = await fetch(API + '/api/v1/orders/' + orderId, {
+      method: 'DELETE',
+      headers: {'Authorization': 'Bearer ' + token}
+    }).then(r => r.json());
+    if (res.code === 200 || res.detail === undefined) {
+      alert('订单已删除');
+      loadAll();
+    } else {
+      alert('删除失败：' + (res.message || res.detail || '未知错误'));
+    }
+  } catch(e) {
+    alert('删除失败，网络错误');
+  }
+}
+
+// ========== 加载统计报表 ==========
+async function loadAdminStats() {
+  try {
+    const token = await getToken();
+    const res = await fetch(API + '/api/v1/orders', {
+      headers: {'Authorization': 'Bearer ' + token}
+    }).then(r => r.json());
+    const orders = res.data && res.data.items ? res.data.items : [];
+
+    // 本月过滤
+    const now = new Date();
+    const monthStart = new Date(now.getFullYear(), now.getMonth(), 1).toISOString().slice(0,10);
+    const thisMonth = orders.filter(o => (o.created_at||'').slice(0,10) >= monthStart);
+
+    // 总览
+    const totalLoan = thisMonth.reduce((s,o) => s+(o.loan_amount||0), 0);
+    const totalInterest = thisMonth.reduce((s,o) => s+(o.interest_rate||0)*(o.loan_amount||0), 0);
+    const totalMonthly = thisMonth.reduce((s,o) => s+(o.monthly_payment||0), 0);
+    document.getElementById('overallStats').innerHTML = [
+      {label:'本月订单', val: thisMonth.length, color:'#0f1f3d'},
+      {label:'本月放款总额', val: '¥'+(totalLoan/10000).toFixed(1)+'万', color:'#D4AF37'},
+      {label:'本月利息总额', val: '¥'+(totalInterest/10000).toFixed(1)+'万', color:'#D4AF37'},
+      {label:'月供总额', val: '¥'+(totalMonthly/10000).toFixed(1)+'万/月', color:'#1a3a6b'},
+    ].map(s => '<div style="background:white;border-radius:10px;padding:16px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,0.06);border-top:3px solid '+s.color+'">'+
+      '<div style="font-size:22px;font-weight:700;color:'+s.color+'">'+s.val+'</div>'+
+      '<div style="font-size:12px;color:#888;margin-top:4px">'+s.label+'</div></div>').join('');
+
+    // 员工统计
+    const staffMap = {};
+    const STAFF_LIST = [{name:'焦建华',code:'DQ003'},{name:'邹文丽',code:'DQ005'}];
+    STAFF_LIST.forEach(s => { staffMap[s.name] = {name:s.name,code:s.code,count:0,loan:0}; });
+    thisMonth.forEach(o => {
+      const rem = o.stage_remark||'';
+      const rep = rem.includes('员工:') ? rem.split('员工:')[1].split('|')[0] : '';
+      if (staffMap[rep]) { staffMap[rep].count++; staffMap[rep].loan += o.loan_amount||0; }
+    });
+    document.getElementById('adminStaffStats').innerHTML = STAFF_LIST.map(s => {
+      const st = staffMap[s.name];
+      return '<div style="background:white;border-radius:10px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,0.06);border-left:3px solid #D4AF37">'+
+        '<div style="font-weight:700;color:#0f1f3d;margin-bottom:10px">'+st.name+' <span style="font-size:11px;color:#888">('+st.code+')</span></div>'+
+        '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;text-align:center">'+
+          '<div><div style="font-size:20px;font-weight:700;color:#D4AF37">'+st.count+'</div><div style="font-size:11px;color:#888">订单数</div></div>'+
+          '<div><div style="font-size:20px;font-weight:700;color:#0f1f3d">'+(st.loan>0?(st.loan/10000).toFixed(1)+'万':'0')+'</div><div style="font-size:11px;color:#888">放款额</div></div>'+
+        '</div></div>';
+    }).join('');
+
+    // 费率分布
+    const feeMap = {};
+    thisMonth.forEach(o => {
+      const r = o.interest_rate ? (o.interest_rate*100).toFixed(2)+'%' : '-';
+      if (!feeMap[r]) feeMap[r] = {rate:r,count:0,loan:0};
+      feeMap[r].count++; feeMap[r].loan += o.loan_amount||0;
+    });
+    document.getElementById('feeRateStats').innerHTML = Object.values(feeMap).map(f =>
+      '<div style="background:white;border-radius:10px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,0.06);border-top:3px solid #D4AF37;text-align:center">'+
+        '<div style="font-size:22px;font-weight:700;color:#D4AF37">'+f.rate+'</div>'+
+        '<div style="font-size:12px;color:#888">费率</div>'+
+        '<div style="font-size:16px;font-weight:700;color:#0f1f3d;margin-top:6px">'+f.count+' 单</div>'+
+        '<div style="font-size:12px;color:#888">放款 '+(f.loan/10000).toFixed(1)+'万</div>'+
+      '</div>'
+    ).join('') || '<div style="color:#888;text-align:center;padding:20px">暂无数据</div>';
+
+  } catch(e) { console.error(e); }
+}
 
 // ========== 切换管理标签 ==========
 function switchAdminTab(name, el) {
