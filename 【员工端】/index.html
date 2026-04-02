@@ -392,7 +392,7 @@ function staffLogin() {
     localStorage.setItem('staff_token', 'logged');
     document.getElementById('loginPage').style.display = 'none';
     document.getElementById('staffPage').style.display = 'block';
-    document.getElementById('staffName').textContent = localStorage.getItem('staff_reporter') || '员工';
+    document.getElementById('staffName').textContent = localStorage.getItem('staff_reporter') || '👋 你好';
     switchTab('new');
   } else {
     document.getElementById('loginError').style.display = 'block';

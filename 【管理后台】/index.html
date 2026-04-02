@@ -629,7 +629,7 @@ function viewOrder(id) {
     fetch(API + '/api/v1/orders/' + id, {
       headers: { 'Authorization': 'Bearer ' + token }
     }).then(r => r.json()).then(res => {
-      const o = res.data;
+      const o = res.data.order;
       if (!o) {
         document.getElementById('orderDetailContent').innerHTML = '<div style="padding:20px;color:var(--danger)">订单不存在</div>';
         return;
@@ -665,7 +665,7 @@ function viewOrder(id) {
           <div class="detail-item"><div class="detail-label">GPS安装</div><div class="detail-value">${gps}</div></div>
           <div class="detail-item"><div class="detail-label">是否垫资</div><div class="detail-value">${advance}</div></div>
           <div class="detail-item"><div class="detail-label">总费率</div><div class="detail-value">${feeRate}</div></div>
-          <div class="detail-item"><div class="detail-label">一次性费用</div><div class="detail-value">¥${oneTimeFee}元</div></div>
+          
           <div class="detail-item"><div class="detail-label">月供（60期）</div><div class="detail-value" style="color:var(--accent)">¥${o.monthly_payment ? o.monthly_payment.toLocaleString()+'元' : '-'}</div></div>
           <div class="detail-item"><div class="detail-label">创建时间</div><div class="detail-value">${o.created_at ? o.created_at.slice(0,19) : '-'}</div></div>
         </div>
@@ -780,25 +780,6 @@ function switchAdminTab(name, el) {
 }
 
 // ========== 删除订单 ==========
-async function deleteOrder(orderId) {
-  if (!confirm('确认删除订单 ' + orderId + '？删除后无法恢复。')) return;
-  try {
-    const token = await getToken();
-    const res = await fetch(API + '/api/v1/orders/' + orderId, {
-      method: 'DELETE',
-      headers: {'Authorization': 'Bearer ' + token}
-    }).then(r => r.json());
-    if (res.code === 200) {
-      alert('订单已删除');
-      loadAll();
-    } else {
-      alert('删除失败：' + (res.message || res.detail || '未知错误'));
-    }
-  } catch(e) {
-    alert('删除失败，网络错误');
-  }
-}
-
 // ========== 加载统计报表 ==========
 async function loadAdminStats() {
   try {
