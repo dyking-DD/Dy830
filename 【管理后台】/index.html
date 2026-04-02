@@ -638,8 +638,8 @@ function viewOrder(id) {
       const reporter = remark.includes('员工:') ? remark.split('员工:')[1].split('|')[0] : (o.created_by || '-');
       const gps = remark.includes('GPS:') ? remark.split('GPS:')[1].split('|')[0] : '-';
       const advance = remark.includes('垫资:') ? remark.split('垫资:')[1].split('|')[0] : '-';
-      const feeRate = o.interest_rate ? (o.interest_rate * 100).toFixed(2) + '%' : '-';
-      const totalInterest = remark.includes('总利息:') ? remark.split('总利息:')[1].split('|')[0] : '-';
+      const feeRate = o.interest_rate ? (o.interest_rate >= 1 ? o.interest_rate : o.interest_rate * 100).toFixed(2) + '%' : '-';
+      const totalInterest = remark.includes('总利息:') ? remark.split('总利息:')[1].split('|')[0] : (o.interest_rate ? (o.interest_rate >= 1 ? (o.interest_rate * o.loan_amount / 100).toFixed(0) : '-') : '-');
       const carPrice = (o.loan_amount||0) + (o.down_payment||0);
       document.getElementById('orderDetailContent').innerHTML = `
         <div style="margin-bottom:16px;padding:12px;background:#f5f7ff;border-radius:8px">
@@ -721,7 +721,7 @@ async function loadAdminStats() {
 
     // 总览
     const totalLoan = thisMonth.reduce((s,o) => s+(o.loan_amount||0), 0);
-    const totalInterest = thisMonth.reduce((s,o) => s+(o.interest_rate||0)*(o.loan_amount||0), 0);
+    const totalInterest = thisMonth.reduce((s,o) => { const r=o.interest_rate||0; const l=o.loan_amount||0; const ti=r>=1?(r*l/100):(r*l); return s+ti; }, 0);
     const totalMonthly = thisMonth.reduce((s,o) => s+(o.monthly_payment||0), 0);
     document.getElementById('overallStats').innerHTML = [
       {label:'本月订单', val: thisMonth.length, color:'#0f1f3d'},
@@ -754,7 +754,7 @@ async function loadAdminStats() {
     // 费率分布
     const feeMap = {};
     thisMonth.forEach(o => {
-      const r = o.interest_rate ? (o.interest_rate*100).toFixed(2)+'%' : '-';
+      const r = o.interest_rate ? (o.interest_rate >= 1 ? o.interest_rate : o.interest_rate*100).toFixed(2)+'%' : '-';
       if (!feeMap[r]) feeMap[r] = {rate:r,count:0,loan:0};
       feeMap[r].count++; feeMap[r].loan += o.loan_amount||0;
     });
@@ -797,7 +797,7 @@ async function loadAdminStats() {
     // 总览统计
     const totalOrders = thisMonth.length;
     const totalLoan = thisMonth.reduce((s,o) => s+(o.loan_amount||0), 0);
-    const totalInterest = thisMonth.reduce((s,o) => s+(o.interest_rate||0)*(o.loan_amount||0), 0);
+    const totalInterest = thisMonth.reduce((s,o) => { const r=o.interest_rate||0; const l=o.loan_amount||0; const ti=r>=1?(r*l/100):(r*l); return s+ti; }, 0);
     const totalMonthly = thisMonth.reduce((s,o) => s+(o.monthly_payment||0), 0);
     document.getElementById('overallStats').innerHTML = [
       {label:'本月订单', val: totalOrders, color:'#0f1f3d'},
@@ -833,7 +833,7 @@ async function loadAdminStats() {
     // 费率分布
     const feeMap = {};
     thisMonth.forEach(o => {
-      const r = o.interest_rate ? (o.interest_rate*100).toFixed(2)+'%' : '-';
+      const r = o.interest_rate ? (o.interest_rate >= 1 ? o.interest_rate : o.interest_rate*100).toFixed(2)+'%' : '-';
       if (!feeMap[r]) feeMap[r] = {rate:r, count:0, loan:0};
       feeMap[r].count++;
       feeMap[r].loan += o.loan_amount||0;
