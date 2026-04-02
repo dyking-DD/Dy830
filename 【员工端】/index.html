@@ -147,6 +147,7 @@ textarea.form-control { width: 100%; padding: 10px 12px; border: 1px solid #ddd;
     <div class="tabs">
       <button class="tab-btn active" onclick="switchTab('new')">📝 新建订单</button>
       <button class="tab-btn" onclick="switchTab('my')">📋 我的订单</button>
+      <button class="tab-btn" onclick="switchTab('supplement')">🔄 二次提交</button>
       <button class="tab-btn" onclick="switchTab('stat')">📊 我的业绩</button>
     </div>
 
@@ -364,6 +365,63 @@ textarea.form-control { width: 100%; padding: 10px 12px; border: 1px solid #ddd;
       </div>
     </div>
 
+
+    <div id="supplementTab" style="display:none">
+      <div class="card">
+        <h3>🔄 二次提交（抵押 + 人车合影）</h3>
+        <div style="margin-bottom:16px;padding:10px 14px;background:#fff8e1;border-radius:8px;font-size:13px;color:#888">
+          说明：选择已有订单，填写抵押信息及上传人车合影照片后提交。
+        </div>
+        <div class="form-group" style="margin-bottom:14px">
+          <label>选择订单 <span>*</span></label>
+          <select id="sOrderId" onchange="loadSupplementOrder()">
+            <option value="">请选择订单</option>
+          </select>
+        </div>
+        <div id="supplementOrderInfo" style="display:none">
+          <div class="form-grid">
+            <div class="form-group">
+              <label>客户姓名</label>
+              <input id="sCustomerName" readonly style="background:#f5f5f5">
+            </div>
+            <div class="form-group">
+              <label>车牌号</label>
+              <input id="sPlate" placeholder="陕A12345">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>抵押银行 <span>*</span></label>
+            <input id="sBank" placeholder="如：工商银行">
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>抵押日期 <span>*</span></label>
+              <input id="sMortgageDate" type="date">
+            </div>
+            <div class="form-group">
+              <label>抵押登记证号 <span>*</span></label>
+              <input id="sMortgageNo" placeholder="如：BJ2024001">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>人车合影照片</label>
+            <div style="border:2px dashed #ddd;border-radius:10px;padding:20px;text-align:center;cursor:pointer;transition:all 0.2s" id="sPhotoBox" onclick="document.getElementById('sPhoto').click()">
+              <div id="sPhotoPreview" style="display:none">
+                <img id="sPhotoImg" style="max-width:100%;max-height:200px;border-radius:8px">
+                <div style="margin-top:8px;font-size:12px;color:#888">点击重新上传</div>
+              </div>
+              <div id="sPhotoPlaceholder" style="color:#aaa">
+                <div style="font-size:28px;margin-bottom:6px">📷</div>
+                <div style="font-size:13px">点击上传人车合影照片</div>
+              </div>
+            </div>
+            <input id="sPhoto" type="file" accept="image/*" style="display:none" onchange="previewPhoto(this)">
+          </div>
+          <button class="submit-btn" onclick="submitSupplement()">提 交 二 次 资 料</button>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -415,6 +473,7 @@ function switchTab(name) {
   document.getElementById('myTab').style.display = name === 'my' ? 'block' : 'none';
   document.getElementById('statTab').style.display = name === 'stat' ? 'block' : 'none';
   if (name === 'my') loadMyOrders();
+  if (name === 'supplement') loadSupplementOrders();
   if (name === 'stat') { loadMyStats(); loadStaffStats(); }
 }
 
@@ -755,6 +814,133 @@ function getStatusClass(stage) {
 window._selectedFeeRate = 0.10;
 initDownModeUI();
 calcLoan();
+
+// ========== 二次提交 ==========
+async function loadSupplementOrders() {
+  const sel = document.getElementById('sOrderId');
+  sel.innerHTML = '<option value="">加载中...</option>';
+  try {
+    const token = await getToken();
+    const res = await fetch(API + '/api/v1/orders', {
+      headers: {'Authorization': 'Bearer ' + token}
+    }).then(r => r.json());
+    const orders = res.data && res.data.items ? res.data.items.filter(o => {
+      // 只显示已提车但未完成二次提交的订单
+      const rem = o.stage_remark || '';
+      return rem && !rem.includes('抵押银行:');
+    }) : [];
+    if (!orders.length) {
+      sel.innerHTML = '<option value="">暂无可二次提交的订单</option>';
+      return;
+    }
+    sel.innerHTML = '<option value="">请选择订单</option>' + orders.map(o =>
+      '<option value="' + (o.order_id||'') + '">' + (o.order_id||'') + ' - ' + (o.customer_name||'客户') + ' - ' + (o.car_brand||'') + ' ' + (o.car_model||'') + '</option>'
+    ).join('');
+  } catch(e) { sel.innerHTML = '<option value="">加载失败</option>'; }
+}
+
+async function loadSupplementOrder() {
+  const orderId = document.getElementById('sOrderId').value;
+  const info = document.getElementById('supplementOrderInfo');
+  if (!orderId) { info.style.display = 'none'; return; }
+  info.style.display = 'block';
+  try {
+    const token = await getToken();
+    const res = await fetch(API + '/api/v1/orders/' + orderId, {
+      headers: {'Authorization': 'Bearer ' + token}
+    }).then(r => r.json());
+    const o = res.data && res.data.order;
+    if (!o) return;
+    document.getElementById('sCustomerName').value = o.customer_name || '-';
+    document.getElementById('sPlate').value = o.plate_number || '陕';
+  } catch(e) {}
+}
+
+function previewPhoto(input) {
+  if (!input.files || !input.files[0]) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    document.getElementById('sPhotoImg').src = e.target.result;
+    document.getElementById('sPhotoPreview').style.display = 'block';
+    document.getElementById('sPhotoPlaceholder').style.display = 'none';
+  };
+  reader.readAsDataURL(input.files[0]);
+}
+
+async function submitSupplement() {
+  const orderId = document.getElementById('sOrderId').value;
+  const bank = document.getElementById('sBank').value.trim();
+  const date = document.getElementById('sMortgageDate').value;
+  const no = document.getElementById('sMortgageNo').value.trim();
+  const photoInput = document.getElementById('sPhoto');
+  const photoBase64 = photoInput.files && photoInput.files[0] ? await fileToBase64(photoInput.files[0]) : '';
+
+  if (!orderId) { showToast('请选择订单！', true); return; }
+  if (!bank) { showToast('请填写抵押银行！', true); return; }
+  if (!date) { showToast('请填写抵押日期！', true); return; }
+  if (!no) { showToast('请填写抵押登记证号！', true); return; }
+
+  const btn = document.querySelector('#supplementTab .submit-btn');
+  btn.disabled = true; btn.textContent = '提交中...';
+  try {
+    const token = await getToken();
+    const headers = {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token};
+
+    // 先获取现有订单信息
+    const orderRes = await fetch(API + '/api/v1/orders/' + orderId, {
+      headers: {'Authorization': 'Bearer ' + token}
+    }).then(r => r.json());
+    const o = orderRes.data && orderRes.data.order;
+    const remark = o && o.stage_remark ? o.stage_remark : '';
+
+    // 更新订单备注：追加抵押信息
+    const newRemark = remark + '|抵押银行:' + bank + '|抵押日期:' + date + '|抵押证号:' + no;
+
+    await fetch(API + '/api/v1/orders/' + orderId + '/stage', {
+      method: 'PUT',
+      headers,
+      body: JSON.stringify({new_stage: '抵押登记中', remark: newRemark})
+    });
+
+    // 如果有照片，单独存到 vehicles 表（plate_number 字段存 base64）
+    if (photoBase64) {
+      // 检查是否有车辆记录
+      const vRes = await fetch(API + '/api/v1/vehicles?order_id=' + orderId, {headers}).then(r => r.json());
+      const vId = vRes.data && vRes.data.items && vRes.data.items[0] && vRes.data.items[0].vehicle_id;
+      if (vId) {
+        await fetch(API + '/api/v1/vehicles/' + vId, {
+          method: 'PUT',
+          headers,
+          body: JSON.stringify({plate_number: document.getElementById('sPlate').value, remark: '人车合影:' + photoBase64})
+        });
+      }
+    }
+
+    showToast('✅ 二次提交成功！');
+    document.getElementById('sOrderId').value = '';
+    document.getElementById('supplementOrderInfo').style.display = 'none';
+    document.getElementById('sPhotoPreview').style.display = 'none';
+    document.getElementById('sPhotoPlaceholder').style.display = 'block';
+    document.getElementById('sPhoto').value = '';
+    switchTab('my');
+  } catch(e) {
+    showToast('提交失败：' + e.message, true);
+  }
+  btn.disabled = false; btn.textContent = '提 交 二 次 资 料';
+}
+
+function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+// switchTab 扩展支持 supplement
+const _origSwitchTab = switchTab;
+eval("switchTab = function(name) { _origSwitchTab(name); if (name === 'supplement') loadSupplementOrders(); }");
 </script>
 </body>
 </html>

@@ -540,6 +540,32 @@ async def delete_order(order_id: str, authorization: Optional[str] = Header(None
         conn.close()
 
 
+@app.put("/api/v1/vehicles/{vehicle_id}", tags=["车辆管理"], summary="更新车辆信息")
+async def update_vehicle(vehicle_id: str, update: models.VehicleUpdate, authorization: Optional[str] = Header(None)):
+    verify_admin_or_staff_token(authorization)
+    conn = database.get_db_connection()
+    cursor = conn.cursor()
+    try:
+        fields, values = [], []
+        if update.plate_number is not None: fields.append("plate_number = ?"); values.append(update.plate_number)
+        if update.vin is not None: fields.append("vin = ?"); values.append(update.vin)
+        if update.remark is not None: fields.append("vin = ?"); values.append(update.remark)  # vin字段临时存照片备注
+        if not fields:
+            raise HTTPException(status_code=400, detail="没有需要更新的字段")
+        values.append(vehicle_id)
+        cursor.execute(f"UPDATE vehicles SET {', '.join(fields)} WHERE vehicle_id = ?", values)
+        if cursor.rowcount == 0:
+            raise HTTPException(status_code=404, detail="车辆不存在")
+        conn.commit()
+        cursor.execute("SELECT * FROM vehicles WHERE vehicle_id = ?", (vehicle_id,))
+        return api_response(message="车辆更新成功", data={"vehicle": dict(zip([d[0] for d in cursor.description], cursor.fetchone()))})
+    except Exception as e:
+        conn.rollback()
+        raise HTTPException(status_code=500, detail=f"更新失败: {str(e)}")
+    finally:
+        conn.close()
+
+
 # ==================== 垫资管理路由 ====================
 
 @app.post("/api/v1/advances", tags=["垫资管理"], summary="创建垫资单")

@@ -85,6 +85,12 @@ class OrderStageUpdate(BaseModel):
     remark: Optional[str] = Field(None, description="备注")
 
 
+class VehicleUpdate(BaseModel):
+    plate_number: Optional[str] = Field(None, description="车牌号")
+    vin: Optional[str] = Field(None, description="车架号")
+    remark: Optional[str] = Field(None, description="备注（可存base64图片）")
+
+
 class OrderResponse(BaseModel):
     """订单响应"""
     order_id: str
