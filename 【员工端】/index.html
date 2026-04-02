@@ -246,8 +246,15 @@ textarea.form-control { width: 100%; padding: 10px 12px; border: 1px solid #ddd;
             </select>
           </div>
           <div class="form-group">
-            <label>首付金额（元）<span>*</span></label>
-            <input id="fDown" placeholder="首付" type="number" oninput="calcLoan()">
+            <label>首付比例 <span>*</span></label>
+            <select id="fDownPct" onchange="calcLoan()">
+              <option value="0.15" selected>首付15% · 贷85%</option>
+              <option value="0.20">首付20% · 贷80%</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>首付金额（元）</label>
+            <input id="fDownAmt" placeholder="自动计算" readonly style="background:#f0f0f0">
           </div>
           <div class="form-group">
             <label>GPS安装</label>
@@ -276,7 +283,7 @@ textarea.form-control { width: 100%; padding: 10px 12px; border: 1px solid #ddd;
             <span><strong id="rRate">10%</strong></span>
           </div>
           <div class="result-row">
-            <span>一次性费用</span>
+            <span>合计总利息</span>
             <span>¥ <strong id="rInterest">0</strong></span>
           </div>
           <div class="result-row">
@@ -284,7 +291,7 @@ textarea.form-control { width: 100%; padding: 10px 12px; border: 1px solid #ddd;
             <span>¥ <strong id="rMonthly">0</strong></span>
           </div>
           <div class="result-row total">
-            <span>合计还款</span>
+            <span>合计本息</span>
             <span>¥ <strong id="rTotal">0</strong></span>
           </div>
         </div>
@@ -390,8 +397,11 @@ function selectRate(el, feeRate) {
 
 function calcLoan() {
   const price = parseFloat(document.getElementById('fPrice').value) || 0;
-  const down = parseFloat(document.getElementById('fDown').value) || 0;
-  const loan = Math.max(0, price - down);
+  const downPct = parseFloat(document.getElementById('fDownPct').value) || 0.15;
+  const downAmt = Math.round(price * downPct);
+  const loan = Math.max(0, price - downAmt);
+
+  document.getElementById('fDownAmt').value = downAmt > 0 ? downAmt.toLocaleString() : '';
 
   if (loan <= 0) {
     document.getElementById('rLoan').textContent = '0';
@@ -403,14 +413,15 @@ function calcLoan() {
   }
 
   const totalFeeRate = _selectedFeeRate;
-  const oneTimeFee = loan * totalFeeRate;
-  const monthlyPayment = (loan + oneTimeFee) / 60;
+  const totalInterest = loan * totalFeeRate;
+  const monthlyPayment = (loan + totalInterest) / 60;
+  const totalRepayment = loan + totalInterest;
 
   document.getElementById('rLoan').textContent = loan.toLocaleString('zh-CN', {maximumFractionDigits: 0});
   document.getElementById('rRate').textContent = (totalFeeRate * 100).toFixed(2) + '%';
-  document.getElementById('rInterest').textContent = Math.round(oneTimeFee).toLocaleString('zh-CN');
+  document.getElementById('rInterest').textContent = Math.round(totalInterest).toLocaleString('zh-CN');
   document.getElementById('rMonthly').textContent = Math.round(monthlyPayment).toLocaleString('zh-CN');
-  document.getElementById('rTotal').textContent = Math.round(loan + oneTimeFee).toLocaleString('zh-CN');
+  document.getElementById('rTotal').textContent = Math.round(totalRepayment).toLocaleString('zh-CN');
 }
 
 async function getToken() {
@@ -463,9 +474,11 @@ async function submitOrder() {
       });
     }
 
-    const loan = price - down;
+    const downPct = parseFloat(document.getElementById('fDownPct').value) || 0.15;
+    const downAmt = Math.round(price * downPct);
+    const loan = Math.max(0, price - downAmt);
     const totalFeeRate = _selectedFeeRate;
-    const oneTimeFee = loan * totalFeeRate;
+    const totalInterest = loan * totalFeeRate;
     const staffInfo = STAFF_LIST.find(s => s.name === reporter) || {};
     const staffCode = staffInfo.code || 'DQ003';
 
@@ -474,7 +487,7 @@ async function submitOrder() {
       body: JSON.stringify({
         customer_id: customerId,
         loan_amount: loan,
-        down_payment: down,
+        down_payment: downAmt,
         loan_period: 60,
         monthly_payment: monthly,
         interest_rate: totalFeeRate,
@@ -482,9 +495,10 @@ async function submitOrder() {
         created_by: reporter + '(' + staffCode + ')',
         stage_remark: '员工:' + reporter + '|工号:' + staffCode +
           '|费率:' + (totalFeeRate*100).toFixed(2) + '%' +
+          '|首付:' + (downPct*100).toFixed(0) + '%' +
           '|GPS:' + document.getElementById('fGPS').value +
           '|垫资:' + document.getElementById('fAdvance').value +
-          '|一次性费用:' + Math.round(oneTimeFee).toLocaleString() +
+          '|总利息:' + Math.round(totalInterest).toLocaleString() +
           '|月供:' + Math.round(monthly).toLocaleString()
       })
     }).then(r => r.json());
