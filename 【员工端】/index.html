@@ -136,7 +136,7 @@ textarea.form-control { width: 100%; padding: 10px 12px; border: 1px solid #ddd;
   <div class="navbar">
     <h2>🚗 AI CAR 员工工作台</h2>
     <div class="nav-right">
-      <span id="staffName">员工</span>
+      <span id="staffName">👋 你好</span>
       <button class="logout-btn" onclick="staffLogout()">退出</button>
     </div>
   </div>
@@ -402,8 +402,10 @@ function staffLogout() { localStorage.removeItem('staff_token'); location.reload
 if (localStorage.getItem('staff_token')) {
   document.getElementById('loginPage').style.display = 'none';
   document.getElementById('staffPage').style.display = 'block';
-  document.getElementById('staffName').textContent = localStorage.getItem('staff_name');
+  document.getElementById('staffName').textContent = localStorage.getItem('staff_reporter') || '👋 你好';
   switchTab('new');
+  // 清除旧的随机名称
+  localStorage.removeItem('staff_name');
 }
 
 function switchTab(name) {
