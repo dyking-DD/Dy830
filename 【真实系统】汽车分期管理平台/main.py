@@ -503,6 +503,24 @@ async def update_order_stage(order_id: str, stage_update: models.OrderStageUpdat
         conn.close()
 
 
+@app.delete("/api/v1/orders/{order_id}", tags=["订单管理"], summary="删除订单")
+async def delete_order(order_id: str, authorization: Optional[str] = Header(None)):
+    verify_admin_token(authorization)
+    conn = database.get_db_connection()
+    cursor = conn.cursor()
+    try:
+        cursor.execute("DELETE FROM orders WHERE order_id = ?", (order_id,))
+        if cursor.rowcount == 0:
+            raise HTTPException(status_code=404, detail="订单不存在")
+        conn.commit()
+        return api_response(message="订单删除成功")
+    except Exception as e:
+        conn.rollback()
+        raise HTTPException(status_code=500, detail=f"删除失败: {str(e)}")
+    finally:
+        conn.close()
+
+
 # ==================== 垫资管理路由 ====================
 
 @app.post("/api/v1/advances", tags=["垫资管理"], summary="创建垫资单")
