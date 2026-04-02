@@ -389,10 +389,10 @@ function staffLogin() {
   const pw = document.getElementById('passwordInput').value;
   if (pw === STAFF_PASSWORD) {
     localStorage.setItem('staff_token', 'logged');
-    localStorage.setItem('staff_name', '员工-' + Math.floor(Math.random()*900+100));
+    localStorage.setItem('staff_token', 'logged');
     document.getElementById('loginPage').style.display = 'none';
     document.getElementById('staffPage').style.display = 'block';
-    document.getElementById('staffName').textContent = localStorage.getItem('staff_name');
+    document.getElementById('staffName').textContent = localStorage.getItem('staff_reporter') || '员工';
     switchTab('new');
   } else {
     document.getElementById('loginError').style.display = 'block';
@@ -636,6 +636,7 @@ async function submitOrder() {
 
     if (orderRes.code === 200) {
       showToast('✅ 订单提交成功！订单号：' + (orderRes.data && orderRes.data.order && orderRes.data.order.order_id || '') );
+      localStorage.setItem('staff_reporter', reporter);
       // 清空表单
       document.querySelectorAll('#newTab input:not([type=radio]), #newTab textarea').forEach(i => i.value = '');
       document.getElementById('fReporter').value = '';
@@ -660,8 +661,24 @@ async function loadMyOrders() {
   try {
     const token = await getToken();
     const res = await fetch(API + '/api/v1/orders', {headers: {'Authorization': 'Bearer ' + token}}).then(r => r.json());
-    const orders = res.data ? (res.data.items || []) : [];
-    if (!orders.length) { list.innerHTML = '<div class="empty">暂无订单</div>'; return; }
+    let orders = res.data ? (res.data.items || []) : [];
+
+    // 取当前登录员工姓名
+    const myName = localStorage.getItem('staff_reporter') || '';
+    // 本月第一天
+    const now = new Date();
+    const monthStart = new Date(now.getFullYear(), now.getMonth(), 1).toISOString().slice(0,10);
+
+    // 筛选：本人 + 本月
+    orders = orders.filter(o => {
+      const remark = o.stage_remark || '';
+      const reporter = remark.includes('员工:') ? remark.split('员工:')[1].split('|')[0] : (o.created_by || '');
+      const isMe = myName && (reporter.includes(myName) || (o.created_by && o.created_by.includes(myName)));
+      const isThisMonth = (o.created_at || '').slice(0,10) >= monthStart;
+      return isMe && isThisMonth;
+    });
+
+    if (!orders.length) { list.innerHTML = '<div class="empty">本月暂无订单</div>'; return; }
     list.innerHTML = orders.map(o => {
       const remark = o.stage_remark || '';
       const reporter = remark.includes('员工:') ? remark.split('员工:')[1].split('|')[0] : (o.created_by || '-');
@@ -672,7 +689,7 @@ async function loadMyOrders() {
           '<span class="order-item-id">' + (o.order_id || '-') + '</span>' +
           '<span class="order-item-status ' + getStatusClass(o.stage) + '">' + (o.stage || '未知') + '</span>' +
         '</div>' +
-        '<div class="order-item-name">' + (o.customer_name || '-') + ' <span style="font-size:12px;color:var(--text-light);font-weight:400">报单:' + reporter + '</span></div>' +
+        '<div class="order-item-name">' + (o.customer_name || '-') + '</div>' +
         '<div class="order-item-info">' +
           '<div>车型：<strong>' + (o.car_brand||'-') + ' ' + (o.car_model||'-') + '</strong></div>' +
           '<div>贷款：<strong>' + (o.loan_amount ? o.loan_amount.toLocaleString()+'元' : '-') + '</strong></div>' +
