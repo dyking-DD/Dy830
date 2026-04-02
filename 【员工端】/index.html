@@ -258,6 +258,10 @@ textarea.form-control { width: 100%; padding: 10px 12px; border: 1px solid #ddd;
             <input id="fDownAmt" placeholder="自动计算" readonly style="background:#f0f0f0">
           </div>
           <div class="form-group">
+            <label>贷款金额（元）</label>
+            <input id="fLoanAmt" placeholder="自动计算" readonly style="background:#f0f0f0;color:var(--accent);font-weight:700">
+          </div>
+          <div class="form-group">
             <label>GPS安装</label>
             <select id="fGPS">
               <option value="否">否</option>
@@ -409,6 +413,7 @@ function calcLoan() {
   const loan = Math.max(0, price - downAmt);
 
   document.getElementById('fDownAmt').value = downAmt > 0 ? downAmt.toLocaleString() : '';
+  document.getElementById('fLoanAmt').value = loan > 0 ? loan.toLocaleString() : '';
 
   if (loan <= 0) {
     document.getElementById('rLoan').textContent = '0';
