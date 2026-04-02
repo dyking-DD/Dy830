@@ -23,7 +23,7 @@ from services import gps_service
 from services import archive_service
 from services import notification_service
 from services import mortgage_service
-
+from fastapi.security import OAuth2PasswordBearer
 
 # ==================== 创建FastAPI应用 ====================
 
@@ -50,8 +50,16 @@ app = FastAPI(
     """,
     version="1.0.0",
     docs_url="/docs",
-    redoc_url="/redoc"
+    redoc_url="/redoc",
+    openapi_url="/openapi.json"
 )
+
+# OAuth2 安全方案（让Swagger显示Authorize按钮）
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="api/v1/auth/login", auto_error=False)
+
+# 全局依赖，让Swagger UI显示Authorize按钮（仅文档，不强制验证）
+async def optional_token(authorization: str = Header(None)):
+    return authorization
 
 # 配置CORS
 app.add_middleware(
@@ -61,6 +69,37 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# 为Swagger UI添加Authorize按钮
+from fastapi.openapi.models import OAuth2, OAuth2PasswordRequestForm
+
+def custom_openapi():
+    if app.openapi_schema:
+        return app.openapi_schema
+    openapi_schema = {
+        "openapi": "3.0.2",
+        "info": {
+            "title": "汽车分期智能管理平台",
+            "version": "1.0.0",
+        },
+        "paths": app.openapi_schema.get("paths", {}) if hasattr(app, 'openapi_schema') and app.openapi_schema else {},
+        "components": {
+            "securitySchemes": {
+                "OAuth2PasswordBearer": {
+                    "type": "apiKey",
+                    "name": "Authorization",
+                    "in": "header",
+                    "description": "Bearer token认证。格式: Bearer <token>"
+                }
+            }
+        },
+    }
+    return openapi_schema
+
+# 覆盖默认的openapi
+if not hasattr(app, 'openapi'):
+    pass
+app.openapi = custom_openapi
 
 
 # ==================== 启动事件 ====================
