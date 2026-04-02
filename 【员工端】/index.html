@@ -398,6 +398,7 @@ function calcLoan() {
     document.getElementById('rRate').textContent = '-';
     document.getElementById('rInterest').textContent = '0';
     document.getElementById('rMonthly').textContent = '0';
+    document.getElementById('rTotal').textContent = '0';
     return;
   }
 
@@ -409,6 +410,7 @@ function calcLoan() {
   document.getElementById('rRate').textContent = (totalFeeRate * 100).toFixed(2) + '%';
   document.getElementById('rInterest').textContent = Math.round(oneTimeFee).toLocaleString('zh-CN');
   document.getElementById('rMonthly').textContent = Math.round(monthlyPayment).toLocaleString('zh-CN');
+  document.getElementById('rTotal').textContent = Math.round(loan + oneTimeFee).toLocaleString('zh-CN');
 }
 
 async function getToken() {
