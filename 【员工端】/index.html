@@ -447,7 +447,7 @@ async function submitOrder() {
     showToast('请填写必填项（*标记）', true); return;
   }
   if (phone.length !== 11) { showToast('手机号格式不正确', true); return; }
-  if (down >= price) { showToast('首付金额不能大于车价', true); return; }
+  if (downAmt >= price) { showToast('首付金额不能大于车价', true); return; }
 
   const btn = document.getElementById('submitBtn');
   btn.disabled = true; btn.textContent = '提交中...';
@@ -456,14 +456,19 @@ async function submitOrder() {
     const token = await getToken();
     const headers = {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token};
 
-    const customerRes = await fetch(API + '/api/v1/customers', {
-      method: 'POST', headers,
-      body: JSON.stringify({name, phone, id_number: document.getElementById('fIdNum').value, address: ''})
-    }).then(r => r.json());
-    let customerId = customerRes.data && customerRes.data.customer_id ? customerRes.data.customer_id : '';
-    if (!customerId) {
-      const exist = await fetch(API + '/api/v1/customers?phone=' + phone, {headers}).then(r => r.json());
-      customerId = (exist.data && exist.data.items && exist.data.items[0] && exist.data.items[0].customer_id) || '';
+    // 查询是否已存在该手机号客户
+    let customerId = '';
+    const existRes = await fetch(API + '/api/v1/customers?phone=' + phone, {headers}).then(r => r.json());
+    if (existRes.data && existRes.data.items && existRes.data.items.length > 0) {
+      customerId = existRes.data.items[0].customer_id;
+    } else {
+      const customerRes = await fetch(API + '/api/v1/customers', {
+        method: 'POST', headers,
+        body: JSON.stringify({name, phone, id_number: document.getElementById('fIdNum').value, address: ''})
+      }).then(r => r.json());
+      if (customerRes.data && customerRes.data.customer) {
+        customerId = customerRes.data.customer.customer_id;
+      }
     }
 
     if (document.getElementById('fPlate').value || document.getElementById('fIdNum').value) {
