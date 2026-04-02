@@ -23,7 +23,7 @@ from services import gps_service
 from services import archive_service
 from services import notification_service
 from services import mortgage_service
-from fastapi.security import OAuth2PasswordBearer
+from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 
 # ==================== 创建FastAPI应用 ====================
 
@@ -71,7 +71,7 @@ app.add_middleware(
 )
 
 # 为Swagger UI添加Authorize按钮
-from fastapi.openapi.models import OAuth2, OAuth2PasswordRequestForm
+from fastapi.openapi.models import OAuth2
 
 def custom_openapi():
     if app.openapi_schema:
@@ -432,8 +432,8 @@ async def list_orders(
         
         offset = (page - 1) * page_size
         list_sql = f"""
-            SELECT o.*, c.name as customer_name, c.phone as customer_phone,
-                   v.brand as car_brand, v.model as car_model, v.plate_number
+            SELECT o.*, c.name as customer_name, c.phone as customer_phone, c.id_number, c.address,
+                   v.brand as car_brand, v.model as car_model, v.vin, v.plate_number
             FROM orders o
             LEFT JOIN customers c ON o.customer_id = c.customer_id
             LEFT JOIN vehicles v ON v.order_id = o.order_id
