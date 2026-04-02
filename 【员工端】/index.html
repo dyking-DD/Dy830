@@ -161,7 +161,7 @@ textarea.form-control { width: 100%; padding: 10px 12px; border: 1px solid #ddd;
             <select id="fReporter">
               <option value="">请选择报单员</option>
               <option value="焦建华">焦建华（DQ003）</option>
-              <option value="邹文丽">邹文丽</option>
+              <option value="邹文丽">邹文丽（DQ005）</option>
             </select>
           </div>
           <div class="form-group">
@@ -203,44 +203,34 @@ textarea.form-control { width: 100%; padding: 10px 12px; border: 1px solid #ddd;
           <label>选择费率方案 <span>*</span>（等额本息费率）</label>
         </div>
         <div class="rate-cards" id="rateCards">
-          <div class="rate-card selected" onclick="selectRate(this, 0.10, 12)" data-periods="12" data-base="0.10">
+          <div class="rate-card selected" onclick="selectRate(this, 0.10)" data-fee="0.10">
             <div class="check-icon">✓</div>
             <div class="rate-name">方案A</div>
             <div class="rate-value">10%</div>
-            <div class="rate-desc">12期 · 1年（基准5年=10%）</div>
+            <div class="rate-desc">5年期 · 总费率</div>
           </div>
-          <div class="rate-card" onclick="selectRate(this, 0.135, 24)" data-periods="24" data-base="0.135">
+          <div class="rate-card" onclick="selectRate(this, 0.135)" data-fee="0.135">
             <div class="check-icon">✓</div>
             <div class="rate-name">方案B</div>
             <div class="rate-value">13.5%</div>
-            <div class="rate-desc">24期 · 2年（基准5年=13.5%）</div>
+            <div class="rate-desc">5年期 · 总费率</div>
           </div>
-          <div class="rate-card" onclick="selectRate(this, 0.15, 36)" data-periods="36" data-base="0.15">
+          <div class="rate-card" onclick="selectRate(this, 0.15)" data-fee="0.15">
             <div class="check-icon">✓</div>
             <div class="rate-name">方案C</div>
             <div class="rate-value">15%</div>
-            <div class="rate-desc">36期 · 3年（基准5年=15%）</div>
+            <div class="rate-desc">5年期 · 总费率</div>
           </div>
-          <div class="rate-card" onclick="selectRate(this, 0.1584, 60)" data-periods="60" data-base="0.1584">
+          <div class="rate-card" onclick="selectRate(this, 0.1584)" data-fee="0.1584">
             <div class="check-icon">✓</div>
             <div class="rate-name">方案D</div>
             <div class="rate-value">15.84%</div>
-            <div class="rate-desc">48期 · 4年（基准5年=15.84%）</div>
+            <div class="rate-desc">5年期 · 总费率</div>
           </div>
         </div>
 
         <!-- 分期期数自定义 -->
         <div class="form-grid" style="margin-top: 12px;">
-          <div class="form-group">
-            <label>自定义期数</label>
-            <select id="fPeriod" onchange="onPeriodChange()">
-              <option value="12">12期（1年）</option>
-              <option value="24">24期（2年）</option>
-              <option value="36" selected>36期（3年）</option>
-              <option value="48">48期（4年）</option>
-              <option value="60">60期（5年）</option>
-            </select>
-          </div>
           <div class="form-group">
             <label>合作银行</label>
             <select id="fBank">
@@ -260,8 +250,18 @@ textarea.form-control { width: 100%; padding: 10px 12px; border: 1px solid #ddd;
             <input id="fDown" placeholder="首付" type="number" oninput="calcLoan()">
           </div>
           <div class="form-group">
-            <label>车行/4S店</label>
-            <input id="fDealer" placeholder="如：宝泽4S店">
+            <label>GPS安装</label>
+            <select id="fGPS">
+              <option value="否">否</option>
+              <option value="是">是</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>是否垫资</label>
+            <select id="fAdvance">
+              <option value="否">否</option>
+              <option value="是">是</option>
+            </select>
           </div>
         </div>
 
@@ -272,15 +272,15 @@ textarea.form-control { width: 100%; padding: 10px 12px; border: 1px solid #ddd;
             <span>¥ <strong id="rLoan">0</strong></span>
           </div>
           <div class="result-row">
-            <span>费率</span>
+            <span>总费率（5年）</span>
             <span><strong id="rRate">10%</strong></span>
           </div>
           <div class="result-row">
-            <span>利息总额</span>
+            <span>一次性费用</span>
             <span>¥ <strong id="rInterest">0</strong></span>
           </div>
           <div class="result-row">
-            <span>月供</span>
+            <span>月供（60期）</span>
             <span>¥ <strong id="rMonthly">0</strong></span>
           </div>
           <div class="result-row total">
@@ -332,10 +332,9 @@ textarea.form-control { width: 100%; padding: 10px 12px; border: 1px solid #ddd;
 const API = 'http://localhost:8899';
 const STAFF_PASSWORD = '888888';
 
-// 员工列表
 const STAFF_LIST = [
   {name:'焦建华', code:'DQ003'},
-  {name:'邹文丽',  code:'DQ004'},
+  {name:'邹文丽',  code:'DQ005'},
 ];
 
 // 登录
@@ -376,66 +375,40 @@ function showToast(msg, isError) {
   t.style.display = 'block'; setTimeout(() => t.style.display = 'none', 3500);
 }
 
-// 选择费率方案
-// baseFeeRate = 5年基准总费率（如10%=0.10）
-// 实际总费率 = baseFeeRate * (期数/60)
-// 年均费率 = baseFeeRate / 5
-function selectRate(el, baseFeeRate, periods) {
+// 选择费率方案（独立4档，5年期）
+// 总费率 = 选定方案（10%/13.5%/15%/15.84%）
+// 一次性费用 = 贷款金额 × 总费率
+// 月供（60期）= (贷款金额 + 一次性费用) / 60
+let _selectedFeeRate = 0.10;
+
+function selectRate(el, feeRate) {
   document.querySelectorAll('.rate-card').forEach(c => c.classList.remove('selected'));
   el.classList.add('selected');
-  window._baseFeeRate = baseFeeRate;
-  document.getElementById('fPeriod').value = periods;
+  _selectedFeeRate = feeRate;
   calcLoan();
 }
 
-// 期数变化时自动匹配最接近的费率方案
-function onPeriodChange() {
-  const periods = parseInt(document.getElementById('fPeriod').value);
-  const cards = Array.from(document.querySelectorAll('.rate-card'));
-  let closest = cards[0];
-  let minDiff = 999;
-  cards.forEach(c => {
-    const d = Math.abs(parseInt(c.dataset.periods) - periods);
-    if (d < minDiff) { minDiff = d; closest = c; }
-  });
-  cards.forEach(c => c.classList.remove('selected'));
-  closest.classList.add('selected');
-  window._baseFeeRate = parseFloat(closest.dataset.base);
-  calcLoan();
-}
-
-// 计算贷款
-// 总费率 = 基准费率 × (期数/60)
-// 例如：60期10%基准→10%，36期10%基准→10%×(36/60)=6%
-// 利息 = 贷款金额 × 总费率
-// 月供 = (贷款金额 + 利息) / 期数
 function calcLoan() {
   const price = parseFloat(document.getElementById('fPrice').value) || 0;
   const down = parseFloat(document.getElementById('fDown').value) || 0;
-  const periods = parseInt(document.getElementById('fPeriod').value) || 60;
-
   const loan = Math.max(0, price - down);
-  if (loan <= 0 || periods <= 0) {
+
+  if (loan <= 0) {
     document.getElementById('rLoan').textContent = '0';
     document.getElementById('rRate').textContent = '-';
     document.getElementById('rInterest').textContent = '0';
     document.getElementById('rMonthly').textContent = '0';
-    document.getElementById('rTotal').textContent = '0';
     return;
   }
 
-  const baseFeeRate = window._baseFeeRate || 0.10;
-  // 总费率 = 基准费率 × (实际期数/60)
-  const totalFeeRate = baseFeeRate * (periods / 60);
-  const totalInterest = loan * totalFeeRate;
-  const monthlyPayment = periods > 0 ? (loan + totalInterest) / periods : 0;
-  const totalRepayment = loan + totalInterest;
+  const totalFeeRate = _selectedFeeRate;
+  const oneTimeFee = loan * totalFeeRate;
+  const monthlyPayment = (loan + oneTimeFee) / 60;
 
-  document.getElementById('rLoan').textContent = loan.toLocaleString('zh-CN', {minimumFractionDigits: 0, maximumFractionDigits: 0});
-  document.getElementById('rRate').textContent = (totalFeeRate * 100).toFixed(2) + '%（总费率）= 年均' + (baseFeeRate * 100 / 5).toFixed(2) + '%';
-  document.getElementById('rInterest').textContent = Math.round(totalInterest).toLocaleString('zh-CN');
+  document.getElementById('rLoan').textContent = loan.toLocaleString('zh-CN', {maximumFractionDigits: 0});
+  document.getElementById('rRate').textContent = (totalFeeRate * 100).toFixed(2) + '%';
+  document.getElementById('rInterest').textContent = Math.round(oneTimeFee).toLocaleString('zh-CN');
   document.getElementById('rMonthly').textContent = Math.round(monthlyPayment).toLocaleString('zh-CN');
-  document.getElementById('rTotal').textContent = Math.round(totalRepayment).toLocaleString('zh-CN');
 }
 
 async function getToken() {
@@ -455,7 +428,6 @@ async function submitOrder() {
   const model = document.getElementById('fModel').value.trim();
   const price = parseFloat(document.getElementById('fPrice').value);
   const down = parseFloat(document.getElementById('fDown').value);
-  const periods = parseInt(document.getElementById('fPeriod').value);
   const monthly = parseFloat(document.getElementById('rMonthly').textContent.replace(/,/g,'')) || 0;
 
   if (!reporter || !phone || !name || !brand || !model || !price || !down) {
@@ -490,9 +462,8 @@ async function submitOrder() {
     }
 
     const loan = price - down;
-    const baseFeeRate = window._baseFeeRate || 0.10;
-    const totalFeeRate = baseFeeRate * (periods / 60);
-    const totalInterest = loan * totalFeeRate;
+    const totalFeeRate = _selectedFeeRate;
+    const oneTimeFee = loan * totalFeeRate;
     const staffInfo = STAFF_LIST.find(s => s.name === reporter) || {};
     const staffCode = staffInfo.code || 'DQ003';
 
@@ -502,12 +473,17 @@ async function submitOrder() {
         customer_id: customerId,
         loan_amount: loan,
         down_payment: down,
-        loan_period: periods,
+        loan_period: 60,
         monthly_payment: monthly,
         interest_rate: totalFeeRate,
         bank_name: document.getElementById('fBank').value,
         created_by: reporter + '(' + staffCode + ')',
-        stage_remark: '员工:' + reporter + '|工号:' + staffCode + '|基准:' + (baseFeeRate*100).toFixed(1) + '%|总费率:' + (totalFeeRate*100).toFixed(2) + '%|利息:' + Math.round(totalInterest).toLocaleString()
+        stage_remark: '员工:' + reporter + '|工号:' + staffCode +
+          '|费率:' + (totalFeeRate*100).toFixed(2) + '%' +
+          '|GPS:' + document.getElementById('fGPS').value +
+          '|垫资:' + document.getElementById('fAdvance').value +
+          '|一次性费用:' + Math.round(oneTimeFee).toLocaleString() +
+          '|月供:' + Math.round(monthly).toLocaleString()
       })
     }).then(r => r.json());
 
@@ -515,7 +491,8 @@ async function submitOrder() {
       showToast('订单提交成功！');
       document.querySelectorAll('#newTab input, #newTab textarea').forEach(i => i.value = '');
       document.getElementById('fReporter').value = '';
-      document.getElementById('fPeriod').value = '36';
+      document.getElementById('fGPS').value = '否';
+      document.getElementById('fAdvance').value = '否';
       calcLoan();
       switchTab('my');
     } else {
@@ -538,6 +515,8 @@ async function loadMyOrders() {
     list.innerHTML = orders.map(o => {
       const remark = o.stage_remark || '';
       const reporter = remark.includes('员工:') ? remark.split('员工:')[1].split('|')[0] : (o.created_by || '-');
+      const gps = remark.includes('GPS:') ? '|GPS:' + remark.split('GPS:')[1].split('|')[0] : '';
+      const advance = remark.includes('垫资:') ? '|垫资:' + remark.split('垫资:')[1].split('|')[0] : '';
       return '<div class="order-item ' + (o.stage && o.stage.includes('逾期') ? 'overdue' : '') + '">' +
         '<div class="order-item-header">' +
           '<span class="order-item-id">' + (o.order_id || '-') + '</span>' +
@@ -550,6 +529,7 @@ async function loadMyOrders() {
           '<div>月供：<strong>' + (o.monthly_payment ? o.monthly_payment.toLocaleString()+'元' : '-') + '</strong></div>' +
           '<div>期数：<strong>' + (o.loan_period||'-') + '期</strong></div>' +
           '<div>银行：<strong>' + (o.bank_name||'-') + '</strong></div>' +
+          '<div>GPS:' + gps.split(':')[1] + ' 垫资:' + advance.split(':')[1] + ' <strong></strong></div>' +
           '<div>时间：<strong>' + (o.created_at||'').slice(0,10) + '</strong></div>' +
         '</div>' +
       '</div>';
@@ -570,7 +550,6 @@ async function loadMyStats() {
   } catch(e) {}
 }
 
-// 按员工统计业务量
 async function loadStaffStats() {
   const container = document.getElementById('staffStatsRows');
   container.innerHTML = '<div class="empty">加载中...</div>';
@@ -579,38 +558,27 @@ async function loadStaffStats() {
     const res = await fetch(API + '/api/v1/orders', {headers: {'Authorization': 'Bearer ' + token}}).then(r => r.json());
     const orders = res.data ? (res.data.items || []) : [];
 
-    // 按created_by或stage_remark中的姓名统计
     const stats = {};
-    STAFF_LIST.forEach(s => { stats[s.name] = {name: s.name, code: s.code, count: 0, totalLoan: 0, totalMonthly: 0}; });
+    STAFF_LIST.forEach(s => { stats[s.name] = {name:s.name, code:s.code, count:0, totalLoan:0}; });
 
     orders.forEach(o => {
       const remark = o.stage_remark || '';
-      let reporter = remark.includes('员工:') ? remark.split('员工:')[1].split('|')[0] : (o.created_by || '');
-      // 去掉工号
-      reporter = reporter.replace(/\([^)]+\)/, '').trim();
+      const reporter = remark.includes('员工:') ? remark.split('员工:')[1].split('|')[0] : '';
       if (stats[reporter]) {
         stats[reporter].count++;
         stats[reporter].totalLoan += o.loan_amount || 0;
-        stats[reporter].totalMonthly += o.monthly_payment || 0;
       }
     });
 
     const rows = STAFF_LIST.map(s => {
       const st = stats[s.name];
-      const done = orders.filter(o => {
-        const r = (o.stage_remark||'').includes('员工:'+s.name) &&
-                  o.stage && (o.stage.includes('结清')||o.stage.includes('完结')||o.stage.includes('已抵押'));
-        return r;
-      }).length;
       return '<div style="background:#f8f9fa;border-radius:8px;padding:14px;margin-bottom:10px;">' +
         '<div style="font-weight:700;color:var(--primary);margin-bottom:8px">' + st.name + ' <span style="font-size:12px;color:var(--text-light)">(' + st.code + ')</span></div>' +
-        '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;text-align:center">' +
+        '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;text-align:center">' +
           '<div><div style="font-size:20px;font-weight:700;color:var(--accent)">' + st.count + '</div><div style="font-size:11px;color:var(--text-light)">订单总数</div></div>' +
           '<div><div style="font-size:20px;font-weight:700;color:var(--primary)">' + (st.totalLoan > 0 ? (st.totalLoan/10000).toFixed(1) + '万' : '0') + '</div><div style="font-size:11px;color:var(--text-light)">贷款总额</div></div>' +
-          '<div><div style="font-size:20px;font-weight:700;color:var(--success)">' + done + '</div><div style="font-size:11px;color:var(--text-light)">已完成</div></div>' +
         '</div></div>';
     }).join('');
-
     container.innerHTML = rows || '<div class="empty">暂无数据</div>';
   } catch(e) { container.innerHTML = '<div class="empty">加载失败</div>'; }
 }
@@ -622,8 +590,7 @@ function getStatusClass(stage) {
   return 'status-doing';
 }
 
-// 初始化
-window._baseFeeRate = 0.10;
+window._selectedFeeRate = 0.10;
 calcLoan();
 </script>
 </body>

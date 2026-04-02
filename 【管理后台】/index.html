@@ -233,7 +233,7 @@ tr:hover td { background: #fafafa; }
       <table>
         <thead>
           <tr>
-            <th>订单号</th><th>客户</th><th>车辆</th><th>贷款金额</th><th>月供</th><th>阶段</th><th>操作</th>
+            <th>订单号</th><th>客户</th><th>车辆</th><th>贷款金额</th><th>月供</th><th>阶段</th><th>GPS</th><th>垫资</th><th>操作</th>
           </tr>
         </thead>
         <tbody id="ordersBody"></tbody>
@@ -468,6 +468,8 @@ async function loadAll() {
         <td>${o.loan_amount ? o.loan_amount.toLocaleString() + '元' : '-'}</td>
         <td>${o.monthly_payment ? o.monthly_payment.toLocaleString() + '元' : '-'}</td>
         <td><span class="badge ${getStageClass(o.stage)}">${o.stage || '-'}</span></td>
+        <td>${(o.stage_remark||'').includes('GPS:') ? o.stage_remark.split('GPS:')[1].split('|')[0] : '-'}</td>
+        <td>${(o.stage_remark||'').includes('垫资:') ? o.stage_remark.split('垫资:')[1].split('|')[0] : '-'}</td>
         <td><button class="refresh-btn" onclick="viewOrder('${o.order_id}')">详情</button></td>
       </tr>
     `).join('');
@@ -612,8 +614,11 @@ function viewOrder(id) {
         return;
       }
       const remark = o.stage_remark || '';
-      const reporter = remark.includes('报单员:') ? remark.split('报单员:')[1].split('|')[0] : '-';
-      const rate = remark.includes('费率:') ? remark.split('费率:')[1].split('|')[0] : '-';
+      const reporter = remark.includes('员工:') ? remark.split('员工:')[1].split('|')[0] : (o.created_by || '-');
+      const gps = remark.includes('GPS:') ? remark.split('GPS:')[1].split('|')[0] : '-';
+      const advance = remark.includes('垫资:') ? remark.split('垫资:')[1].split('|')[0] : '-';
+      const feeRate = o.interest_rate ? (o.interest_rate * 100).toFixed(2) + '%' : '-';
+      const oneTimeFee = remark.includes('一次性费用:') ? remark.split('一次性费用:')[1].split('|')[0] : '-';
       document.getElementById('orderDetailContent').innerHTML = `
         <div style="margin-bottom:16px;padding:12px;background:#f5f7ff;border-radius:8px">
           <div style="font-size:16px;font-weight:700;color:var(--primary);margin-bottom:4px">${o.customer_name || '-'}</div>
@@ -635,6 +640,11 @@ function viewOrder(id) {
           <div class="detail-item"><div class="detail-label">月供</div><div class="detail-value" style="color:var(--accent)">¥${o.monthly_payment ? o.monthly_payment.toLocaleString()+'元' : '-'}</div></div>
           <div class="detail-item"><div class="detail-label">合作银行</div><div class="detail-value">${o.bank_name || '-'}</div></div>
           <div class="detail-item"><div class="detail-label">报单员</div><div class="detail-value">${reporter}</div></div>
+          <div class="detail-item"><div class="detail-label">GPS安装</div><div class="detail-value">${gps}</div></div>
+          <div class="detail-item"><div class="detail-label">是否垫资</div><div class="detail-value">${advance}</div></div>
+          <div class="detail-item"><div class="detail-label">总费率</div><div class="detail-value">${feeRate}</div></div>
+          <div class="detail-item"><div class="detail-label">一次性费用</div><div class="detail-value">¥${oneTimeFee}元</div></div>
+          <div class="detail-item"><div class="detail-label">月供（60期）</div><div class="detail-value" style="color:var(--accent)">¥${o.monthly_payment ? o.monthly_payment.toLocaleString()+'元' : '-'}</div></div>
           <div class="detail-item"><div class="detail-label">创建时间</div><div class="detail-value">${o.created_at ? o.created_at.slice(0,19) : '-'}</div></div>
         </div>
       `;
