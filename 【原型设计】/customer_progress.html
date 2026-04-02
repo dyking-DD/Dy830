@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>客户进度查询 - 汽车分期管理平台</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    }
+    
+    .customer-page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+    
+    .customer-container {
+      width: 100%;
+      max-width: 800px;
+    }
+    
+    .customer-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    
+    .customer-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    
+    .customer-logo-icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      color: var(--white);
+    }
+    
+    .customer-logo-text {
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--primary);
+    }
+    
+    .customer-subtitle {
+      color: var(--gray-600);
+      font-size: 14px;
+    }
+    
+    .search-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      box-shadow: var(--shadow-lg);
+      margin-bottom: 32px;
+    }
+    
+    .search-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--gray-800);
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    
+    .search-input-group {
+      display: flex;
+      gap: 12px;
+    }
+    
+    .search-input-group input {
+      flex: 1;
+      padding: 14px 18px;
+      border: 2px solid var(--gray-200);
+      border-radius: var(--radius);
+      font-size: 16px;
+      transition: var(--transition);
+    }
+    
+    .search-input-group input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(26, 58, 107, 0.1);
+    }
+    
+    .search-input-group button {
+      padding: 14px 32px;
+      font-size: 16px;
+    }
+    
+    .result-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .order-info {
+      display: flex;
+      align-items: center;
+      padding: 20px;
+      background: linear-gradient(135deg, rgba(26, 58, 107, 0.05) 0%, rgba(255, 107, 53, 0.05) 100%);
+      border-radius: var(--radius);
+      margin-bottom: 32px;
+    }
+    
+    .order-info-item {
+      flex: 1;
+      text-align: center;
+      border-right: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    .order-info-item:last-child {
+      border-right: none;
+    }
+    
+    .order-info-label {
+      font-size: 12px;
+      color: var(--gray-500);
+      margin-bottom: 4px;
+    }
+    
+    .order-info-value {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--gray-800);
+    }
+    
+    .timeline-card {
+      background: var(--white);
+      padding: 24px;
+      border-radius: var(--radius);
+      border: 1px solid var(--gray-200);
+    }
+    
+    .timeline-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--gray-800);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .timeline-vertical {
+      position: relative;
+      padding-left: 32px;
+    }
+    
+    .timeline-vertical::before {
+      content: '';
+      position: absolute;
+      left: 11px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--gray-200);
+    }
+    
+    .timeline-item-v {
+      position: relative;
+      padding-bottom: 24px;
+    }
+    
+    .timeline-item-v:last-child {
+      padding-bottom: 0;
+    }
+    
+    .timeline-dot-v {
+      position: absolute;
+      left: -26px;
+      top: 4px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--gray-200);
+      border: 3px solid var(--white);
+      box-shadow: 0 0 0 2px var(--gray-200);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      color: var(--white);
+    }
+    
+    .timeline-item-v.completed .timeline-dot-v {
+      background: var(--success);
+      box-shadow: 0 0 0 2px var(--success);
+    }
+    
+    .timeline-item-v.active .timeline-dot-v {
+      background: var(--accent);
+      box-shadow: 0 0 0 2px var(--accent), 0 0 0 6px rgba(255, 107, 53, 0.2);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 2px var(--accent), 0 0 0 6px rgba(255, 107, 53, 0.2); }
+      50% { box-shadow: 0 0 0 2px var(--accent), 0 0 0 10px rgba(255, 107, 53, 0.1); }
+    }
+    
+    .timeline-item-v.pending .timeline-dot-v {
+      background: var(--gray-300);
+      box-shadow: 0 0 0 2px var(--gray-300);
+    }
+    
+    .timeline-content-v {
+      background: var(--gray-50);
+      padding: 12px 16px;
+      border-radius: var(--radius);
+      border-left: 3px solid var(--gray-300);
+    }
+    
+    .timeline-item-v.completed .timeline-content-v {
+      border-left-color: var(--success);
+      background: rgba(16, 185, 129, 0.05);
+    }
+    
+    .timeline-item-v.active .timeline-content-v {
+      border-left-color: var(--accent);
+      background: rgba(255, 107, 53, 0.05);
+    }
+    
+    .timeline-title-v {
+      font-weight: 600;
+      color: var(--gray-800);
+      margin-bottom: 4px;
+    }
+    
+    .timeline-time-v {
+      font-size: 12px;
+      color: var(--gray-500);
+    }
+    
+    .timeline-desc-v {
+      font-size: 13px;
+      color: var(--gray-600);
+      margin-top: 6px;
+    }
+    
+    .contact-section {
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid var(--gray-200);
+      text-align: center;
+    }
+    
+    .contact-title {
+      font-size: 14px;
+      color: var(--gray-600);
+      margin-bottom: 12px;
+    }
+    
+    .contact-card {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 24px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      border-radius: var(--radius-lg);
+      color: var(--white);
+    }
+    
+    .contact-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+    
+    .contact-info {
+      text-align: left;
+    }
+    
+    .contact-name {
+      font-weight: 600;
+      font-size: 16px;
+      margin-bottom: 2px;
+    }
+    
+    .contact-phone {
+      font-size: 13px;
+      opacity: 0.9;
+    }
+    
+    .contact-btn {
+      padding: 10px 24px;
+      background: var(--accent);
+      color: var(--white);
+      border-radius: var(--radius);
+      font-weight: 500;
+      transition: var(--transition);
+      box-shadow: 0 2px 8px rgba(255, 107, 53, 0.3);
+    }
+    
+    .contact-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(255, 107, 53, 0.4);
+    }
+    
+    .tip-box {
+      background: rgba(59, 130, 246, 0.1);
+      border-left: 3px solid var(--info);
+      padding: 12px 16px;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      margin-top: 16px;
+      font-size: 13px;
+      color: var(--gray-700);
+    }
+  </style>
+</head>
+<body>
+  <div class="customer-page">
+    <div class="customer-container">
+      <!-- 头部 -->
+      <div class="customer-header">
+        <div class="customer-logo">
+          <div class="customer-logo-icon">🚗</div>
+          <span class="customer-logo-text">汽车分期管理平台</span>
+        </div>
+        <div class="customer-subtitle">实时查询您的订单进度，全程透明可追溯</div>
+      </div>
+      
+      <!-- 搜索卡片 -->
+      <div class="search-card">
+        <div class="search-title">请输入订单号查询进度</div>
+        <div class="search-input-group">
+          <input type="text" placeholder="请输入您的订单号，例如：DD202401150012" value="DD202401150012">
+          <button class="btn btn-primary">查询</button>
+        </div>
+        <div class="tip-box">
+          💡 订单号可在购车合同或短信通知中找到，如需帮助请联系您的销售顾问
+        </div>
+      </div>
+      
+      <!-- 查询结果 -->
+      <div class="result-card">
+        <!-- 订单基本信息 -->
+        <div class="order-info">
+          <div class="order-info-item">
+            <div class="order-info-label">订单号</div>
+            <div class="order-info-value">DD202401150012</div>
+          </div>
+          <div class="order-info-item">
+            <div class="order-info-label">客户姓名</div>
+            <div class="order-info-value">张三</div>
+          </div>
+          <div class="order-info-item">
+            <div class="order-info-label">购车车型</div>
+            <div class="order-info-value">本田雅阁 2024款</div>
+          </div>
+          <div class="order-info-item">
+            <div class="order-info-label">当前状态</div>
+            <div class="order-info-value" style="color: var(--accent);">GPS安装中</div>
+          </div>
+        </div>
+        
+        <!-- 进度时间轴 -->
+        <div class="timeline-card">
+          <div class="timeline-title">
+            <span>📋</span>
+            订单进度追踪
+          </div>
+          
+          <div class="timeline-vertical">
+            <div class="timeline-item-v completed">
+              <div class="timeline-dot-v">✓</div>
+              <div class="timeline-content-v">
+                <div class="timeline-title-v">已接单</div>
+                <div class="timeline-time-v">2024-01-10 14:30</div>
+                <div class="timeline-desc-v">您的订单已被销售顾问张经理接收</div>
+              </div>
+            </div>
+            
+            <div class="timeline-item-v completed">
+              <div class="timeline-dot-v">✓</div>
+              <div class="timeline-content-v">
+                <div class="timeline-title-v">垫资通过</div>
+                <div class="timeline-time-v">2024-01-11 10:15</div>
+                <div class="timeline-desc-v">垫资申请已审批通过，金额：¥150,000</div>
+              </div>
+            </div>
+            
+            <div class="timeline-item-v completed">
+              <div class="timeline-dot-v">✓</div>
+              <div class="timeline-content-v">
+                <div class="timeline-title-v">审核通过</div>
+                <div class="timeline-time-v">2024-01-12 16:20</div>
+                <div class="timeline-desc-v">银行审核已通过，即将安排放款</div>
+              </div>
+            </div>
+            
+            <div class="timeline-item-v completed">
+              <div class="timeline-dot-v">✓</div>
+              <div class="timeline-content-v">
+                <div class="timeline-title-v">已放款</div>
+                <div class="timeline-time-v">2024-01-13 09:00</div>
+                <div class="timeline-desc-v">贷款已放款至经销商账户</div>
+              </div>
+            </div>
+            
+            <div class="timeline-item-v completed">
+              <div class="timeline-dot-v">✓</div>
+              <div class="timeline-content-v">
+                <div class="timeline-title-v">已提车</div>
+                <div class="timeline-time-v">2024-01-14 11:30</div>
+                <div class="timeline-desc-v">恭喜！您已成功提车，祝您用车愉快</div>
+              </div>
+            </div>
+            
+            <div class="timeline-item-v active">
+              <div class="timeline-dot-v">6</div>
+              <div class="timeline-content-v">
+                <div class="timeline-title-v">GPS安装中</div>
+                <div class="timeline-time-v">预计完成：2024-01-15</div>
+                <div class="timeline-desc-v">技术人员正在为您安装GPS定位设备</div>
+              </div>
+            </div>
+            
+            <div class="timeline-item-v pending">
+              <div class="timeline-dot-v">7</div>
+              <div class="timeline-content-v">
+                <div class="timeline-title-v">资料归档</div>
+                <div class="timeline-time-v">待进行</div>
+                <div class="timeline-desc-v">等待上传完整资料并完成归档</div>
+              </div>
+            </div>
+            
+            <div class="timeline-item-v pending">
+              <div class="timeline-dot-v">8</div>
+              <div class="timeline-content-v">
+                <div class="timeline-title-v">正常还款</div>
+                <div class="timeline-time-v">预计开始：2024-02-13</div>
+                <div class="timeline-desc-v">首期还款日期：每月13日，金额：¥5,280</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 联系顾问 -->
+        <div class="contact-section">
+          <div class="contact-title">如有疑问，请联系您的专属顾问</div>
+          <div class="contact-card">
+            <div class="contact-avatar">👤</div>
+            <div class="contact-info">
+              <div class="contact-name">张经理</div>
+              <div class="contact-phone">📞 138-8888-8888</div>
+            </div>
+            <a href="tel:13888888888" class="contact-btn">立即联系</a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 底部 -->
+      <div style="text-align: center; margin-top: 32px; color: var(--gray-500); font-size: 12px;">
+        © 2024 汽车分期管理平台 版权所有 | <a href="login.html" style="color: var(--primary);">管理后台登录</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

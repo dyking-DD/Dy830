@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>进度查询 - 汽车分期管理</title>
+  <link rel="stylesheet" href="mobile.css">
+  <style>
+    .search-section {
+      background: linear-gradient(135deg, var(--primary-blue) 0%, #2C5A9E 100%);
+      padding: 24px 16px 32px;
+      margin: -16px -16px 0;
+    }
+    
+    .search-box {
+      background-color: var(--white);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .result-section {
+      margin-top: 24px;
+    }
+    
+    .customer-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    
+    .customer-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background-color: var(--primary-blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-weight: 600;
+    }
+    
+    .customer-name {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--gray-800);
+    }
+    
+    .customer-phone {
+      font-size: 14px;
+      color: var(--gray-500);
+      margin-top: 4px;
+    }
+    
+    .car-info {
+      background-color: var(--gray-100);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+    
+    .car-brand {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--gray-800);
+      margin-bottom: 4px;
+    }
+    
+    .car-model {
+      font-size: 14px;
+      color: var(--gray-500);
+    }
+    
+    .loan-summary {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    
+    .loan-item {
+      text-align: center;
+    }
+    
+    .loan-value {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--primary-orange);
+    }
+    
+    .loan-label {
+      font-size: 12px;
+      color: var(--gray-500);
+      margin-top: 4px;
+    }
+    
+    .current-stage {
+      background: linear-gradient(135deg, var(--primary-blue) 0%, #2C5A9E 100%);
+      color: var(--white);
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 24px;
+    }
+    
+    .current-stage-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    
+    .current-stage-time {
+      font-size: 14px;
+      opacity: 0.9;
+      margin-bottom: 8px;
+    }
+    
+    .current-stage-desc {
+      font-size: 14px;
+      opacity: 0.85;
+      line-height: 1.5;
+    }
+    
+    .section-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--gray-800);
+      margin-bottom: 16px;
+      padding: 0 4px;
+    }
+    
+    @media (max-width: 375px) {
+      .search-section {
+        margin: -16px -12px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- 顶部导航 -->
+  <header class="header">
+    <div class="header-content">
+      <h1 class="header-title">汽车分期管理</h1>
+      <div class="header-avatar">张</div>
+    </div>
+  </header>
+
+  <!-- 主要内容 -->
+  <main class="container" style="margin-top: 16px;">
+    <!-- 搜索区域 -->
+    <section class="search-section">
+      <div class="search-box">
+        <div class="input-group" style="margin-bottom: 0;">
+          <input type="text" class="input-field input-large" placeholder="请输入订单号查询进度" value="DD2026032800001">
+        </div>
+        <button class="btn btn-orange btn-block" style="margin-top: 16px;" onclick="showResult()">
+          查询进度
+        </button>
+      </div>
+    </section>
+
+    <!-- 查询结果区域 -->
+    <section class="result-section" id="resultSection">
+      <!-- 客户信息 -->
+      <div class="card">
+        <div class="card-body">
+          <div class="customer-info">
+            <div class="customer-avatar">张</div>
+            <div>
+              <div class="customer-name">张先生</div>
+              <div class="customer-phone">138****8888</div>
+            </div>
+          </div>
+          
+          <div class="car-info">
+            <div class="car-brand">奔驰 GLC 300L</div>
+            <div class="car-model">2024款 豪华型</div>
+          </div>
+          
+          <div class="loan-summary">
+            <div class="loan-item">
+              <div class="loan-value">28万</div>
+              <div class="loan-label">贷款金额</div>
+            </div>
+            <div class="loan-item">
+              <div class="loan-value">36期</div>
+              <div class="loan-label">贷款期数</div>
+            </div>
+            <div class="loan-item">
+              <div class="loan-value">8,520</div>
+              <div class="loan-label">月供金额</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 进度时间轴 -->
+      <div class="card">
+        <div class="card-header">办理进度</div>
+        <div class="card-body">
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-dot completed">✓</div>
+              <div class="timeline-content">
+                <div class="timeline-title">已接单</div>
+                <div class="timeline-time">2026-03-28 09:30</div>
+              </div>
+            </div>
+            
+            <div class="timeline-item">
+              <div class="timeline-dot completed">✓</div>
+              <div class="timeline-content">
+                <div class="timeline-title">垫资已通过</div>
+                <div class="timeline-time">2026-03-29 14:20</div>
+              </div>
+            </div>
+            
+            <div class="timeline-item">
+              <div class="timeline-dot completed">✓</div>
+              <div class="timeline-content">
+                <div class="timeline-title">审核已通过</div>
+                <div class="timeline-time">2026-03-31 11:00</div>
+              </div>
+            </div>
+            
+            <div class="timeline-item">
+              <div class="timeline-dot current">●</div>
+              <div class="timeline-content">
+                <div class="timeline-title" style="color: var(--primary-blue); font-weight: 600;">银行放款中</div>
+                <div class="timeline-time">2026-04-01 16:45</div>
+              </div>
+            </div>
+            
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content timeline-pending">
+                <div class="timeline-title">等待提车</div>
+              </div>
+            </div>
+            
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content timeline-pending">
+                <div class="timeline-title">GPS在线</div>
+              </div>
+            </div>
+            
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content timeline-pending">
+                <div class="timeline-title">归档完成</div>
+              </div>
+            </div>
+            
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content timeline-pending">
+                <div class="timeline-title">正常还款</div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 当前阶段高亮卡片 -->
+          <div class="current-stage">
+            <div class="current-stage-title">
+              <span>🔵</span>
+              <span>当前阶段：银行放款中</span>
+            </div>
+            <div class="current-stage-time">更新时间：2026-04-01 16:45</div>
+            <div class="current-stage-desc">
+              银行正在审核放款资料，预计1-2个工作日完成放款。请保持电话畅通，工作人员会与您联系。
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 底部导航 -->
+  <nav class="bottom-nav">
+    <a href="index.html" class="nav-item active">
+      <div class="nav-icon">📊</div>
+      <div class="nav-text">进度查询</div>
+    </a>
+    <a href="contract.html" class="nav-item">
+      <div class="nav-icon">📄</div>
+      <div class="nav-text">我的合同</div>
+    </a>
+    <a href="documents.html" class="nav-item">
+      <div class="nav-icon">📁</div>
+      <div class="nav-text">我的资料</div>
+    </a>
+    <a href="contact.html" class="nav-item">
+      <div class="nav-icon">💬</div>
+      <div class="nav-text">联系顾问</div>
+    </a>
+  </nav>
+
+  <script>
+    function showResult() {
+      document.getElementById('resultSection').style.display = 'block';
+      document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    // 页面加载时显示结果（模拟已查询状态）
+    window.onload = function() {
+      document.getElementById('resultSection').style.display = 'block';
+    }
+  </script>
+</body>
+</html>

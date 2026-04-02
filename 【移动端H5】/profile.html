@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>个人中心 - 汽车分期管理平台</title>
+    <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+    <div class="page">
+        <!-- 用户卡片 -->
+        <div class="user-card">
+            <div class="user-avatar" id="userAvatarBig">客</div>
+            <div class="user-name" id="userName">客户</div>
+            <div class="user-phone" id="userPhone">138****8888</div>
+        </div>
+        
+        <!-- 我的顾问 -->
+        <div class="card" id="advisorSection">
+            <div class="card-header">我的顾问</div>
+            <div class="advisor-card" id="advisorCard">
+                <div class="advisor-avatar">李</div>
+                <div class="advisor-info">
+                    <div class="advisor-name">李顾问</div>
+                    <div class="advisor-phone">139****5678</div>
+                </div>
+                <div class="advisor-actions">
+                    <a href="tel:13912345678" class="btn btn-primary btn-sm">📞 拨打</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 功能列表 -->
+        <div class="menu-list">
+            <a href="contract.html" class="menu-item">
+                <div class="menu-icon">📄</div>
+                <div class="menu-text">我的合同</div>
+                <div class="menu-arrow">›</div>
+            </a>
+            <a href="documents.html" class="menu-item">
+                <div class="menu-icon">📁</div>
+                <div class="menu-text">我的资料</div>
+                <div class="menu-arrow">›</div>
+            </a>
+        </div>
+        
+        <!-- 常见问题 -->
+        <div class="menu-list">
+            <div class="menu-item" onclick="toggleFaq(this)">
+                <div class="menu-icon">❓</div>
+                <div class="menu-text">如何修改密码？</div>
+                <div class="menu-arrow">›</div>
+            </div>
+            <div class="faq-answer" style="max-height: 0; overflow: hidden;">
+                <div style="padding: 16px; background: #f5f5f5; font-size: 14px; color: #666; line-height: 1.6;">
+                    请联系您的专属顾问，顾问会协助您重置密码。
+                </div>
+            </div>
+            
+            <div class="menu-item" onclick="toggleFaq(this)">
+                <div class="menu-icon">❓</div>
+                <div class="menu-text">如何联系客服？</div>
+                <div class="menu-arrow">›</div>
+            </div>
+            <div class="faq-answer" style="max-height: 0; overflow: hidden;">
+                <div style="padding: 16px; background: #f5f5f5; font-size: 14px; color: #666; line-height: 1.6;">
+                    您可以通过"我的顾问"直接拨打顾问电话，或发送邮件至 service@example.com
+                </div>
+            </div>
+            
+            <div class="menu-item" onclick="toggleFaq(this)">
+                <div class="menu-icon">❓</div>
+                <div class="menu-text">还款日期是哪天？</div>
+                <div class="menu-arrow">›</div>
+            </div>
+            <div class="faq-answer" style="max-height: 0; overflow: hidden;">
+                <div style="padding: 16px; background: #f5f5f5; font-size: 14px; color: #666; line-height: 1.6;">
+                    还款日期为每月15日，请在还款日前完成还款，避免逾期影响信用。
+                </div>
+            </div>
+        </div>
+        
+        <!-- 其他功能 -->
+        <div class="menu-list">
+            <div class="menu-item" onclick="showApiConfig()">
+                <div class="menu-icon">⚙️</div>
+                <div class="menu-text">API配置</div>
+                <div class="menu-arrow">›</div>
+            </div>
+            <div class="menu-item" onclick="handleLogout()">
+                <div class="menu-icon" style="background: #fff1f0;">🚪</div>
+                <div class="menu-text" style="color: var(--danger);">退出登录</div>
+                <div class="menu-arrow">›</div>
+            </div>
+        </div>
+        
+        <!-- 版本信息 -->
+        <div style="text-align: center; padding: 24px; color: var(--text-light); font-size: 12px;">
+            <p>汽车分期智能管理平台 v1.0.0</p>
+            <p style="margin-top: 4px;">API地址：<span id="currentApi">localhost:8899</span></p>
+        </div>
+    </div>
+    
+    <!-- 底部导航 -->
+    <nav class="bottom-nav">
+        <a href="home.html" class="nav-item">
+            <div class="nav-icon">📊</div>
+            <div class="nav-text">进度查询</div>
+        </a>
+        <a href="contract.html" class="nav-item">
+            <div class="nav-icon">📄</div>
+            <div class="nav-text">我的合同</div>
+        </a>
+        <a href="documents.html" class="nav-item">
+            <div class="nav-icon">📁</div>
+            <div class="nav-text">我的资料</div>
+        </a>
+        <a href="profile.html" class="nav-item active">
+            <div class="nav-icon">👤</div>
+            <div class="nav-text">个人中心</div>
+        </a>
+    </nav>
+    
+    <!-- 引入JS -->
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        // 页面初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            // 检查登录状态
+            if (!initPageAuth()) {
+                return;
+            }
+            
+            // 更新用户信息显示
+            updateUserInfo();
+            
+            // 加载顾问信息
+            loadAdvisor();
+            
+            // 显示当前API地址
+            updateApiDisplay();
+        });
+        
+        // 更新用户信息显示
+        function updateUserInfo() {
+            const userInfo = getUserInfo();
+            
+            // 更新头像
+            const avatar = userInfo.name.charAt(0);
+            document.getElementById('userAvatarBig').textContent = avatar;
+            
+            // 更新用户名
+            document.getElementById('userName').textContent = userInfo.name;
+            
+            // 更新手机号
+            document.getElementById('userPhone').textContent = formatPhone(userInfo.phone);
+        }
+        
+        // 更新API地址显示
+        function updateApiDisplay() {
+            const currentApi = getApiBase();
+            const displayApi = currentApi.replace('http://', '').replace('https://', '');
+            document.getElementById('currentApi').textContent = displayApi;
+        }
+        
+        // 切换FAQ展开/收起
+        function toggleFaq(element) {
+            const answer = element.nextElementSibling;
+            const arrow = element.querySelector('.menu-arrow');
+            
+            if (answer.style.maxHeight && answer.style.maxHeight !== '0px') {
+                // 收起
+                answer.style.maxHeight = '0';
+                arrow.textContent = '›';
+            } else {
+                // 展开
+                answer.style.maxHeight = answer.scrollHeight + 'px';
+                arrow.textContent = '∨';
+            }
+        }
+        
+        // 处理退出登录
+        function handleLogout() {
+            if (confirm('确定要退出登录吗？')) {
+                logout();
+            }
+        }
+    </script>
+</body>
+</html>

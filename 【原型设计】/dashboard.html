@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>首页驾驶舱 - 汽车分期管理平台</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .chart-line-svg {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    
+    .chart-line-svg path {
+      fill: none;
+      stroke: var(--accent);
+      stroke-width: 2;
+    }
+    
+    .chart-area-svg {
+      fill: url(#gradient);
+      opacity: 0.3;
+    }
+    
+    .grid-two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    
+    @media (max-width: 1200px) {
+      .grid-two-col {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <!-- 侧边栏导航 -->
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <div class="logo-icon" style="background: rgba(255,255,255,0.15);">🚗</div>
+        <span class="sidebar-logo-text">汽车分期管理</span>
+      </div>
+      
+      <nav class="nav-menu">
+        <a href="dashboard.html" class="nav-item active">
+          <span class="nav-icon">📊</span>
+          <span class="nav-text">首页驾驶舱</span>
+        </a>
+        <a href="advance_list.html" class="nav-item">
+          <span class="nav-icon">💰</span>
+          <span class="nav-text">垫资管理</span>
+        </a>
+        <a href="gps_dashboard.html" class="nav-item">
+          <span class="nav-icon">📍</span>
+          <span class="nav-text">GPS监控</span>
+        </a>
+        <a href="archive.html" class="nav-item">
+          <span class="nav-icon">📁</span>
+          <span class="nav-text">资料归档</span>
+        </a>
+        <a href="customer_progress.html" class="nav-item">
+          <span class="nav-icon">👤</span>
+          <span class="nav-text">客户进度查询</span>
+        </a>
+        
+        <div style="padding: 12px 16px; margin-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
+          <a href="#" class="nav-item">
+            <span class="nav-icon">⚙️</span>
+            <span class="nav-text">系统设置</span>
+          </a>
+          <a href="#" class="nav-item">
+            <span class="nav-icon">👥</span>
+            <span class="nav-text">用户管理</span>
+          </a>
+        </div>
+      </nav>
+    </aside>
+    
+    <!-- 主内容区 -->
+    <main class="main-content">
+      <!-- 顶部导航栏 -->
+      <header class="top-header">
+        <div class="header-left">
+          <button class="toggle-btn" onclick="document.body.classList.toggle('sidebar-collapsed')">
+            ☰
+          </button>
+          <div class="logo">
+            <span>汽车分期管理平台</span>
+          </div>
+        </div>
+        
+        <div class="header-right">
+          <div class="user-info">
+            <div class="user-avatar">张</div>
+            <span class="user-name">张经理</span>
+          </div>
+          <button class="logout-btn">退出登录</button>
+        </div>
+      </header>
+      
+      <!-- 页面内容 -->
+      <div class="page-content">
+        <div class="page-header">
+          <h1 class="page-title">首页驾驶舱</h1>
+          <div>
+            <span style="color: var(--gray-500); font-size: 13px;">数据更新时间：2024-01-15 10:30:00</span>
+          </div>
+        </div>
+        
+        <!-- 数据卡片 -->
+        <div class="stat-cards">
+          <div class="stat-card">
+            <div class="stat-icon blue">📋</div>
+            <div class="stat-info">
+              <div class="stat-label">今日新增订单</div>
+              <div class="stat-value">128</div>
+              <div class="stat-change up">↑ 12.5% 较昨日</div>
+            </div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-icon orange">💵</div>
+            <div class="stat-info">
+              <div class="stat-label">当前垫资余额</div>
+              <div class="stat-value">¥8,256万</div>
+              <div class="stat-change down">↓ 3.2% 较上月</div>
+            </div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-icon green">✅</div>
+            <div class="stat-info">
+              <div class="stat-label">本月放款笔数</div>
+              <div class="stat-value">2,346</div>
+              <div class="stat-change up">↑ 8.7% 较上月</div>
+            </div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-icon purple">📡</div>
+            <div class="stat-info">
+              <div class="stat-label">GPS在线率</div>
+              <div class="stat-value">96.8%</div>
+              <div class="stat-change up">↑ 1.2% 较昨日</div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 图表与预警区域 -->
+        <div class="grid-two-col">
+          <!-- 折线图 -->
+          <div class="chart-container">
+            <div class="card-header" style="border: none; padding: 0; margin-bottom: 20px;">
+              <h3 class="card-title">近30天垫资余额趋势</h3>
+              <div style="display: flex; gap: 16px; font-size: 12px; color: var(--gray-500);">
+                <span>当前：¥8,256万</span>
+                <span style="color: var(--success);">环比 -3.2%</span>
+              </div>
+            </div>
+            
+            <div class="chart-area">
+              <!-- Y轴标签 -->
+              <div class="chart-y-axis">
+                <span>1000万</span>
+                <span>800万</span>
+                <span>600万</span>
+                <span>400万</span>
+                <span>200万</span>
+                <span>0</span>
+              </div>
+              
+              <!-- SVG折线图 -->
+              <svg class="chart-line-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" style="stop-color:var(--accent);stop-opacity:0.3" />
+                    <stop offset="100%" style="stop-color:var(--accent);stop-opacity:0" />
+                  </linearGradient>
+                </defs>
+                <!-- 面积填充 -->
+                <path class="chart-area-svg" d="M0,60 L10,55 L20,45 L30,50 L40,40 L50,35 L60,38 L70,30 L80,25 L90,20 L100,18 L100,100 L0,100 Z" />
+                <!-- 折线 -->
+                <path d="M0,60 L10,55 L20,45 L30,50 L40,40 L50,35 L60,38 L70,30 L80,25 L90,20 L100,18" />
+              </svg>
+              
+              <!-- X轴标签 -->
+              <div class="chart-x-axis">
+                <span>12/15</span>
+                <span>12/20</span>
+                <span>12/25</span>
+                <span>12/30</span>
+                <span>01/05</span>
+                <span>01/10</span>
+                <span>01/15</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 预警事项 -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">⚠️ 预警事项</h3>
+              <a href="#" class="btn btn-text btn-sm">查看全部</a>
+            </div>
+            
+            <div class="alert-item alert-blink">
+              <div class="alert-icon">🚨</div>
+              <div class="alert-content">
+                <div class="alert-title">逾期告警</div>
+                <div class="alert-desc">客户【张三】垫资已逾期15天，金额¥85,000</div>
+              </div>
+            </div>
+            
+            <div class="alert-item warning">
+              <div class="alert-icon">📡</div>
+              <div class="alert-content">
+                <div class="alert-title">GPS离线</div>
+                <div class="alert-desc">车辆【粤B·12345】GPS已离线超过24小时</div>
+              </div>
+            </div>
+            
+            <div class="alert-item warning">
+              <div class="alert-icon">📄</div>
+              <div class="alert-content">
+                <div class="alert-title">资料缺失</div>
+                <div class="alert-desc">订单【DD202401150012】缺少身份证复印件</div>
+              </div>
+            </div>
+            
+            <div class="alert-item warning">
+              <div class="alert-icon">⚡</div>
+              <div class="alert-content">
+                <div class="alert-title">断电告警</div>
+                <div class="alert-desc">车辆【粤B·67890】GPS检测到断电</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 待办事项 -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">📝 待办事项</h3>
+            <div style="display: flex; gap: 8px;">
+              <span class="status-tag status-pending">待处理 12</span>
+              <span class="status-tag status-approved">进行中 8</span>
+            </div>
+          </div>
+          
+          <div class="list-group">
+            <div class="list-item">
+              <div class="list-item-icon" style="background: rgba(245, 158, 11, 0.1); color: var(--warning);">📋</div>
+              <div class="list-item-content">
+                <div class="list-item-title">审批垫资申请 - 客户李四</div>
+                <div class="list-item-desc">申请金额：¥120,000 | 提交时间：2024-01-15 09:30</div>
+              </div>
+              <div class="list-item-action">
+                <button class="btn btn-primary btn-sm">立即处理</button>
+              </div>
+            </div>
+            
+            <div class="list-item">
+              <div class="list-item-icon" style="background: rgba(59, 130, 246, 0.1); color: var(--info);">📞</div>
+              <div class="list-item-content">
+                <div class="list-item-title">回访客户 - 王五</div>
+                <div class="list-item-desc">放款后第7天回访 | 联系电话：138****5678</div>
+              </div>
+              <div class="list-item-action">
+                <button class="btn btn-secondary btn-sm">查看详情</button>
+              </div>
+            </div>
+            
+            <div class="list-item">
+              <div class="list-item-icon" style="background: rgba(16, 185, 129, 0.1); color: var(--success);">📄</div>
+              <div class="list-item-content">
+                <div class="list-item-title">资料审核 - 订单DD202401150015</div>
+                <div class="list-item-desc">已上传3份文件，待审核 | 提交时间：2024-01-15 08:45</div>
+              </div>
+              <div class="list-item-action">
+                <button class="btn btn-primary btn-sm">去审核</button>
+              </div>
+            </div>
+            
+            <div class="list-item">
+              <div class="list-item-icon" style="background: rgba(139, 92, 246, 0.1); color: #8b5cf6;">💰</div>
+              <div class="list-item-content">
+                <div class="list-item-title">确认还款 - 客户赵六</div>
+                <div class="list-item-desc">本期应还：¥5,280 | 到期日：2024-01-15</div>
+              </div>
+              <div class="list-item-action">
+                <button class="btn btn-secondary btn-sm">确认到账</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

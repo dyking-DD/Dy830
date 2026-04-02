@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>联系顾问 - 汽车分期管理</title>
+  <link rel="stylesheet" href="mobile.css">
+  <style>
+    .advisor-section {
+      background: linear-gradient(135deg, var(--primary-blue) 0%, #2C5A9E 100%);
+      margin: -16px -16px 24px;
+      padding: 32px 16px;
+    }
+    
+    .advisor-card {
+      background-color: var(--white);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .advisor-top {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--gray-200);
+    }
+    
+    .advisor-avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary-orange) 0%, #FF8B5A 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 24px;
+      font-weight: 600;
+    }
+    
+    .advisor-info {
+      flex: 1;
+    }
+    
+    .advisor-name {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--gray-800);
+      margin-bottom: 4px;
+    }
+    
+    .advisor-title {
+      font-size: 14px;
+      color: var(--gray-500);
+    }
+    
+    .advisor-contacts {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      background-color: var(--gray-100);
+      border-radius: 10px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    
+    .contact-item:active {
+      transform: scale(0.98);
+    }
+    
+    .contact-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+    
+    .contact-icon.phone {
+      background-color: rgba(16, 185, 129, 0.1);
+    }
+    
+    .contact-icon.wechat {
+      background-color: rgba(7, 193, 96, 0.1);
+    }
+    
+    .contact-text {
+      flex: 1;
+    }
+    
+    .contact-label {
+      font-size: 12px;
+      color: var(--gray-500);
+    }
+    
+    .contact-value {
+      font-size: 15px;
+      color: var(--gray-800);
+      font-weight: 500;
+    }
+    
+    .contact-arrow {
+      color: var(--gray-400);
+      font-size: 18px;
+    }
+    
+    .section-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--gray-800);
+      margin-bottom: 16px;
+      padding: 0 4px;
+    }
+    
+    .faq-list {
+      background-color: var(--white);
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    
+    .faq-item {
+      border-bottom: 1px solid var(--gray-100);
+    }
+    
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+    
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 20px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    
+    .faq-question:active {
+      background-color: var(--gray-100);
+    }
+    
+    .faq-title {
+      font-size: 15px;
+      color: var(--gray-700);
+      font-weight: 500;
+      flex: 1;
+      padding-right: 12px;
+    }
+    
+    .faq-arrow {
+      color: var(--gray-400);
+      font-size: 14px;
+      transition: transform 0.3s;
+    }
+    
+    .faq-item.active .faq-arrow {
+      transform: rotate(180deg);
+    }
+    
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+      background-color: var(--gray-100);
+    }
+    
+    .faq-item.active .faq-answer {
+      max-height: 200px;
+    }
+    
+    .faq-answer-content {
+      padding: 16px 20px;
+      font-size: 14px;
+      color: var(--gray-600);
+      line-height: 1.7;
+    }
+    
+    .online-service {
+      position: fixed;
+      bottom: 90px;
+      right: 16px;
+      z-index: 99;
+    }
+    
+    .service-btn {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary-orange) 0%, #FF8B5A 100%);
+      color: var(--white);
+      border: none;
+      box-shadow: 0 4px 12px rgba(255, 107, 53, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    
+    .service-btn:active {
+      transform: scale(0.95);
+    }
+    
+    .service-label {
+      position: absolute;
+      bottom: -24px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 12px;
+      color: var(--gray-600);
+      white-space: nowrap;
+      background-color: var(--white);
+      padding: 2px 8px;
+      border-radius: 4px;
+      box-shadow: var(--shadow);
+    }
+    
+    .work-time {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 16px;
+      background-color: rgba(26, 58, 107, 0.05);
+      border-radius: 8px;
+      margin-top: 12px;
+      font-size: 13px;
+      color: var(--gray-600);
+    }
+    
+    .work-time span {
+      color: var(--primary-blue);
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <!-- 顶部导航 -->
+  <header class="header">
+    <div class="header-content">
+      <h1 class="header-title">汽车分期管理</h1>
+      <div class="header-avatar">张</div>
+    </div>
+  </header>
+
+  <!-- 主要内容 -->
+  <main class="container" style="margin-top: 16px;">
+    <!-- 顾问信息 -->
+    <section class="advisor-section">
+      <div class="advisor-card">
+        <div class="advisor-top">
+          <div class="advisor-avatar">李</div>
+          <div class="advisor-info">
+            <div class="advisor-name">李经理</div>
+            <div class="advisor-title">高级客户顾问 | 工号 8866</div>
+          </div>
+        </div>
+        
+        <div class="advisor-contacts">
+          <a href="tel:13800138000" class="contact-item">
+            <div class="contact-icon phone">📞</div>
+            <div class="contact-text">
+              <div class="contact-label">联系电话</div>
+              <div class="contact-value">138-0013-8000</div>
+            </div>
+            <div class="contact-arrow">›</div>
+          </a>
+          
+          <div class="contact-item" onclick="copyWechat()">
+            <div class="contact-icon wechat">💬</div>
+            <div class="contact-text">
+              <div class="contact-label">微信号</div>
+              <div class="contact-value" id="wechatId">li_manager_8866</div>
+            </div>
+            <div class="contact-arrow">复制</div>
+          </div>
+        </div>
+        
+        <div class="work-time">
+          🕐 工作时间：<span>周一至周五 9:00-18:00</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 常见问题 -->
+    <section>
+      <div class="section-title">常见问题</div>
+      <div class="faq-list">
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-question">
+            <div class="faq-title">贷款审批需要多长时间？</div>
+            <div class="faq-arrow">▼</div>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              一般情况下，贷款审批需要3-5个工作日。完整提交资料后，我们会加快审核进度，并通过短信通知您审批结果。
+            </div>
+          </div>
+        </div>
+        
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-question">
+            <div class="faq-title">如何查询还款计划？</div>
+            <div class="faq-arrow">▼</div>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              您可以在"我的合同"页面查看详细的还款计划，包括每期的还款日期、还款金额等信息。系统会在还款日前3天通过短信提醒您。
+            </div>
+          </div>
+        </div>
+        
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-question">
+            <div class="faq-title">可以提前还款吗？</div>
+            <div class="faq-arrow">▼</div>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              可以提前还款。贷款满6个月后可申请提前还款，无需支付违约金。请联系您的顾问或拨打客服热线办理。
+            </div>
+          </div>
+        </div>
+        
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-question">
+            <div class="faq-title">逾期还款有什么影响？</div>
+            <div class="faq-arrow">▼</div>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              逾期还款会产生罚息，并影响您的个人征信。建议您设置自动扣款或在还款日前主动还款，避免逾期。
+            </div>
+          </div>
+        </div>
+        
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-question">
+            <div class="faq-title">资料上传失败怎么办？</div>
+            <div class="faq-arrow">▼</div>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              请检查网络连接，确保图片大小在5M以内，格式为jpg或png。如多次上传失败，请直接联系顾问，通过微信发送资料。
+            </div>
+          </div>
+        </div>
+        
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-question">
+            <div class="faq-title">GPS设备有什么作用？</div>
+            <div class="faq-arrow">▼</div>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-content">
+              GPS设备用于车辆定位和安全保障，不影响您的正常使用。在贷款结清后，我们会协助您拆除GPS设备。
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 其他联系方式 -->
+    <section style="margin-top: 24px; margin-bottom: 100px;">
+      <div class="section-title">客服热线</div>
+      <div class="card">
+        <div class="card-body">
+          <div class="info-list">
+            <div class="info-row">
+              <span class="info-label">全国服务热线</span>
+              <a href="tel:4008888888" style="color: var(--primary-blue); text-decoration: none; font-weight: 500;">400-888-8888</a>
+            </div>
+            <div class="info-row">
+              <span class="info-label">服务时间</span>
+              <span class="info-value">7×24小时</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">投诉建议</span>
+              <a href="mailto:service@example.com" style="color: var(--primary-blue); text-decoration: none; font-weight: 500;">service@example.com</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 在线客服按钮 -->
+  <div class="online-service">
+    <button class="service-btn" onclick="openService()">
+      💬
+    </button>
+    <div class="service-label">在线客服</div>
+  </div>
+
+  <!-- 底部导航 -->
+  <nav class="bottom-nav">
+    <a href="index.html" class="nav-item">
+      <div class="nav-icon">📊</div>
+      <div class="nav-text">进度查询</div>
+    </a>
+    <a href="contract.html" class="nav-item">
+      <div class="nav-icon">📄</div>
+      <div class="nav-text">我的合同</div>
+    </a>
+    <a href="documents.html" class="nav-item">
+      <div class="nav-icon">📁</div>
+      <div class="nav-text">我的资料</div>
+    </a>
+    <a href="contact.html" class="nav-item active">
+      <div class="nav-icon">💬</div>
+      <div class="nav-text">联系顾问</div>
+    </a>
+  </nav>
+
+  <script>
+    // FAQ手风琴
+    function toggleFaq(item) {
+      const isActive = item.classList.contains('active');
+      
+      // 关闭所有其他项
+      document.querySelectorAll('.faq-item').forEach(faq => {
+        faq.classList.remove('active');
+      });
+      
+      // 切换当前项
+      if (!isActive) {
+        item.classList.add('active');
+      }
+    }
+    
+    // 复制微信号
+    function copyWechat() {
+      const wechat = document.getElementById('wechatId').textContent;
+      
+      // 创建临时输入框
+      const input = document.createElement('input');
+      input.value = wechat;
+      document.body.appendChild(input);
+      input.select();
+      document.execCommand('copy');
+      document.body.removeChild(input);
+      
+      // 提示
+      alert('微信号已复制：' + wechat);
+    }
+    
+    // 打开在线客服
+    function openService() {
+      alert('正在为您接入在线客服，请稍候...');
+    }
+  </script>
+</body>
+</html>

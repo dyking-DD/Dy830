@@ -1,0 +1,1025 @@
+/**
+ * 汽车分期管理平台 - 移动端H5样式
+ * 风格：微信小程序/支付宝小程序
+ */
+
+/* CSS Variables */
+:root {
+    --primary: #1A3A6B;
+    --primary-light: #2a5298;
+    --accent: #FF6B35;
+    --accent-light: #ff8c5a;
+    --bg: #F5F5F5;
+    --card: #FFFFFF;
+    --text: #333333;
+    --text-light: #888888;
+    --success: #52c41a;
+    --danger: #ff4d4f;
+    --warning: #faad14;
+    --border: #e8e8e8;
+    --shadow: 0 2px 12px rgba(0,0,0,0.08);
+    --radius: 12px;
+}
+
+/* Reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    font-family: system-ui, -apple-system, -blinkmacsystemfont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+    padding-bottom: 70px;
+}
+
+/* 页面容器 */
+.page {
+    max-width: 100%;
+    min-height: 100vh;
+    background: var(--bg);
+}
+
+/* ========== 导航栏 ========== */
+.navbar {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: white;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(26, 58, 107, 0.2);
+}
+
+.navbar-title {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.navbar-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* ========== 底部导航 ========== */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--card);
+    display: flex;
+    justify-content: space-around;
+    padding: 8px 0 12px;
+    box-shadow: 0 -2px 12px rgba(0,0,0,0.08);
+    z-index: 100;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 6px 16px;
+    text-decoration: none;
+    color: var(--text-light);
+    transition: all 0.2s;
+    border-radius: 8px;
+}
+
+.nav-item.active {
+    color: var(--primary);
+}
+
+.nav-item:active {
+    background: var(--bg);
+}
+
+.nav-icon {
+    font-size: 22px;
+    margin-bottom: 2px;
+}
+
+.nav-text {
+    font-size: 11px;
+}
+
+/* ========== 卡片 ========== */
+.card {
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin: 12px 16px;
+    overflow: hidden;
+}
+
+.card-header {
+    padding: 16px;
+    border-bottom: 1px solid var(--border);
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--text);
+}
+
+.card-body {
+    padding: 16px;
+}
+
+.card-footer {
+    padding: 12px 16px;
+    border-top: 1px solid var(--border);
+    background: #fafafa;
+}
+
+/* ========== 按钮 ========== */
+.btn {
+    display: inline-block;
+    padding: 14px 24px;
+    border-radius: var(--radius);
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+    color: white;
+}
+
+.btn-primary:active {
+    background: linear-gradient(135deg, var(--accent-light) 0%, var(--accent) 100%);
+}
+
+.btn-secondary {
+    background: var(--primary);
+    color: white;
+}
+
+.btn-ghost {
+    background: transparent;
+    color: var(--primary);
+    border: 1px solid var(--primary);
+}
+
+.btn-block {
+    display: block;
+    width: 100%;
+}
+
+.btn-sm {
+    padding: 8px 16px;
+    font-size: 13px;
+}
+
+/* ========== 输入框 ========== */
+.input-group {
+    margin-bottom: 16px;
+}
+
+.input-label {
+    display: block;
+    font-size: 14px;
+    color: var(--text-light);
+    margin-bottom: 8px;
+}
+
+.input-field {
+    width: 100%;
+    padding: 14px 16px;
+    font-size: 16px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: white;
+    transition: all 0.2s;
+    outline: none;
+}
+
+.input-field:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(26, 58, 107, 0.1);
+}
+
+.input-field::placeholder {
+    color: #bbb;
+}
+
+.input-with-icon {
+    position: relative;
+}
+
+.input-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: var(--text-light);
+}
+
+.input-with-icon .input-field {
+    padding-left: 44px;
+}
+
+/* ========== 状态标签 ========== */
+.badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.badge-success {
+    background: #e6f7e6;
+    color: var(--success);
+}
+
+.badge-danger {
+    background: #fff1f0;
+    color: var(--danger);
+}
+
+.badge-warning {
+    background: #fffbe6;
+    color: var(--warning);
+}
+
+.badge-info {
+    background: #e6f4ff;
+    color: var(--primary);
+}
+
+.badge-default {
+    background: #f5f5f5;
+    color: var(--text-light);
+}
+
+/* ========== 时间轴 ========== */
+.timeline {
+    position: relative;
+    padding-left: 32px;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 11px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--primary) 0%, var(--border) 100%);
+}
+
+.timeline-item {
+    position: relative;
+    padding-bottom: 24px;
+}
+
+.timeline-item:last-child {
+    padding-bottom: 0;
+}
+
+.timeline-dot {
+    position: absolute;
+    left: -24px;
+    top: 2px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    z-index: 1;
+}
+
+.timeline-dot.completed {
+    background: var(--primary);
+    color: white;
+}
+
+.timeline-dot.current {
+    background: var(--accent);
+    color: white;
+    box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.2);
+    animation: pulse 2s infinite;
+}
+
+.timeline-dot.pending {
+    background: white;
+    border: 2px solid var(--border);
+}
+
+.timeline-content {
+    padding-left: 8px;
+}
+
+.timeline-title {
+    font-size: 15px;
+    color: var(--text);
+    margin-bottom: 4px;
+}
+
+.timeline-time {
+    font-size: 12px;
+    color: var(--text-light);
+}
+
+.timeline-item.completed .timeline-title {
+    color: var(--primary);
+}
+
+.timeline-item.current .timeline-title {
+    color: var(--accent);
+    font-weight: 600;
+}
+
+.timeline-item.pending .timeline-title,
+.timeline-item.pending .timeline-time {
+    color: var(--text-light);
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.2);
+    }
+    50% {
+        box-shadow: 0 0 0 8px rgba(255, 107, 53, 0.1);
+    }
+}
+
+/* ========== 进度圆环 ========== */
+.progress-ring {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto;
+}
+
+.progress-ring svg {
+    transform: rotate(-90deg);
+}
+
+.progress-ring-bg {
+    fill: none;
+    stroke: var(--border);
+    stroke-width: 10;
+}
+
+.progress-ring-progress {
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 10;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.5s ease;
+}
+
+.progress-ring-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.progress-ring-value {
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--accent);
+}
+
+.progress-ring-label {
+    font-size: 12px;
+    color: var(--text-light);
+}
+
+/* ========== 信息列表 ========== */
+.info-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.info-row:last-child {
+    border-bottom: none;
+}
+
+.info-label {
+    color: var(--text-light);
+    font-size: 14px;
+}
+
+.info-value {
+    color: var(--text);
+    font-weight: 500;
+    font-size: 14px;
+}
+
+/* ========== 资料项 ========== */
+.doc-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.2s;
+}
+
+.doc-item:last-child {
+    border-bottom: none;
+}
+
+.doc-item:active {
+    background: #fafafa;
+}
+
+.doc-name {
+    font-size: 15px;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.doc-required {
+    color: var(--danger);
+    font-size: 12px;
+}
+
+.doc-status {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.doc-status.uploaded {
+    color: var(--success);
+}
+
+.doc-status.pending {
+    color: var(--text-light);
+}
+
+/* ========== 表格 ========== */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th,
+.table td {
+    padding: 12px 8px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+}
+
+.table th {
+    color: var(--text-light);
+    font-weight: 500;
+    background: #fafafa;
+}
+
+.table td {
+    color: var(--text);
+}
+
+/* ========== 用户卡片 ========== */
+.user-card {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: white;
+    padding: 24px 20px;
+    text-align: center;
+}
+
+.user-avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    margin: 0 auto 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.user-name {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.user-phone {
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+/* ========== 顾问卡片 ========== */
+.advisor-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+}
+
+.advisor-avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.advisor-info {
+    flex: 1;
+}
+
+.advisor-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+}
+
+.advisor-phone {
+    font-size: 14px;
+    color: var(--text-light);
+}
+
+.advisor-actions {
+    display: flex;
+    gap: 8px;
+}
+
+/* ========== 功能列表 ========== */
+.menu-list {
+    background: var(--card);
+    margin: 12px 16px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    border-bottom: 1px solid var(--border);
+    text-decoration: none;
+    color: var(--text);
+    transition: background 0.2s;
+}
+
+.menu-item:last-child {
+    border-bottom: none;
+}
+
+.menu-item:active {
+    background: #fafafa;
+}
+
+.menu-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: #f0f5ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    margin-right: 12px;
+}
+
+.menu-text {
+    flex: 1;
+    font-size: 15px;
+}
+
+.menu-arrow {
+    color: var(--text-light);
+    font-size: 18px;
+}
+
+/* ========== 登录页样式 ========== */
+.login-header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: white;
+    padding: 48px 24px 40px;
+    text-align: center;
+}
+
+.login-logo {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.login-subtitle {
+    font-size: 16px;
+    opacity: 0.9;
+}
+
+.login-form {
+    padding: 24px 16px;
+}
+
+.login-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 24px;
+    margin-bottom: 16px;
+}
+
+.login-footer {
+    text-align: center;
+    padding: 24px;
+    color: var(--text-light);
+    font-size: 13px;
+}
+
+.login-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 14px;
+}
+
+/* ========== 空状态 ========== */
+.empty-state {
+    text-align: center;
+    padding: 48px 24px;
+}
+
+.empty-icon {
+    font-size: 64px;
+    margin-bottom: 16px;
+}
+
+.empty-text {
+    font-size: 15px;
+    color: var(--text-light);
+    margin-bottom: 16px;
+}
+
+/* ========== 加载动画 ========== */
+.loading {
+    text-align: center;
+    padding: 40px;
+}
+
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--border);
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 12px;
+}
+
+.loading-text {
+    color: var(--text-light);
+    font-size: 14px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ========== Toast提示 ========== */
+.toast {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0,0,0,0.75);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 14px;
+    z-index: 999;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.toast.show {
+    opacity: 1;
+}
+
+/* ========== 高亮卡片 ========== */
+.highlight-card {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: white;
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-top: 16px;
+}
+
+.highlight-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.highlight-desc {
+    font-size: 14px;
+    opacity: 0.9;
+    line-height: 1.6;
+}
+
+/* ========== 金额显示 ========== */
+.amount-large {
+    font-size: 32px;
+    font-weight: 700;
+    color: white;
+}
+
+.amount-unit {
+    font-size: 16px;
+    opacity: 0.9;
+    margin-left: 4px;
+}
+
+/* ========== 进度条 ========== */
+.progress-bar {
+    height: 8px;
+    background: var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent) 0%, var(--accent-light) 100%);
+    border-radius: 4px;
+    transition: width 0.3s;
+}
+
+/* ========== 分组标题 ========== */
+.section-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    padding: 16px 16px 8px;
+}
+
+/* ========== 客户信息 ========== */
+.customer-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.customer-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.customer-name {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.customer-phone {
+    font-size: 14px;
+    color: var(--text-light);
+    margin-top: 2px;
+}
+
+/* ========== 车辆信息 ========== */
+.car-info {
+    background: #f5f7fa;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+.car-brand {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+}
+
+.car-model {
+    font-size: 14px;
+    color: var(--text-light);
+}
+
+/* ========== 贷款概览 ========== */
+.loan-summary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.loan-item {
+    text-align: center;
+}
+
+.loan-value {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--accent);
+}
+
+.loan-label {
+    font-size: 12px;
+    color: var(--text-light);
+    margin-top: 4px;
+}
+
+/* ========== 贷款总览卡片 ========== */
+.loan-overview-card {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: white;
+    border-radius: var(--radius);
+    padding: 24px;
+    margin: 12px 16px;
+    text-align: center;
+}
+
+.loan-amount {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+.loan-detail {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255,255,255,0.2);
+}
+
+.loan-detail-item {
+    text-align: center;
+}
+
+.loan-detail-value {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.loan-detail-label {
+    font-size: 12px;
+    opacity: 0.8;
+}
+
+/* ========== 还款进度 ========== */
+.repayment-progress {
+    padding: 16px;
+    background: #fafafa;
+}
+
+.repayment-progress-text {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    margin-bottom: 8px;
+}
+
+.repayment-progress-bar {
+    height: 6px;
+    background: var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.repayment-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent) 0%, var(--accent-light) 100%);
+    border-radius: 3px;
+}
+
+/* ========== 当前阶段卡片 ========== */
+.current-stage-card {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: white;
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-top: 16px;
+}
+
+.current-stage-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.current-stage-time {
+    font-size: 14px;
+    opacity: 0.9;
+    margin-bottom: 8px;
+}
+
+.current-stage-desc {
+    font-size: 14px;
+    opacity: 0.85;
+    line-height: 1.6;
+}
+
+/* ========== 搜索区域 ========== */
+.search-section {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    padding: 24px 16px 32px;
+    margin-bottom: -20px;
+}
+
+.search-box {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: var(--shadow);
+}
+
+/* ========== API配置 ========== */
+.api-config {
+    position: fixed;
+    bottom: 80px;
+    right: 16px;
+    z-index: 99;
+}
+
+.api-config-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: white;
+    border: none;
+    font-size: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    cursor: pointer;
+}
+
+/* ========== 响应式 ========== */
+@media (max-width: 375px) {
+    .loan-summary {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .loan-detail {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

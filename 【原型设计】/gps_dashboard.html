@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GPS监控大屏 - 汽车分期管理平台</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    }
+    
+    .gps-dashboard {
+      min-height: 100vh;
+      color: #fff;
+    }
+    
+    .gps-header {
+      background: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .gps-title {
+      font-size: 24px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .gps-title-icon {
+      font-size: 28px;
+    }
+    
+    .stat-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      margin-left: 12px;
+      font-size: 14px;
+    }
+    
+    .stat-pill .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+    
+    .stat-pill .dot.green { background: #10b981; }
+    .stat-pill .dot.red { background: #ef4444; }
+    .stat-pill .dot.yellow { background: #f59e0b; }
+    
+    .gps-main {
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 20px;
+      padding: 20px;
+      height: calc(100vh - 72px);
+    }
+    
+    /* 模拟地图 */
+    .map-container {
+      background: rgba(15, 23, 42, 0.6);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .map-grid {
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+    }
+    
+    .map-point {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 20px currentColor;
+    }
+    
+    .map-point.online {
+      background: #10b981;
+      color: #10b981;
+    }
+    
+    .map-point.offline {
+      background: #6b7280;
+      color: #6b7280;
+    }
+    
+    .map-point.alert {
+      background: #ef4444;
+      color: #ef4444;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { 
+        transform: translate(-50%, -50%) scale(1);
+        box-shadow: 0 0 20px currentColor;
+      }
+      50% { 
+        transform: translate(-50%, -50%) scale(1.5);
+        box-shadow: 0 0 40px currentColor;
+      }
+    }
+    
+    .map-label {
+      position: absolute;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      white-space: nowrap;
+      transform: translate(8px, -50%);
+      top: 50%;
+      left: 100%;
+    }
+    
+    /* 右侧面板 */
+    .side-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    
+    .panel-card {
+      background: rgba(30, 41, 59, 0.8);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      overflow: hidden;
+    }
+    
+    .panel-header {
+      padding: 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .panel-title {
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .panel-body {
+      max-height: 300px;
+      overflow-y: auto;
+    }
+    
+    /* 设备列表 */
+    .device-item {
+      display: flex;
+      align-items: center;
+      padding: 12px 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      transition: background 0.3s;
+    }
+    
+    .device-item:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+    
+    .device-item:last-child {
+      border-bottom: none;
+    }
+    
+    .device-status {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin-right: 12px;
+      flex-shrink: 0;
+    }
+    
+    .device-status.online { background: #10b981; }
+    .device-status.offline { background: #6b7280; }
+    
+    .device-info {
+      flex: 1;
+    }
+    
+    .device-plate {
+      font-weight: 500;
+      color: #fff;
+    }
+    
+    .device-location {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.5);
+      margin-top: 2px;
+    }
+    
+    .device-tags {
+      display: flex;
+      gap: 4px;
+      margin-top: 4px;
+    }
+    
+    .device-tag {
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 500;
+    }
+    
+    .device-tag.speed {
+      background: rgba(239, 68, 68, 0.2);
+      color: #fca5a5;
+    }
+    
+    .device-tag.area {
+      background: rgba(245, 158, 11, 0.2);
+      color: #fcd34d;
+    }
+    
+    .device-tag.power {
+      background: rgba(139, 92, 246, 0.2);
+      color: #c4b5fd;
+    }
+    
+    /* 告警滚动区域 */
+    .alert-scroll {
+      max-height: 200px;
+      overflow-y: auto;
+    }
+    
+    .alert-item-dark {
+      display: flex;
+      align-items: center;
+      padding: 12px 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      background: rgba(239, 68, 68, 0.1);
+      animation: blink 2s ease-in-out infinite;
+    }
+    
+    @keyframes blink {
+      0%, 50%, 100% { opacity: 1; }
+      25%, 75% { opacity: 0.5; }
+    }
+    
+    .alert-item-dark:nth-child(even) {
+      background: rgba(245, 158, 11, 0.1);
+      animation: none;
+    }
+    
+    .alert-icon-dark {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: rgba(239, 68, 68, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 12px;
+      font-size: 16px;
+    }
+    
+    .alert-item-dark:nth-child(even) .alert-icon-dark {
+      background: rgba(245, 158, 11, 0.2);
+    }
+    
+    .alert-content-dark {
+      flex: 1;
+    }
+    
+    .alert-title-dark {
+      font-weight: 500;
+      color: #fff;
+      font-size: 13px;
+    }
+    
+    .alert-time-dark {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.5);
+      margin-top: 2px;
+    }
+    
+    /* 统计卡片 */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      padding: 20px;
+      background: rgba(30, 41, 59, 0.6);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .stat-item {
+      text-align: center;
+    }
+    
+    .stat-value-dark {
+      font-size: 32px;
+      font-weight: 700;
+      color: #fff;
+    }
+    
+    .stat-label-dark {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.6);
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="gps-dashboard">
+    <!-- 顶部 -->
+    <header class="gps-header">
+      <div class="gps-title">
+        <span class="gps-title-icon">📍</span>
+        GPS监控大屏
+        <div class="stat-pill">
+          <span class="dot green"></span>
+          <span>在线 2,846</span>
+        </div>
+        <div class="stat-pill">
+          <span class="dot red"></span>
+          <span>离线 94</span>
+        </div>
+        <div class="stat-pill">
+          <span class="dot yellow"></span>
+          <span>告警 12</span>
+        </div>
+      </div>
+      
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <span style="color: rgba(255,255,255,0.6); font-size: 13px;" id="currentTime">2024-01-15 14:30:25</span>
+        <a href="dashboard.html" class="btn btn-secondary" style="background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2);">
+          返回后台
+        </a>
+      </div>
+    </header>
+    
+    <!-- 统计卡片 -->
+    <div class="stat-grid">
+      <div class="stat-item">
+        <div class="stat-value-dark">2,940</div>
+        <div class="stat-label-dark">设备总数</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value-dark" style="color: #10b981;">2,846</div>
+        <div class="stat-label-dark">在线设备</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value-dark" style="color: #ef4444;">94</div>
+        <div class="stat-label-dark">离线设备</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value-dark" style="color: #f59e0b;">12</div>
+        <div class="stat-label-dark">告警设备</div>
+      </div>
+    </div>
+    
+    <!-- 主区域 -->
+    <div class="gps-main" style="height: calc(100vh - 180px);">
+      <!-- 地图区域 -->
+      <div class="map-container">
+        <div class="map-grid"></div>
+        
+        <!-- 模拟地图标注点 -->
+        <div class="map-point online" style="left: 25%; top: 30%;">
+          <span class="map-label">粤B·12345</span>
+        </div>
+        <div class="map-point online" style="left: 40%; top: 45%;">
+          <span class="map-label">粤B·23456</span>
+        </div>
+        <div class="map-point online" style="left: 60%; top: 35%;">
+          <span class="map-label">粤B·34567</span>
+        </div>
+        <div class="map-point alert" style="left: 75%; top: 55%;">
+          <span class="map-label" style="color: #fca5a5;">粤B·45678 ⚠️</span>
+        </div>
+        <div class="map-point online" style="left: 30%; top: 65%;">
+          <span class="map-label">粤B·56789</span>
+        </div>
+        <div class="map-point offline" style="left: 55%; top: 70%;">
+          <span class="map-label" style="color: #9ca3af;">粤B·67890 离线</span>
+        </div>
+        <div class="map-point alert" style="left: 20%; top: 50%;">
+          <span class="map-label" style="color: #fcd34d;">粤B·78901 ⚠️</span>
+        </div>
+        <div class="map-point online" style="left: 70%; top: 25%;">
+          <span class="map-label">粤B·89012</span>
+        </div>
+        <div class="map-point online" style="left: 85%; top: 40%;">
+          <span class="map-label">粤B·90123</span>
+        </div>
+        <div class="map-point online" style="left: 45%; top: 20%;">
+          <span class="map-label">粤B·01234</span>
+        </div>
+        
+        <!-- 地图图例 -->
+        <div style="position: absolute; bottom: 20px; left: 20px; background: rgba(0,0,0,0.7); padding: 12px 16px; border-radius: 8px; font-size: 12px;">
+          <div style="display: flex; gap: 20px;">
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <span style="width: 10px; height: 10px; border-radius: 50%; background: #10b981;"></span>
+              <span>在线</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <span style="width: 10px; height: 10px; border-radius: 50%; background: #6b7280;"></span>
+              <span>离线</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <span style="width: 10px; height: 10px; border-radius: 50%; background: #ef4444;"></span>
+              <span>告警</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 右侧面板 -->
+      <div class="side-panel">
+        <!-- 设备状态列表 -->
+        <div class="panel-card">
+          <div class="panel-header">
+            <div class="panel-title">
+              <span>📡</span>
+              <span>设备状态</span>
+            </div>
+            <span style="font-size: 12px; color: rgba(255,255,255,0.5);">实时更新</span>
+          </div>
+          <div class="panel-body">
+            <div class="device-item">
+              <div class="device-status online"></div>
+              <div class="device-info">
+                <div class="device-plate">粤B·12345</div>
+                <div class="device-location">深圳市南山区科技园</div>
+              </div>
+              <span class="status-tag status-online">在线</span>
+            </div>
+            
+            <div class="device-item">
+              <div class="device-status online"></div>
+              <div class="device-info">
+                <div class="device-plate">粤B·45678</div>
+                <div class="device-location">深圳市福田区CBD</div>
+                <div class="device-tags">
+                  <span class="device-tag speed">超速</span>
+                </div>
+              </div>
+              <span class="status-tag status-overdue">告警</span>
+            </div>
+            
+            <div class="device-item">
+              <div class="device-status offline"></div>
+              <div class="device-info">
+                <div class="device-plate">粤B·67890</div>
+                <div class="device-location">最后定位：深圳市宝安区</div>
+              </div>
+              <span class="status-tag status-offline">离线</span>
+            </div>
+            
+            <div class="device-item">
+              <div class="device-status online"></div>
+              <div class="device-info">
+                <div class="device-plate">粤B·78901</div>
+                <div class="device-location">深圳市龙华区民治</div>
+                <div class="device-tags">
+                  <span class="device-tag area">出区域</span>
+                  <span class="device-tag power">断电</span>
+                </div>
+              </div>
+              <span class="status-tag status-overdue">告警</span>
+            </div>
+            
+            <div class="device-item">
+              <div class="device-status online"></div>
+              <div class="device-info">
+                <div class="device-plate">粤B·23456</div>
+                <div class="device-location">深圳市罗湖区东门</div>
+              </div>
+              <span class="status-tag status-online">在线</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 告警滚动 -->
+        <div class="panel-card">
+          <div class="panel-header">
+            <div class="panel-title">
+              <span>🚨</span>
+              <span>实时告警</span>
+            </div>
+            <span style="font-size: 12px; color: #fca5a5;">12条告警</span>
+          </div>
+          <div class="alert-scroll">
+            <div class="alert-item-dark">
+              <div class="alert-icon-dark">⚡</div>
+              <div class="alert-content-dark">
+                <div class="alert-title-dark">粤B·78901 检测到断电</div>
+                <div class="alert-time-dark">14:28:35 | 深圳市龙华区</div>
+              </div>
+            </div>
+            
+            <div class="alert-item-dark">
+              <div class="alert-icon-dark">🚀</div>
+              <div class="alert-content-dark">
+                <div class="alert-title-dark">粤B·45678 超速告警</div>
+                <div class="alert-time-dark">14:25:12 | 时速 135km/h</div>
+              </div>
+            </div>
+            
+            <div class="alert-item-dark">
+              <div class="alert-icon-dark">📍</div>
+              <div class="alert-content-dark">
+                <div class="alert-title-dark">粤B·78901 离开规定区域</div>
+                <div class="alert-time-dark">14:20:45 | 已驶离 15km</div>
+              </div>
+            </div>
+            
+            <div class="alert-item-dark">
+              <div class="alert-icon-dark">📡</div>
+              <div class="alert-content-dark">
+                <div class="alert-title-dark">粤B·67890 GPS离线</div>
+                <div class="alert-time-dark">13:45:22 | 已离线 45分钟</div>
+              </div>
+            </div>
+            
+            <div class="alert-item-dark">
+              <div class="alert-icon-dark">⚡</div>
+              <div class="alert-content-dark">
+                <div class="alert-title-dark">粤B·13579 电瓶电压低</div>
+                <div class="alert-time-dark">13:30:18 | 电压 11.2V</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

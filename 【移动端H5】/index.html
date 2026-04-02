@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>登录 - 汽车分期管理平台</title>
+    <link rel="stylesheet" href="css/app.css">
+    <style>
+        body {
+            padding-bottom: 0;
+            background: var(--bg);
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- Logo区域 -->
+        <div class="login-header">
+            <div class="login-logo">🚗 汽车分期</div>
+            <div class="login-subtitle">智能管理平台</div>
+        </div>
+        
+        <!-- 登录表单 -->
+        <div class="login-form">
+            <div class="login-card">
+                <div class="input-group">
+                    <label class="input-label">手机号</label>
+                    <div class="input-with-icon">
+                        <span class="input-icon">📱</span>
+                        <input type="tel" id="phoneInput" class="input-field" placeholder="请输入手机号" maxlength="11">
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">密码</label>
+                    <div class="input-with-icon">
+                        <span class="input-icon">🔒</span>
+                        <input type="password" id="passwordInput" class="input-field" placeholder="请输入密码">
+                    </div>
+                </div>
+                
+                <button class="btn btn-primary btn-block" onclick="handleLogin()">登录</button>
+                
+                <div style="text-align: right; margin-top: 12px;">
+                    <a href="#" class="login-link" onclick="showApiConfig()">忘记密码？</a>
+                </div>
+            </div>
+            
+            <!-- API配置提示 -->
+            <div style="text-align: center; margin-top: 24px;">
+                <button class="btn btn-ghost btn-sm" onclick="showApiConfig()">
+                    ⚙️ 配置API地址
+                </button>
+                <div style="font-size: 12px; color: var(--text-light); margin-top: 8px;">
+                    当前地址：<span id="currentApi">localhost:8899</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 底部版权 -->
+        <div class="login-footer">
+            <p>© 2026 汽车分期智能管理平台</p>
+            <p>安全 · 便捷 · 专业</p>
+        </div>
+    </div>
+    
+    <!-- 引入JS -->
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        // 页面加载时检查是否已登录
+        document.addEventListener('DOMContentLoaded', function() {
+            const token = localStorage.getItem('customer_token');
+            if (token) {
+                // 已登录，跳转到首页
+                window.location.href = 'home.html';
+            }
+            
+            // 显示当前API地址
+            updateApiDisplay();
+        });
+        
+        // 更新API地址显示
+        function updateApiDisplay() {
+            const currentApi = getApiBase();
+            const displayApi = currentApi.replace('http://', '').replace('https://', '');
+            document.getElementById('currentApi').textContent = displayApi;
+        }
+        
+        // 处理登录
+        async function handleLogin() {
+            const phone = document.getElementById('phoneInput').value.trim();
+            const password = document.getElementById('passwordInput').value;
+            
+            // 验证手机号
+            if (!phone) {
+                showToast('请输入手机号');
+                return;
+            }
+            
+            if (!/^1\d{10}$/.test(phone)) {
+                showToast('请输入正确的手机号');
+                return;
+            }
+            
+            // 验证密码
+            if (!password) {
+                showToast('请输入密码');
+                return;
+            }
+            
+            // 显示加载中
+            showLoading();
+            
+            try {
+                const result = await customerLogin(phone, password);
+                hideLoading();
+                
+                if (result.success) {
+                    showToast('登录成功');
+                    // 跳转到首页
+                    setTimeout(() => {
+                        window.location.href = 'home.html';
+                    }, 500);
+                } else {
+                    showToast(result.message || '登录失败，请检查账号密码');
+                }
+            } catch (error) {
+                hideLoading();
+                showToast('登录失败，请检查网络连接');
+            }
+        }
+        
+        // 回车键登录
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                handleLogin();
+            }
+        });
+        
+        // API配置（重写父级函数）
+        function showApiConfig() {
+            const currentApi = getApiBase();
+            const newApi = prompt('请输入API地址：\n（例如：192.168.1.100:8899）', currentApi);
+            
+            if (newApi !== null && newApi.trim() !== '') {
+                let apiUrl = newApi.trim();
+                // 自动添加http前缀
+                if (!apiUrl.startsWith('http://') && !apiUrl.startsWith('https://')) {
+                    apiUrl = 'http://' + apiUrl;
+                }
+                setApiBase(apiUrl);
+                updateApiDisplay();
+                showToast('API地址已更新');
+            }
+        }
+    </script>
+</body>
+</html>

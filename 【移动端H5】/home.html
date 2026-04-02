@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>进度查询 - 汽车分期管理平台</title>
+    <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+    <div class="page">
+        <!-- 顶部导航 -->
+        <header class="navbar">
+            <h1 class="navbar-title">进度查询</h1>
+            <a href="profile.html" class="navbar-avatar" id="userAvatar">客</a>
+        </header>
+        
+        <!-- 搜索区域 -->
+        <section class="search-section">
+            <div class="search-box">
+                <div class="input-group" style="margin-bottom: 0;">
+                    <input type="text" id="orderInput" class="input-field input-large" placeholder="请输入订单号查询进度">
+                </div>
+                <button class="btn btn-primary btn-block" style="margin-top: 16px;" onclick="searchOrder()">
+                    🔍 查询进度
+                </button>
+            </div>
+        </section>
+        
+        <!-- 查询结果区域 -->
+        <section id="resultSection" style="display: none;">
+            <!-- 动态渲染 -->
+        </section>
+    </div>
+    
+    <!-- 底部导航 -->
+    <nav class="bottom-nav">
+        <a href="home.html" class="nav-item active">
+            <div class="nav-icon">📊</div>
+            <div class="nav-text">进度查询</div>
+        </a>
+        <a href="contract.html" class="nav-item">
+            <div class="nav-icon">📄</div>
+            <div class="nav-text">我的合同</div>
+        </a>
+        <a href="documents.html" class="nav-item">
+            <div class="nav-icon">📁</div>
+            <div class="nav-text">我的资料</div>
+        </a>
+        <a href="profile.html" class="nav-item">
+            <div class="nav-icon">👤</div>
+            <div class="nav-text">个人中心</div>
+        </a>
+    </nav>
+    
+    <!-- API配置按钮 -->
+    <div class="api-config">
+        <button class="api-config-btn" onclick="showApiConfig()">⚙️</button>
+    </div>
+    
+    <!-- 引入JS -->
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        // 页面初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            // 检查登录状态
+            if (!initPageAuth()) {
+                return;
+            }
+            
+            // 加载默认订单数据
+            loadDefaultOrder();
+        });
+        
+        // 加载默认订单
+        async function loadDefaultOrder() {
+            showLoading();
+            
+            try {
+                const res = await getMyOrders();
+                hideLoading();
+                
+                if (res.code === 200 && res.data && res.data.length > 0) {
+                    // 显示第一个订单
+                    renderOrderResult(res.data[0]);
+                    
+                    // 填充订单号到输入框
+                    const orderId = res.data[0].order_id || res.data[0].order_no;
+                    if (orderId) {
+                        document.getElementById('orderInput').value = orderId;
+                    }
+                } else {
+                    // 使用模拟数据
+                    renderOrderResult(getMockOrder());
+                }
+            } catch (error) {
+                hideLoading();
+                // 使用模拟数据
+                renderOrderResult(getMockOrder());
+            }
+        }
+        
+        // 获取模拟订单数据
+        function getMockOrder() {
+            return {
+                order_id: 'DD2026032800001',
+                customer_name: localStorage.getItem('customer_name') || '张先生',
+                customer_phone: localStorage.getItem('phone') || '13812345678',
+                car_brand: '奔驰 GLC 300L',
+                car_model: '2024款 豪华型',
+                loan_amount: 280000,
+                loan_term: 36,
+                monthly_payment: 8520,
+                stage: '银行审批中',
+                stage_time: '2026-04-01 16:45',
+                update_time: '2026-04-01 16:45'
+            };
+        }
+    </script>
+</body>
+</html>
