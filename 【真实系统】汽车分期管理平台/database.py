@@ -368,7 +368,7 @@ def init_database():
     
     # 8. 插入抵押记录
     cursor.execute("""
-        INSERT INTO mortgage (mortgage_id, order_id, mortgage_bank, register_date, expire_date, certificate_number, status, created_at)
+        INSERT OR IGNORE INTO mortgage (mortgage_id, order_id, mortgage_bank, register_date, expire_date, certificate_number, status, created_at)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?)
     """, ("MTG-001", "ORD-002", "工商银行", (now - timedelta(days=60)).strftime("%Y-%m-%d"), (now + timedelta(days=365*3)).strftime("%Y-%m-%d"), "BJ2024001", "抵押中", (now - timedelta(days=60)).strftime("%Y-%m-%d %H:%M:%S")))
     
@@ -383,7 +383,7 @@ def init_database():
         ("USER-0003", "collections01", hash_pwd("collect123"), "贷后李", "collections", "贷后部", "正常", now.strftime("%Y-%m-%d %H:%M:%S")),
     ]
     cursor.executemany("""
-        INSERT INTO system_users (user_id, username, password_hash, name, role, department, status, created_at)
+        INSERT OR IGNORE INTO system_users (user_id, username, password_hash, name, role, department, status, created_at)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?)
     """, system_users)
     
@@ -393,7 +393,7 @@ def init_database():
         ("ACC-0002", "CUS-002", "13800138002", hash_pwd("123456"), "正常", now.strftime("%Y-%m-%d %H:%M:%S")),
     ]
     cursor.executemany("""
-        INSERT INTO customer_accounts (account_id, customer_id, phone, password_hash, status, created_at)
+        INSERT OR IGNORE INTO customer_accounts (account_id, customer_id, phone, password_hash, status, created_at)
         VALUES (?, ?, ?, ?, ?, ?)
     """, customer_accounts)
     
