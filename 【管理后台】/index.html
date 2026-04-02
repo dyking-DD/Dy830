@@ -8,6 +8,7 @@
 :root{--p:#0f1f3d;--p2:#1a3a6b;--a:#D4AF37;--bg:#F0F2F5;--c:#fff;--t:#333;--tl:#888;--ok:#52c41a;--err:#ff4d4f}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:system-ui,sans-serif;background:var(--bg);color:var(--t)}
+/* LOGIN */
 .lp{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--p),var(--p2))}
 .lb{background:var(--c);border-radius:16px;padding:40px;width:360px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.2)}
 .lb h1{color:var(--a);font-size:22px;margin-bottom:6px}
@@ -16,19 +17,25 @@ body{font-family:system-ui,sans-serif;background:var(--bg);color:var(--t)}
 .lb input:focus{border-color:var(--a)}
 .lb button{width:100%;padding:13px;background:linear-gradient(135deg,var(--a),#B8860B);color:var(--p);border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer}
 .le{color:var(--err);font-size:13px;margin-top:8px;display:none}
+/* ADMIN */
 .ap{display:none}
+/* NAVBAR */
 .nb{background:linear-gradient(135deg,var(--p),var(--p2));color:var(--c);padding:14px 20px;display:flex;justify-content:space-between;align-items:center}
 .nb h2{font-size:17px}
-.lgo{background:rgba(255,255,255, .15);color:var(--c);border:1px solid rgba(255,255,255,.3);padding:5px 14px;border-radius:20px;cursor:pointer;font-size:12px}
+.lgo{background:rgba(255,255,255,.15);color:var(--c);border:1px solid rgba(255,255,255,.3);padding:5px 14px;border-radius:20px;cursor:pointer;font-size:12px}
+/* TABS */
 .nt{display:flex;gap:4px;padding:12px 16px 0;background:var(--bg);overflow-x:auto}
 .tb{padding:9px 14px;border:none;background:var(--c);border-radius:12px 12px 0 0;cursor:pointer;font-size:13px;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,.06)}
 .tb.active{background:linear-gradient(135deg,var(--a),#B8860B);color:var(--p);font-weight:700}
+/* CONTENT */
 .cn{padding:16px;max-width:1200px;margin:0 auto}
+/* CARD */
 .cd{background:var(--c);border-radius:14px;box-shadow:0 2px 12px rgba(0,0,0,.08);padding:20px;margin-bottom:16px;border-top:3px solid var(--a)}
 .cd h3{font-size:14px;color:var(--p);font-weight:700;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid #f0}
+/* STATS */
 .sr{grid-template-columns:repeat(4,1fr);display:grid;gap:12px;margin-bottom:16px}
 .si{background:var(--c);border-radius:12px;padding:16px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.06);border-top:3px solid var(--a)}
-.si .v{font-size:22px;font-weight:700;color:var(--p)}
+.si .v{font-size:22px;font-weight:700}
 .si .l{font-size:12px;color:var(--tl);margin-top:4px}
 .sc{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
 .sc .card{background:var(--c);border-radius:10px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,.06);border-left:3px solid var(--a)}
@@ -36,19 +43,23 @@ body{font-family:system-ui,sans-serif;background:var(--bg);color:var(--t)}
 .sc .ss{display:grid;grid-template-columns:1fr 1fr;gap:8px;text-align:center}
 .sc .sv{font-size:20px;font-weight:700;color:var(--a)}
 .sc .sl{font-size:11px;color:var(--tl)}
+/* TABLE */
 .ov{overflow-x:auto}
 table{width:100%;border-collapse:collapse;font-size:13px}
 th{background:linear-gradient(135deg,var(--p),var(--p2));color:var(--c);padding:10px 12px;text-align:left;white-space:nowrap}
 tr{border-bottom:1px solid #f0}
 tr:hover{background:#f8f9ff}
 td{padding:10px 12px}
+/* BADGE */
 .bdg{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:500}
 .bg-grn{background:#e6f7e6;color:var(--ok)}
 .bg-yel{background:#fffbe6;color:#faad14}
 .bg-red{background:#fff1f0;color:var(--err)}
 .bg-blu{background:#e8f0ff;color:var(--p)}
+/* BUTTONS */
 .bn{padding:3px 10px;border:none;border-radius:4px;cursor:pointer;font-size:12px;background:linear-gradient(135deg,var(--p),var(--p2));color:var(--c)}
 .br{background:var(--err)!important}
+/* MODAL */
 .mo{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:200;align-items:center;justify-content:center}
 .mb{background:var(--c);border-radius:16px;padding:24px;width:600px;max-height:85vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.3)}
 .mc{float:right;font-size:24px;cursor:pointer;color:var(--tl);line-height:1}
@@ -58,6 +69,7 @@ td{padding:10px 12px}
 .di.full{grid-column:1/-1}
 .dl{font-size:11px;color:var(--tl);margin-bottom:3px}
 .dv{font-size:14px;font-weight:600;color:var(--p)}
+/* FORM ADD */
 .fs{background:var(--c);border-radius:12px;padding:20px;margin-bottom:16px}
 .fg{grid-template-columns:1fr 1fr;display:grid;gap:12px;margin-bottom:12px}
 .fp{display:flex;flex-direction:column;gap:5px}
@@ -65,8 +77,11 @@ td{padding:10px 12px}
 .fp input,.fp select{padding:10px 12px;border:1px solid #ddd;border-radius:8px;font-size:14px;outline:none}
 .fp input:focus{border-color:var(--a)}
 .sb{width:100%;padding:14px;background:linear-gradient(135deg,var(--a),#B8860B);color:var(--p);border:none;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;margin-top:16px}
+.sb:disabled{opacity:.6;cursor:not-allowed}
+/* TOAST */
 .toast{position:fixed;top:70px;right:16px;background:var(--ok);color:var(--c);padding:10px 20px;border-radius:8px;font-size:14px;display:none;z-index:300}
 .toast.e{background:var(--err)}
+/* EMPTY */
 .empty{text-align:center;padding:40px;color:var(--tl);font-size:14px}
 </style>
 </head>
@@ -87,102 +102,29 @@ td{padding:10px 12px}
     <h2>AI CAR 管理后台</h2>
     <button class="lgo" onclick="doLogout()">退出登录</button>
   </div>
-  <div class="nt">
-    <button class="tb active" onclick="switchTab('stats',this)">统计报表</button>
-    <button class="tb" onclick="switchTab('orders',this)">订单列表</button>
-    <button class="tb" onclick="switchTab('advances',this)">垫资管理</button>
-    <button class="tb" onclick="switchTab('gps',this)">GPS设备</button>
-    <button class="tb" onclick="switchTab('repayments',this)">还款管理</button>
-    <button class="tb" onclick="switchTab('mortgage',this)">抵押管理</button>
-    <button class="tb" onclick="switchTab('add',this)">添加订单</button>
+  <div class="nt" id="tabBar">
+    <button class="tb active" onclick="switchTab('stats')">统计报表</button>
+    <button class="tb" onclick="switchTab('orders')">订单列表</button>
+    <button class="tb" onclick="switchTab('advances')">垫资管理</button>
+    <button class="tb" onclick="switchTab('gps')">GPS设备</button>
+    <button class="tb" onclick="switchTab('repayments')">还款管理</button>
+    <button class="tb" onclick="switchTab('mortgage')">抵押管理</button>
+    <button class="tb" onclick="switchTab('add')">添加订单</button>
   </div>
   <div class="cn">
 
-    <!-- 统计报表 -->
-    <div id="statsDiv">
-      <div class="cd">
-        <h3>本月业务总览</h3>
-        <div class="sr" id="overallStats"></div>
-        <h3 style="margin-top:20px">员工业务明细（本月）</h3>
-        <div class="sc" id="staffStats"></div>
-        <h3 style="margin-top:20px">费率分布（本月）</h3>
-        <div class="sr" id="feeStats"></div>
-      </div>
-    </div>
-
-    <!-- 订单列表 -->
-    <div id="ordersDiv" style="display:none">
-      <div class="cd">
-        <h3>全部订单</h3>
-        <div class="ov">
-          <table><thead><tr><th>订单号</th><th>客户</th><th>车辆</th><th>贷款金额</th><th>月供</th><th>阶段</th><th>GPS</th><th>垫资</th><th>报单员</th><th>操作</th></tr></thead><tbody id="ordersBody"></tbody></table>
-        </div>
-      </div>
-    </div>
-
-    <!-- 垫资 -->
-    <div id="advancesDiv" style="display:none">
-      <div class="cd">
-        <h3>垫资单列表</h3>
-        <div class="ov"><table><thead><tr><th>垫资号</th><th>订单号</th><th>金额</th><th>利率</th><th>状态</th><th>操作</th></tr></thead><tbody id="advancesBody"></tbody></table></div>
-      </div>
-    </div>
-
-    <!-- GPS -->
-    <div id="gpsDiv" style="display:none">
-      <div class="cd">
-        <h3>GPS设备列表</h3>
-        <div class="ov"><table><thead><tr><th>设备号</th><th>IMEI</th><th>类型</th><th>状态</th><th>最后心跳</th></tr></thead><tbody id="gpsBody"></tbody></table></div>
-      </div>
-    </div>
-
-    <!-- 还款 -->
-    <div id="repaymentsDiv" style="display:none">
-      <div class="cd">
-        <h3>还款计划列表</h3>
-        <div class="ov"><table><thead><tr><th>计划号</th><th>订单号</th><th>期数</th><th>到期日</th><th>金额</th><th>实还日期</th><th>实还金额</th><th>状态</th></tr></thead><tbody id="repayBody"></tbody></table></div>
-      </div>
-    </div>
-
-    <!-- 抵押 -->
-    <div id="mortgageDiv" style="display:none">
-      <div class="cd">
-        <h3>抵押登记列表</h3>
-        <div class="ov"><table><thead><tr><th>抵押号</th><th>订单号</th><th>银行</th><th>抵押日期</th><th>证号</th><th>照片</th><th>状态</th><th>操作</th></tr></thead><tbody id="mortgageBody"></tbody></table></div>
-      </div>
-    </div>
-
-    <!-- 添加订单 -->
-    <div id="addDiv" style="display:none">
-      <div class="fs">
-        <h3>新建订单</h3>
-        <div class="fg">
-          <div class="fp"><label>客户姓名 <span style="color:red">*</span></label><input id="aName" placeholder="客户姓名"></div>
-          <div class="fp"><label>手机号码 <span style="color:red">*</span></label><input id="aPhone" placeholder="11位手机号" maxlength="11"></div>
-          <div class="fp"><label>身份证号</label><input id="aIdNum" placeholder="18位身份证号" maxlength="18"></div>
-          <div class="fp"><label>客户地址</label><input id="aAddr" placeholder="详细地址"></div>
-          <div class="fp"><label>汽车品牌 <span style="color:red">*</span></label><input id="aBrand" placeholder="如：宝马"></div>
-          <div class="fp"><label>车型 <span style="color:red">*</span></label><input id="aModel" placeholder="如：320Li"></div>
-          <div class="fp"><label>车牌号</label><input id="aPlate" placeholder="陕A12345" value="陕"></div>
-          <div class="fp"><label>车价（元） <span style="color:red">*</span></label><input id="aPrice" type="number" placeholder="如：350000"></div>
-          <div class="fp"><label>贷款金额（元） <span style="color:red">*</span></label><input id="aLoan" type="number" placeholder="贷款金额"></div>
-          <div class="fp"><label>首付金额（元）</label><input id="aDown" type="number" placeholder="首付金额"></div>
-          <div class="fp"><label>月供（元）</label><input id="aMonthly" type="number" placeholder="月供"></div>
-          <div class="fp"><label>合作银行</label>
-            <select id="aBank"><option value="">请选择</option><option>工商银行</option><option>建设银行</option><option>中国银行</option><option>农业银行</option><option>招商银行</option><option>平安银行</option><option>秦农银行</option><option>其他</option></select>
-          </div>
-          <div class="fp"><label>报单员工</label>
-            <select id="aReporter"><option value="">请选择</option><option value="焦建华(DQ003)">焦建华(DQ003)</option><option value="邹文丽(DQ005)">邹文丽(DQ005)</option></select>
-          </div>
-        </div>
-        <button class="sb" onclick="submitNewOrder()">提 交 订 单</button>
-      </div>
-    </div>
+    <div id="statsDiv"></div>
+    <div id="ordersDiv" style="display:none"></div>
+    <div id="advancesDiv" style="display:none"></div>
+    <div id="gpsDiv" style="display:none"></div>
+    <div id="repaymentsDiv" style="display:none"></div>
+    <div id="mortgageDiv" style="display:none"></div>
+    <div id="addDiv" style="display:none"></div>
 
   </div>
 </div>
 
-<!-- 详情弹窗 -->
+<!-- ORDER DETAIL MODAL -->
 <div class="mo" id="orderModal">
   <div class="mb">
     <span class="mc" onclick="closeModal()">x</span>
@@ -190,7 +132,7 @@ td{padding:10px 12px}
   </div>
 </div>
 
-<!-- 照片放大 -->
+<!-- PHOTO LARGE -->
 <div class="mo" id="photoModal" onclick="this.style.display='none'">
   <img id="photoLarge" style="max-width:90%;max-height:90%;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.5)">
 </div>
@@ -199,229 +141,338 @@ td{padding:10px 12px}
 
 <script>
 var API = 'http://localhost:8899';
+var currentTab = 'stats';
 
+// ==================== LOGIN ====================
 function doLogin() {
   var pw = document.getElementById('pwInput').value;
   if (pw === 'admin123') {
-    localStorage.setItem('at', '1');
+    localStorage.setItem('admin_token', '1');
     document.getElementById('loginPage').style.display = 'none';
     document.getElementById('adminPage').style.display = 'block';
-    switchTab('stats', document.querySelector('.tb'));
+    switchTab('stats');
   } else {
     document.getElementById('loginError').style.display = 'block';
   }
 }
 
 function doLogout() {
-  localStorage.removeItem('at');
+  localStorage.removeItem('admin_token');
   location.reload();
 }
 
-if (localStorage.getItem('at')) {
+if (localStorage.getItem('admin_token')) {
   document.getElementById('loginPage').style.display = 'none';
   document.getElementById('adminPage').style.display = 'block';
-  switchTab('stats', document.querySelector('.tb'));
+  switchTab('stats');
 }
 
-function toast(msg, err) {
+// ==================== TOAST ====================
+function toast(msg, isErr) {
   var t = document.getElementById('toast');
   t.textContent = msg;
-  t.className = 'toast' + (err ? ' e' : '');
+  t.className = 'toast' + (isErr ? ' e' : '');
   t.style.display = 'block';
   setTimeout(function() { t.style.display = 'none'; }, 3500);
 }
 
+// ==================== TOKEN ====================
 function getToken() {
   return fetch(API + '/api/v1/auth/login', {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({username:'admin', password:'admin123'})
+    body: JSON.stringify({username: 'admin', password: 'admin123'})
   }).then(function(r) { return r.json(); }).then(function(d) { return d.data ? d.data.token : ''; });
 }
 
-function switchTab(name, btn) {
-  var tabs = ['stats','orders','advances','gps','repayments','mortgage','add'];
-  tabs.forEach(function(t) {
-    var el = document.getElementById(t + 'Div');
+// ==================== TAB SWITCH ====================
+function switchTab(name) {
+  var tabs = ['stats', 'orders', 'advances', 'gps', 'repayments', 'mortgage', 'add'];
+  var i;
+  for (i = 0; i < tabs.length; i++) {
+    var el = document.getElementById(tabs[i] + 'Div');
     if (el) el.style.display = 'none';
-  });
+  }
   document.querySelectorAll('.tb').forEach(function(b) { b.classList.remove('active'); });
   var target = document.getElementById(name + 'Div');
   if (target) target.style.display = 'block';
-  if (btn) btn.classList.add('active');
+  var btns = document.querySelectorAll('.tb');
+  if (btns[tabs.indexOf(name)]) btns[tabs.indexOf(name)].classList.add('active');
+  currentTab = name;
   if (name === 'stats') loadStats();
   else if (name === 'orders') loadOrders();
   else if (name === 'advances') loadAdvances();
   else if (name === 'gps') loadGps();
   else if (name === 'repayments') loadRepayments();
   else if (name === 'mortgage') loadMortgages();
+  else if (name === 'add') renderAddForm();
 }
 
-function sc(r) { return !r ? 'bg-yel' : r.includes('结清')||r.includes('已抵押') ? 'bg-grn' : r.includes('逾期') ? 'bg-red' : 'bg-blu'; }
-function fmt(n) { return n ? n.toLocaleString() : '0'; }
+// ==================== HELPERS ====================
+function fmt(n) { return n ? Number(n).toLocaleString() : '0'; }
+function sc(s) {
+  if (!s) return 'bg-blu';
+  if (s.indexOf('结清') >= 0 || s.indexOf('已抵押') >= 0 || s.indexOf('完成') >= 0) return 'bg-grn';
+  if (s.indexOf('逾期') >= 0) return 'bg-red';
+  if (s.indexOf('垫资') >= 0) return 'bg-yel';
+  return 'bg-blu';
+}
+function getRem(rem) {
+  rem = rem || '';
+  return {
+    staff: rem.indexOf('员工:') >= 0 ? rem.split('员工:')[1].split('|')[0] : '-',
+    gps: rem.indexOf('GPS:') >= 0 ? rem.split('GPS:')[1].split('|')[0] : '-',
+    adv: rem.indexOf('垫资:') >= 0 ? rem.split('垫资:')[1].split('|')[0] : '-',
+    bank: rem.indexOf('抵押银行:') >= 0 ? rem.split('抵押银行:')[1].split('|')[0] : '-',
+    date: rem.indexOf('抵押日期:') >= 0 ? rem.split('抵押日期:')[1].split('|')[0] : '-',
+    cert: rem.indexOf('抵押证号:') >= 0 ? rem.split('抵押证号:')[1].split('|')[0] : '-',
+    interest: rem.indexOf('总利息:') >= 0 ? rem.split('总利息:')[1].split('|')[0] : '-'
+  };
+}
 
-// ===================== LOAD STATS =====================
+// ==================== LOAD STATS ====================
 function loadStats() {
+  var div = document.getElementById('statsDiv');
+  div.innerHTML = '<div class="cd"><h3>业务总览</h3><div class="empty">加载中...</div></div>';
   getToken().then(function(token) {
     var h = {'Authorization': 'Bearer ' + token};
-    fetch(API + '/api/v1/orders', {headers:h}).then(function(r){return r.json();}).then(function(d) {
-      var orders = (d.data && d.data.items) ? d.data.items : [];
-      var now = new Date(), ms = new Date(now.getFullYear(), now.getMonth(), 1).toISOString().slice(0,10);
-      var tm = orders.filter(function(o){ return (o.created_at||'').slice(0,10) >= ms; });
-      var tl = tm.reduce(function(s,o){return s+(o.loan_amount||0);}, 0);
-      var ti = tm.reduce(function(s,o){
-        var r=o.interest_rate||0, l=o.loan_amount||0;
-        return s+(r>=1?r*l/100:r*l);
-      }, 0);
-      var tm2 = tm.reduce(function(s,o){return s+(o.monthly_payment||0);}, 0);
-      var s = [
-        {l:'本月订单', v:tm.length, c:'var(--p)'},
-        {l:'本月放款', v:'¥'+(tl/10000).toFixed(1)+'万', c:'var(--a)'},
-        {l:'本月利息', v:'¥'+(ti/10000).toFixed(1)+'万', c:'var(--a)'},
-        {l:'月供合计', v:'¥'+(tm2/10000).toFixed(1)+'万/月', c:'var(--p2)'}
-      ];
-      document.getElementById('overallStats').innerHTML = s.map(function(x){
-        return '<div class="si"><div class="v" style="color:'+x.c+'">'+x.v+'</div><div class="l">'+x.l+'</div></div>';
-      }).join('');
-
-      // staff
-      var sm = {};
-      [{n:'焦建华',c:'DQ003'},{n:'邹文丽',c:'DQ005'}].forEach(function(s2){ sm[s2.n]={n:s2.n,c:s2.c,ct:0,loan:0}; });
-      tm.forEach(function(o){
-        var rem=o.stage_remark||'';
-        var rep=rem.includes('员工:')?rem.split('员工:')[1].split('|')[0]:'';
-        if(sm[rep]){sm[rep].ct++;sm[rep].loan+=o.loan_amount||0;}
-      });
-      var sHtml = Object.values(sm).map(function(st){
-        return '<div class="card"><div class="name">'+st.n+' <span style="font-size:11px;color:#888">('+st.c+')</span></div><div class="ss">'+
-          '<div><div class="sv">'+st.ct+'</div><div class="sl">订单数</div></div>'+
-          '<div><div class="sv" style="color:var(--p)">'+(st.loan>0?(st.loan/10000).toFixed(1)+'万':'0')+'</div><div class="sl">放款额</div></div></div></div>';
-      }).join('');
-      document.getElementById('staffStats').innerHTML = sHtml || '<div class="empty">暂无数据</div>';
-
-      // fee
-      var fm={};
-      tm.forEach(function(o){
-        var r=o.interest_rate?(o.interest_rate>=1?o.interest_rate:o.interest_rate*100).toFixed(2)+'%':'-';
-        if(!fm[r])fm[r]={r:r,ct:0,loan:0};
-        fm[r].ct++;fm[r].loan+=o.loan_amount||0;
-      });
-      var fHtml = Object.values(fm).map(function(f){
-        return '<div class="si"><div class="v" style="color:var(--a)">'+f.r+'</div><div class="l">'+f.ct+'单 / '+(f.loan/10000).toFixed(1)+'万</div></div>';
-      }).join('');
-      document.getElementById('feeStats').innerHTML = fHtml || '<div class="empty">暂无数据</div>';
-    }});
+    return fetch(API + '/api/v1/orders', {headers: h});
+  }).then(function(r) { return r.json(); }).then(function(d) {
+    var orders = (d.data && d.data.items) ? d.data.items : [];
+    var now = new Date();
+    var ms = new Date(now.getFullYear(), now.getMonth(), 1).toISOString().slice(0, 10);
+    var tm = orders.filter(function(o) { return (o.created_at || '').slice(0, 10) >= ms; });
+    var tl = 0, ti = 0, tm2 = 0;
+    var i;
+    for (i = 0; i < tm.length; i++) {
+      var o = tm[i];
+      tl += o.loan_amount || 0;
+      var r = o.interest_rate || 0;
+      ti += r >= 1 ? r * (o.loan_amount || 0) / 100 : r * (o.loan_amount || 0);
+      tm2 += o.monthly_payment || 0;
+    }
+    var statsHtml =
+      '<div class="sr">' +
+        '<div class="si"><div class="v" style="color:var(--a)">' + tm.length + '</div><div class="l">本月订单</div></div>' +
+        '<div class="si"><div class="v" style="color:var(--a)">' + (tl > 0 ? (tl / 10000).toFixed(1) + '万' : '0') + '</div><div class="l">本月放款</div></div>' +
+        '<div class="si"><div class="v" style="color:var(--a)">' + (ti > 0 ? (ti / 10000).toFixed(1) + '万' : '0') + '</div><div class="l">本月利息</div></div>' +
+        '<div class="si"><div class="v" style="color:var(--a)">' + (tm2 > 0 ? (tm2 / 10000).toFixed(1) + '万' : '0') + '</div><div class="l">月供合计/月</div></div>' +
+      '</div>';
+    // staff
+    var sm = {};
+    sm['焦建华'] = {n: '焦建华', c: 'DQ003', ct: 0, loan: 0};
+    sm['邹文丽'] = {n: '邹文丽', c: 'DQ005', ct: 0, loan: 0};
+    for (i = 0; i < tm.length; i++) {
+      var rem = tm[i].stage_remark || '';
+      var rep = rem.indexOf('员工:') >= 0 ? rem.split('员工:')[1].split('|')[0] : '';
+      if (sm[rep]) { sm[rep].ct++; sm[rep].loan += tm[i].loan_amount || 0; }
+    }
+    var staffKeys = Object.keys(sm);
+    var scHtml = '<h3 style="margin-top:20px">员工业务（本月）</h3><div class="sc">';
+    for (i = 0; i < staffKeys.length; i++) {
+      var st = sm[staffKeys[i]];
+      scHtml += '<div class="card"><div class="name">' + st.n + ' <span style="font-size:11px;color:#888">(' + st.c + ')</span></div><div class="ss">' +
+        '<div><div class="sv">' + st.ct + '</div><div class="sl">订单数</div></div>' +
+        '<div><div class="sv" style="color:var(--p)">' + (st.loan > 0 ? (st.loan / 10000).toFixed(1) + '万' : '0') + '</div><div class="sl">放款额</div></div>' +
+      '</div></div>';
+    }
+    scHtml += '</div>';
+    // fee dist
+    var fm = {};
+    for (i = 0; i < tm.length; i++) {
+      var o = tm[i];
+      var r = o.interest_rate || 0;
+      var rf = (r >= 1 ? r : r * 100).toFixed(2) + '%';
+      if (!fm[rf]) fm[rf] = {r: rf, ct: 0, loan: 0};
+      fm[rf].ct++;
+      fm[rf].loan += o.loan_amount || 0;
+    }
+    var feeKeys = Object.keys(fm);
+    var feeHtml = '<h3 style="margin-top:20px">费率分布（本月）</h3><div class="sr">';
+    for (i = 0; i < feeKeys.length; i++) {
+      var f = fm[feeKeys[i]];
+      feeHtml += '<div class="si"><div class="v" style="color:var(--a)">' + f.r + '</div><div class="l">' + f.ct + '单 / ' + (f.loan / 10000).toFixed(1) + '万</div></div>';
+    }
+    feeHtml += '</div>';
+    div.innerHTML = '<div class="cd"><h3>本月业务总览</h3>' + statsHtml + scHtml + feeHtml + '</div>';
+  }).catch(function() {
+    div.innerHTML = '<div class="cd"><h3>业务总览</h3><div class="empty">加载失败，请检查后端服务</div></div>';
   });
 }
 
-// ===================== LOAD ORDERS =====================
+// ==================== LOAD ORDERS ====================
 function loadOrders() {
-  var tb = document.getElementById('ordersBody');
-  tb.innerHTML = '<tr><td colspan="10" style="text-align:center;padding:30px;color:#888">加载中...</td></tr>';
+  var div = document.getElementById('ordersDiv');
+  div.innerHTML = '<div class="cd"><h3>全部订单</h3><div class="empty">加载中...</div></div>';
   getToken().then(function(token) {
-    fetch(API + '/api/v1/orders', {headers:{'Authorization':'Bearer '+token}}).then(function(r){return r.json();}).then(function(d) {
-      var orders = (d.data && d.data.items) ? d.data.items : [];
-      if (!orders.length) { tb.innerHTML='<tr><td colspan="10" class="empty">暂无订单</td></tr>'; return; }
-      tb.innerHTML = orders.map(function(o){
-        var rem=o.stage_remark||'';
-        var rep=rem.includes('员工:')?rem.split('员工:')[1].split('|')[0]:'-';
-        var gps=rem.includes('GPS:')?rem.split('GPS:')[1].split('|')[0]:'-';
-        var adv=rem.includes('垫资:')?rem.split('垫资:')[1].split('|')[0]:'-';
-        return '<tr><td style="font-size:12px;color:#888">'+(o.order_id||'-')+'</td>'+
-          '<td style="font-weight:600">'+(o.customer_name||'-')+'</td>'+
-          '<td>'+(o.car_brand||'')+' '+(o.car_model||'')+'</td>'+
-          '<td style="color:var(--a);font-weight:700">¥'+fmt(o.loan_amount)+'</td>'+
-          '<td>¥'+fmt(o.monthly_payment)+'</td>'+
-          '<td><span class="bdg '+sc(o.stage)+'">'+(o.stage||'-')+'</span></td>'+
-          '<td>'+gps+'</td><td>'+adv+'</td>'+
-          '<td style="font-size:12px">'+rep+'</td>'+
-          '<td><button class="bn" onclick="viewOrder(\''+(o.order_id||'')+'\')">详情</button> '+
-          '<button class="bn br" onclick="delOrder(\''+(o.order_id||'')+'\')">删除</button></td></tr>';
-      }).join('');
-    }}).catch(function(){ tb.innerHTML='<tr><td colspan="10" class="empty">加载失败</td></tr>'; });
+    var h = {'Authorization': 'Bearer ' + token};
+    return fetch(API + '/api/v1/orders', {headers: h});
+  }).then(function(r) { return r.json(); }).then(function(d) {
+    var orders = (d.data && d.data.items) ? d.data.items : [];
+    if (!orders.length) {
+      div.innerHTML = '<div class="cd"><h3>全部订单</h3><div class="empty">暂无订单</div></div>';
+      return;
+    }
+    var rows = '';
+    var i;
+    for (i = 0; i < orders.length; i++) {
+      var o = orders[i];
+      var r = getRem(o.stage_remark || '');
+      var stage = o.stage || '-';
+      rows += '<tr>' +
+        '<td style="font-size:12px;color:#888">' + (o.order_id || '-') + '</td>' +
+        '<td style="font-weight:600">' + (o.customer_name || '-') + '</td>' +
+        '<td>' + (o.car_brand || '') + ' ' + (o.car_model || '') + '</td>' +
+        '<td style="color:var(--a);font-weight:700">¥' + fmt(o.loan_amount) + '</td>' +
+        '<td>¥' + fmt(o.monthly_payment) + '</td>' +
+        '<td><span class="bdg ' + sc(stage) + '">' + stage + '</span></td>' +
+        '<td>' + r.gps + '</td><td>' + r.adv + '</td>' +
+        '<td style="font-size:12px">' + r.staff + '</td>' +
+        '<td><button class="bn" onclick="viewOrder(\'' + (o.order_id || '') + '\')">详情</button> ' +
+        '<button class="bn br" onclick="delOrder(\'' + (o.order_id || '') + '\')">删除</button></td>' +
+      '</tr>';
+    }
+    div.innerHTML = '<div class="cd"><h3>全部订单（' + orders.length + '条）</h3><div class="ov"><table><thead><tr><th>订单号</th><th>客户</th><th>车辆</th><th>贷款金额</th><th>月供</th><th>阶段</th><th>GPS</th><th>垫资</th><th>报单员</th><th>操作</th></tr></thead><tbody>' + rows + '</tbody></table></div></div>';
+  }).catch(function() {
+    div.innerHTML = '<div class="cd"><h3>全部订单</h3><div class="empty">加载失败</div></div>';
   });
 }
 
-// ===================== LOAD ADVANCES =====================
+// ==================== LOAD ADVANCES ====================
 function loadAdvances() {
-  var tb = document.getElementById('advancesBody');
-  tb.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:30px;color:#888">加载中...</td></tr>';
+  var div = document.getElementById('advancesDiv');
+  div.innerHTML = '<div class="cd"><h3>垫资单列表</h3><div class="empty">加载中...</div></div>';
   getToken().then(function(token) {
-    fetch(API + '/api/v1/advances', {headers:{'Authorization':'Bearer '+token}}).then(function(r){return r.json();}).then(function(d) {
-      var items = (d.data && d.data.items) ? d.data.items : (d.data ? (Array.isArray(d.data)?d.data:[]) : []);
-      if (!items.length) { tb.innerHTML='<tr><td colspan="6" class="empty">暂无垫资记录</td></tr>'; return; }
-      tb.innerHTML = items.map(function(a){
-        var r=a.interest_rate||0;
-        var rate=(r>=1?r:(r*100)).toFixed(2)+'%';
-        return '<tr><td>'+(a.advance_id||'-')+'</td><td>'+(a.order_id||'-')+'</td>'+
-          '<td style="color:var(--a);font-weight:700">¥'+fmt(a.advance_amount)+'</td>'+
-          '<td>'+rate+'</td>'+
-          '<td><span class="bdg '+sc(a.status)+'">'+(a.status||'-')+'</span></td>'+
-          '<td><button class="bn br" onclick="delAdv(\''+(a.advance_id||'')+'\')">删除</button></td></tr>';
-      }).join('');
-    }}).catch(function(){ tb.innerHTML='<tr><td colspan="6" class="empty">加载失败</td></tr>'; });
+    var h = {'Authorization': 'Bearer ' + token};
+    return fetch(API + '/api/v1/advances', {headers: h});
+  }).then(function(r) { return r.json(); }).then(function(d) {
+    var items = (d.data && d.data.items) ? d.data.items : (d.data ? (Array.isArray(d.data) ? d.data : []) : []);
+    if (!items.length) {
+      div.innerHTML = '<div class="cd"><h3>垫资单列表</h3><div class="empty">暂无垫资记录</div></div>';
+      return;
+    }
+    var rows = '';
+    var i;
+    for (i = 0; i < items.length; i++) {
+      var a = items[i];
+      var r2 = a.interest_rate || 0;
+      var rate = (r2 >= 1 ? r2 : r2 * 100).toFixed(2) + '%';
+      rows += '<tr>' +
+        '<td>' + (a.advance_id || '-') + '</td>' +
+        '<td>' + (a.order_id || '-') + '</td>' +
+        '<td style="color:var(--a);font-weight:700">¥' + fmt(a.advance_amount) + '</td>' +
+        '<td>' + rate + '</td>' +
+        '<td><span class="bdg ' + sc(a.status) + '">' + (a.status || '-') + '</span></td>' +
+        '<td><button class="bn br" onclick="delAdvance(\'' + (a.advance_id || '') + '\')">删除</button></td>' +
+      '</tr>';
+    }
+    div.innerHTML = '<div class="cd"><h3>垫资单列表（' + items.length + '条）</h3><div class="ov"><table><thead><tr><th>垫资号</th><th>订单号</th><th>金额</th><th>利率</th><th>状态</th><th>操作</th></tr></thead><tbody>' + rows + '</tbody></table></div></div>';
+  }).catch(function() {
+    div.innerHTML = '<div class="cd"><h3>垫资单列表</h3><div class="empty">加载失败</div></div>';
   });
 }
 
-// ===================== LOAD GPS =====================
+// ==================== LOAD GPS ====================
 function loadGps() {
-  var tb = document.getElementById('gpsBody');
-  tb.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:30px;color:#888">加载中...</td></tr>';
+  var div = document.getElementById('gpsDiv');
+  div.innerHTML = '<div class="cd"><h3>GPS设备列表</h3><div class="empty">加载中...</div></div>';
   getToken().then(function(token) {
-    fetch(API + '/api/v1/gps/devices', {headers:{'Authorization':'Bearer '+token}}).then(function(r){return r.json();}).then(function(d) {
-      var items = (d.data && d.data.items) ? d.data.items : (d.data ? (Array.isArray(d.data)?d.data:[]) : []);
-      if (!items.length) { tb.innerHTML='<tr><td colspan="5" class="empty">暂无GPS设备</td></tr>'; return; }
-      tb.innerHTML = items.map(function(g){
-        var on=g.online_status==='在线';
-        return '<tr><td>'+(g.device_id||'-')+'</td><td style="font-size:12px">'+(g.imei||'-')+'</td>'+
-          '<td>'+(g.device_type||'-')+'</td>'+
-          '<td><span class="bdg '+(on?'bg-grn':'bg-red')+'">'+(g.online_status||'-')+'</span></td>'+
-          '<td>'+((g.last_heartbeat||'').slice(0,16))+'</td></tr>';
-      }).join('');
-    }}).catch(function(){ tb.innerHTML='<tr><td colspan="5" class="empty">加载失败</td></tr>'; });
+    var h = {'Authorization': 'Bearer ' + token};
+    return fetch(API + '/api/v1/gps/devices', {headers: h});
+  }).then(function(r) { return r.json(); }).then(function(d) {
+    var items = (d.data && d.data.items) ? d.data.items : (d.data ? (Array.isArray(d.data) ? d.data : []) : []);
+    if (!items.length) {
+      div.innerHTML = '<div class="cd"><h3>GPS设备列表</h3><div class="empty">暂无GPS设备</div></div>';
+      return;
+    }
+    var rows = '';
+    var i;
+    for (i = 0; i < items.length; i++) {
+      var g = items[i];
+      var online = g.online_status === '在线';
+      rows += '<tr>' +
+        '<td>' + (g.device_id || '-') + '</td>' +
+        '<td style="font-size:12px">' + (g.imei || '-') + '</td>' +
+        '<td>' + (g.device_type || '-') + '</td>' +
+        '<td><span class="bdg ' + (online ? 'bg-grn' : 'bg-red') + '">' + (g.online_status || '-') + '</span></td>' +
+        '<td>' + ((g.last_heartbeat || '').slice(0, 16)) + '</td>' +
+      '</tr>';
+    }
+    div.innerHTML = '<div class="cd"><h3>GPS设备列表（' + items.length + '条）</h3><div class="ov"><table><thead><tr><th>设备号</th><th>IMEI</th><th>类型</th><th>状态</th><th>最后心跳</th></tr></thead><tbody>' + rows + '</tbody></table></div></div>';
+  }).catch(function() {
+    div.innerHTML = '<div class="cd"><h3>GPS设备列表</h3><div class="empty">加载失败</div></div>';
   });
 }
 
-// ===================== LOAD REPAYMENTS =====================
+// ==================== LOAD REPAYMENTS ====================
 function loadRepayments() {
-  var tb = document.getElementById('repayBody');
-  tb.innerHTML = '<tr><td colspan="8" style="text-align:center;padding:30px;color:#888">加载中...</td></tr>';
+  var div = document.getElementById('repaymentsDiv');
+  div.innerHTML = '<div class="cd"><h3>还款计划列表</h3><div class="empty">加载中...</div></div>';
   getToken().then(function(token) {
-    fetch(API + '/api/v1/repayments/plans', {headers:{'Authorization':'Bearer '+token}}).then(function(r){return r.json();}).then(function(d) {
-      var items = (d.data && d.data.items) ? d.data.items : (d.data ? (Array.isArray(d.data)?d.data:[]) : []);
-      if (!items.length) { tb.innerHTML='<tr><td colspan="8" class="empty">暂无还款记录</td></tr>'; return; }
-      tb.innerHTML = items.slice(0,100).map(function(r){
-        return '<tr><td>'+(r.plan_id||'-')+'</td><td>'+(r.order_id||'-')+'</td>'+
-          '<td>第'+(r.period_number||'-')+'期</td><td>'+(r.due_date||'-')+'</td>'+
-          '<td>¥'+fmt(r.due_amount)+'</td><td>'+(r.actual_date||'-')+'</td>'+
-          '<td>'+(r.actual_amount?'¥'+Number(r.actual_amount).toLocaleString():'-')+'</td>'+
-          '<td><span class="bdg '+sc(r.status)+'">'+(r.status||'-')+'</span></td></tr>';
-      }).join('');
-    }}).catch(function(){ tb.innerHTML='<tr><td colspan="8" class="empty">加载失败</td></tr>'; });
+    var h = {'Authorization': 'Bearer ' + token};
+    return fetch(API + '/api/v1/repayments/plans', {headers: h});
+  }).then(function(r) { return r.json(); }).then(function(d) {
+    var items = (d.data && d.data.items) ? d.data.items : (d.data ? (Array.isArray(d.data) ? d.data : []) : []);
+    if (!items.length) {
+      div.innerHTML = '<div class="cd"><h3>还款计划列表</h3><div class="empty">暂无还款记录</div></div>';
+      return;
+    }
+    var rows = '';
+    var i;
+    for (i = 0; i < Math.min(items.length, 100); i++) {
+      var r3 = items[i];
+      rows += '<tr>' +
+        '<td>' + (r3.plan_id || '-') + '</td>' +
+        '<td>' + (r3.order_id || '-') + '</td>' +
+        '<td>第' + (r3.period_number || '-') + '期</td>' +
+        '<td>' + (r3.due_date || '-') + '</td>' +
+        '<td>¥' + fmt(r3.due_amount) + '</td>' +
+        '<td>' + (r3.actual_date || '-') + '</td>' +
+        '<td>' + (r3.actual_amount ? '¥' + fmt(r3.actual_amount) : '-') + '</td>' +
+        '<td><span class="bdg ' + sc(r3.status) + '">' + (r3.status || '-') + '</span></td>' +
+      '</tr>';
+    }
+    div.innerHTML = '<div class="cd"><h3>还款计划列表（' + items.length + '条）</h3><div class="ov"><table><thead><tr><th>计划号</th><th>订单号</th><th>期数</th><th>到期日</th><th>金额</th><th>实还日期</th><th>实还金额</th><th>状态</th></tr></thead><tbody>' + rows + '</tbody></table></div></div>';
+  }).catch(function() {
+    div.innerHTML = '<div class="cd"><h3>还款计划列表</h3><div class="empty">加载失败</div></div>';
   });
 }
 
-// ===================== LOAD MORTGAGES =====================
+// ==================== LOAD MORTGAGES ====================
 function loadMortgages() {
-  var tb = document.getElementById('mortgageBody');
-  tb.innerHTML = '<tr><td colspan="8" style="text-align:center;padding:30px;color:#888">加载中...</td></tr>';
+  var div = document.getElementById('mortgageDiv');
+  div.innerHTML = '<div class="cd"><h3>抵押登记列表</h3><div class="empty">加载中...</div></div>';
   getToken().then(function(token) {
-    fetch(API + '/api/v1/mortgage-list-sql', {headers:{'Authorization':'Bearer '+token}}).then(function(r){return r.json();}).then(function(d) {
-      var items = (d.data && d.data.items) ? d.data.items : [];
-      if (!items.length) { tb.innerHTML='<tr><td colspan="8" class="empty">暂无抵押记录</td></tr>'; return; }
-      tb.innerHTML = items.map(function(m){
-        var ph=m.person_car_photo&&m.person_car_photo.startsWith('data:image');
-        var th=ph?'<img src="'+m.person_car_photo+'" style="width:60px;height:45px;object-fit:cover;border-radius:6px;cursor:pointer" onclick="showPhoto(this.src)">':'<span style="font-size:20px;color:#ccc">📷</span>';
-        return '<tr><td style="font-size:12px">'+(m.mortgage_id||'-')+'</td>'+
-          '<td style="font-size:12px">'+(m.order_id||'-')+'</td>'+
-          '<td style="font-weight:600">'+(m.bank_name||'-')+'</td>'+
-          '<td>'+(m.mortgage_date||'-')+'</td>'+
-          '<td style="font-size:12px">'+(m.certificate_no||'-')+'</td>'+
-          '<td style="text-align:center">'+th+'</td>'+
-          '<td><span class="bdg '+sc(m.status)+'">'+(m.status||'-')+'</span></td>'+
-          '<td><button class="bn br" onclick="delMtg(\''+(m.mortgage_id||'')+'\')">删除</button></td></tr>';
-      }).join('');
-    }}).catch(function(){ tb.innerHTML='<tr><td colspan="8" class="empty">加载失败</td></tr>'; });
+    var h = {'Authorization': 'Bearer ' + token};
+    return fetch(API + '/api/v1/mortgage-list-sql', {headers: h});
+  }).then(function(r) { return r.json(); }).then(function(d) {
+    var items = (d.data && d.data.items) ? d.data.items : [];
+    if (!items.length) {
+      div.innerHTML = '<div class="cd"><h3>抵押登记列表</h3><div class="empty">暂无抵押记录</div></div>';
+      return;
+    }
+    var rows = '';
+    var i;
+    for (i = 0; i < items.length; i++) {
+      var m = items[i];
+      var hasPhoto = m.person_car_photo && m.person_car_photo.indexOf('data:image') === 0;
+      var photoHtml = hasPhoto
+        ? '<img src="' + m.person_car_photo + '" style="width:60px;height:45px;object-fit:cover;border-radius:6px;cursor:pointer" onclick="showPhoto(this.src)">'
+        : '<span style="font-size:20px;color:#ccc">📷</span>';
+      rows += '<tr>' +
+        '<td style="font-size:12px">' + (m.mortgage_id || '-') + '</td>' +
+        '<td style="font-size:12px">' + (m.order_id || '-') + '</td>' +
+        '<td style="font-weight:600">' + (m.bank_name || '-') + '</td>' +
+        '<td>' + (m.mortgage_date || '-') + '</td>' +
+        '<td style="font-size:12px">' + (m.certificate_no || '-') + '</td>' +
+        '<td style="text-align:center">' + photoHtml + '</td>' +
+        '<td><span class="bdg ' + sc(m.status) + '">' + (m.status || '-') + '</span></td>' +
+        '<td><button class="bn br" onclick="delMortgage(\'' + (m.mortgage_id || '') + '\')">删除</button></td>' +
+      '</tr>';
+    }
+    div.innerHTML = '<div class="cd"><h3>抵押登记列表（' + items.length + '条）</h3><div class="ov"><table><thead><tr><th>抵押号</th><th>订单号</th><th>银行</th><th>抵押日期</th><th>证号</th><th>照片</th><th>状态</th><th>操作</th></tr></thead><tbody>' + rows + '</tbody></table></div></div>';
+  }).catch(function() {
+    div.innerHTML = '<div class="cd"><h3>抵押登记列表</h3><div class="empty">加载失败，后端接口可能不存在</div></div>';
   });
 }
 
@@ -431,139 +482,172 @@ function showPhoto(src) {
   m.style.display = 'flex';
 }
 
-// ===================== VIEW ORDER =====================
+// ==================== VIEW ORDER ====================
 function viewOrder(oid) {
   document.getElementById('orderModal').style.display = 'flex';
   document.getElementById('modalContent').innerHTML = '<div style="padding:30px;text-align:center;color:#888">加载中...</div>';
   getToken().then(function(token) {
-    fetch(API + '/api/v1/orders/' + oid, {headers:{'Authorization':'Bearer '+token}}).then(function(r){return r.json();}).then(function(d) {
-      var o = d.data && d.data.order;
-      if (!o) { document.getElementById('modalContent').innerHTML='<div style="padding:20px;color:var(--err)">订单不存在</div>'; return; }
-      var rem=o.stage_remark||'';
-      var rep=rem.includes('员工:')?rem.split('员工:')[1].split('|')[0]:(o.created_by||'-');
-      var gps=rem.includes('GPS:')?rem.split('GPS:')[1].split('|')[0]:'-';
-      var adv=rem.includes('垫资:')?rem.split('垫资:')[1].split('|')[0]:'-';
-      var mb=rem.includes('抵押银行:')?rem.split('抵押银行:')[1].split('|')[0]:'-';
-      var md=rem.includes('抵押日期:')?rem.split('抵押日期:')[1].split('|')[0]:'-';
-      var mn=rem.includes('抵押证号:')?rem.split('抵押证号:')[1].split('|')[0]:'-';
-      var cp=(o.loan_amount||0)+(o.down_payment||0);
-      var r=o.interest_rate||0;
-      var rate=(r>=1?r:(r*100)).toFixed(2)+'%';
-      var ti=rem.includes('总利息:')?rem.split('总利息:')[1].split('|')[0]:'-';
-      document.getElementById('modalContent').innerHTML =
-        '<div style="margin-bottom:16px;padding:14px;background:linear-gradient(135deg,#fffdf0,#fff8e1);border-radius:10px;border:1px solid #e8d48a">'+
-          '<div style="font-size:17px;font-weight:700;color:var(--p)">'+(o.customer_name||'-')+'</div>'+
-          '<div style="font-size:12px;color:#888;margin-top:4px">订单号：'+(o.order_id||'-')+'　<span class="bdg '+sc(o.stage)+'">'+(o.stage||'-')+'</span></div></div>'+
-        '<div class="dg">'+
-          '<div class="di"><div class="dl">手机号码</div><div class="dv" style="font-size:15px">'+(o.customer_phone||'-')+'</div></div>'+
-          '<div class="di"><div class="dl">身份证号</div><div class="dv">'+(o.id_number||'-')+'</div></div>'+
-          '<div class="di full"><div class="dl">客户地址</div><div class="dv">'+(o.address||'-')+'</div></div>'+
-          '<div class="di"><div class="dl">汽车品牌</div><div class="dv">'+(o.car_brand||'-')+'</div></div>'+
-          '<div class="di"><div class="dl">车型</div><div class="dv">'+(o.car_model||'-')+'</div></div>'+
-          '<div class="di"><div class="dl">车牌号</div><div class="dv">'+(o.plate_number||'-')+'</div></div>'+
-          '<div class="di"><div class="dl">车价</div><div class="dv">¥'+fmt(cp)+'元</div></div>'+
-          '<div class="di"><div class="dl">首付</div><div class="dv">¥'+(o.down_payment?fmt(o.down_payment)+'元':'-')+'</div></div>'+
-          '<div class="di"><div class="dl">贷款金额</div><div class="dv" style="color:var(--a);font-size:15px">¥'+(o.loan_amount?fmt(o.loan_amount)+'元':'-')+'</div></div>'+
-          '<div class="di"><div class="dl">总利息</div><div class="dv" style="color:var(--a)">¥'+ti+'元</div></div>'+
-          '<div class="di"><div class="dl">总费率</div><div class="dv">'+rate+'</div></div>'+
-          '<div class="di"><div class="dl">月供（60期）</div><div class="dv" style="color:var(--a)">¥'+(o.monthly_payment?fmt(o.monthly_payment)+'元':'-')+'</div></div>'+
-          '<div class="di"><div class="dl">分期期数</div><div class="dv">'+(o.loan_period?o.loan_period+'期':'-')+'</div></div>'+
-          '<div class="di"><div class="dl">合作银行</div><div class="dv">'+(o.bank_name||'-')+'</div></div>'+
-          '<div class="di"><div class="dl">报单员</div><div class="dv">'+rep+'</div></div>'+
-          '<div class="di"><div class="dl">GPS安装</div><div class="dv">'+gps+'</div></div>'+
-          '<div class="di"><div class="dl">是否垫资</div><div class="dv">'+adv+'</div></div>'+
-          '<div class="di"><div class="dl">抵押银行</div><div class="dv">'+mb+'</div></div>'+
-          '<div class="di"><div class="dl">抵押日期</div><div class="dv">'+md+'</div></div>'+
-          '<div class="di"><div class="dl">抵押证号</div><div class="dv">'+mn+'</div></div>'+
-          '<div class="di full"><div class="dl">创建时间</div><div class="dv">'+((o.created_at||'-').slice(0,19))+'</div></div>'+
-        '</div>'+
-        '<div style="margin-top:16px;padding-top:14px;border-top:2px solid #e8d48a;text-align:center">'+
-          '<button onclick="delOrder(\''+oid+'\');closeModal();" style="background:var(--err);color:white;border:none;padding:10px 24px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600">删除此订单</button>'+
-        '</div>';
-    }}).catch(function(){ document.getElementById('modalContent').innerHTML='<div style="padding:20px;color:var(--err)">加载失败</div>'; });
+    var h = {'Authorization': 'Bearer ' + token};
+    return fetch(API + '/api/v1/orders/' + oid, {headers: h});
+  }).then(function(r) { return r.json(); }).then(function(d) {
+    var o = d.data && d.data.order;
+    if (!o) {
+      document.getElementById('modalContent').innerHTML = '<div style="padding:20px;color:var(--err)">订单不存在</div>';
+      return;
+    }
+    var r4 = getRem(o.stage_remark || '');
+    var cp = (o.loan_amount || 0) + (o.down_payment || 0);
+    var rRate = o.interest_rate || 0;
+    var rateStr = (rRate >= 1 ? rRate : rRate * 100).toFixed(2) + '%';
+    var stage = o.stage || '-';
+    document.getElementById('modalContent').innerHTML =
+      '<div style="margin-bottom:16px;padding:14px;background:#fffdf0;border-radius:10px;border:1px solid #e8d48a">' +
+        '<div style="font-size:17px;font-weight:700;color:var(--p)">' + (o.customer_name || '-') + '</div>' +
+        '<div style="font-size:12px;color:#888;margin-top:4px">订单号：' + (o.order_id || '-') + ' <span class="bdg ' + sc(stage) + '">' + stage + '</span></div>' +
+      '</div>' +
+      '<div class="dg">' +
+        '<div class="di"><div class="dl">手机号码</div><div class="dv" style="font-size:15px">' + (o.customer_phone || '-') + '</div></div>' +
+        '<div class="di"><div class="dl">身份证号</div><div class="dv">' + (o.id_number || '-') + '</div></div>' +
+        '<div class="di full"><div class="dl">客户地址</div><div class="dv">' + (o.address || '-') + '</div></div>' +
+        '<div class="di"><div class="dl">汽车品牌</div><div class="dv">' + (o.car_brand || '-') + '</div></div>' +
+        '<div class="di"><div class="dl">车型</div><div class="dv">' + (o.car_model || '-') + '</div></div>' +
+        '<div class="di"><div class="dl">车牌号</div><div class="dv">' + (o.plate_number || '-') + '</div></div>' +
+        '<div class="di"><div class="dl">车价</div><div class="dv">¥' + fmt(cp) + '元</div></div>' +
+        '<div class="di"><div class="dl">首付</div><div class="dv">¥' + (o.down_payment ? fmt(o.down_payment) + '元' : '-') + '</div></div>' +
+        '<div class="di"><div class="dl">贷款金额</div><div class="dv" style="color:var(--a);font-size:15px">¥' + (o.loan_amount ? fmt(o.loan_amount) + '元' : '-') + '</div></div>' +
+        '<div class="di"><div class="dl">总利息</div><div class="dv" style="color:var(--a)">¥' + r4.interest + '元</div></div>' +
+        '<div class="di"><div class="dl">总费率</div><div class="dv">' + rateStr + '</div></div>' +
+        '<div class="di"><div class="dl">月供（60期）</div><div class="dv" style="color:var(--a)">¥' + (o.monthly_payment ? fmt(o.monthly_payment) + '元' : '-') + '</div></div>' +
+        '<div class="di"><div class="dl">分期期数</div><div class="dv">' + (o.loan_period ? o.loan_period + '期' : '-') + '</div></div>' +
+        '<div class="di"><div class="dl">合作银行</div><div class="dv">' + (o.bank_name || '-') + '</div></div>' +
+        '<div class="di"><div class="dl">报单员</div><div class="dv">' + r4.staff + '</div></div>' +
+        '<div class="di"><div class="dl">GPS安装</div><div class="dv">' + r4.gps + '</div></div>' +
+        '<div class="di"><div class="dl">是否垫资</div><div class="dv">' + r4.adv + '</div></div>' +
+        '<div class="di"><div class="dl">抵押银行</div><div class="dv">' + r4.bank + '</div></div>' +
+        '<div class="di"><div class="dl">抵押日期</div><div class="dv">' + r4.date + '</div></div>' +
+        '<div class="di"><div class="dl">抵押证号</div><div class="dv">' + r4.cert + '</div></div>' +
+        '<div class="di full"><div class="dl">创建时间</div><div class="dv">' + ((o.created_at || '-').slice(0, 19)) + '</div></div>' +
+      '</div>' +
+      '<div style="margin-top:16px;padding-top:14px;border-top:2px solid #e8d48a;text-align:center">' +
+        '<button onclick="delOrder(\'' + oid + '\');closeModal();" style="background:var(--err);color:white;border:none;padding:10px 24px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600">删除此订单</button>' +
+      '</div>';
+  }).catch(function() {
+    document.getElementById('modalContent').innerHTML = '<div style="padding:20px;color:var(--err)">加载失败</div>';
   });
 }
 
-function closeModal() { document.getElementById('orderModal').style.display='none'; }
+function closeModal() { document.getElementById('orderModal').style.display = 'none'; }
 
-// ===================== DELETE =====================
+// ==================== DELETE ====================
 function delOrder(oid) {
   if (!confirm('确认删除订单 ' + oid + '？删除后无法恢复。')) return;
   getToken().then(function(token) {
-    fetch(API + '/api/v1/orders/' + oid, {method:'DELETE',headers:{'Authorization':'Bearer '+token}}).then(function(r){return r.json();}).then(function(d) {
-      toast('订单已删除');
-      loadOrders(); loadStats();
-    }}).catch(function(){ toast('删除失败', true); });
-  });
+    var h = {'Authorization': 'Bearer ' + token};
+    return fetch(API + '/api/v1/orders/' + oid, {method: 'DELETE', headers: h});
+  }).then(function(r) { return r.json(); }).then(function() {
+    toast('订单已删除');
+    if (currentTab === 'orders') loadOrders();
+    else if (currentTab === 'stats') loadStats();
+  }).catch(function() { toast('删除失败', true); });
 }
 
-function delAdv(id) {
+function delAdvance(id) {
   if (!confirm('确认删除此垫资记录？')) return;
   getToken().then(function(token) {
-    fetch(API + '/api/v1/advances/' + id, {method:'DELETE',headers:{'Authorization':'Bearer '+token}}).then(function(){ toast('已删除'); loadAdvances(); }).catch(function(){ toast('删除失败', true); });
-  });
+    var h = {'Authorization': 'Bearer ' + token};
+    return fetch(API + '/api/v1/advances/' + id, {method: 'DELETE', headers: h});
+  }).then(function() {
+    toast('已删除');
+    loadAdvances();
+  }).catch(function() { toast('删除失败', true); });
 }
 
-function delMtg(id) {
+function delMortgage(id) {
   if (!confirm('确认删除此抵押记录？')) return;
   getToken().then(function(token) {
-    fetch(API + '/api/v1/mortgage/' + id, {method:'DELETE',headers:{'Authorization':'Bearer '+token}}).then(function(){ toast('已删除'); loadMortgages(); }).catch(function(){ toast('删除失败', true); });
-  });
+    var h = {'Authorization': 'Bearer ' + token};
+    return fetch(API + '/api/v1/mortgage/' + id, {method: 'DELETE', headers: h});
+  }).then(function() {
+    toast('已删除');
+    loadMortgages();
+  }).catch(function() { toast('删除失败', true); });
 }
 
-// ===================== ADD ORDER =====================
-function submitNewOrder() {
-  var name=document.getElementById('aName').value.trim();
-  var phone=document.getElementById('aPhone').value.trim();
-  var brand=document.getElementById('aBrand').value.trim();
-  var model=document.getElementById('aModel').value.trim();
-  var price=parseFloat(document.getElementById('aPrice').value)||0;
-  var loan=parseFloat(document.getElementById('aLoan').value)||0;
-  var down=parseFloat(document.getElementById('aDown').value)||0;
-  var monthly=parseFloat(document.getElementById('aMonthly').value)||0;
-  var reporter=document.getElementById('aReporter').value;
-  if (!name||!phone||!brand||!model||!price||!loan) { toast('请填写必填项', true); return; }
-  if (phone.length!==11) { toast('手机号需11位', true); return; }
-  var btn=document.querySelector('.sb');
-  btn.disabled=true; btn.textContent='提交中...';
-  getToken().then(function(token) {
-    var h={'Content-Type':'application/json','Authorization':'Bearer '+token};
-    // find or create customer
-    fetch(API+'/api/v1/customers?phone='+phone,{headers:h}).then(function(r){return r.json();}).then(function(cr) {
-      var cid='';
-      if (cr.data&&cr.data.items&&cr.data.items.length>0) {
-        cid=cr.data.items[0].customer_id;
-      }
-      if (!cid) {
-        return fetch(API+'/api/v1/customers',{method:'POST',headers:h,body:JSON.stringify({name:name,phone:phone,id_number:document.getElementById('aIdNum').value,address:document.getElementById('aAddr').value})}).then(function(r){return r.json();}).then(function(cr2){
-          if(cr2.data&&cr2.data.customer) cid=cr2.data.customer.customer_id;
-          return createOrder(cid);
-        });
-      } else {
-        return createOrder(cid);
-      }
-      function createOrder(cid) {
-        var feeRate=loan>0&&price>0?(price-loan)/price:0.135;
-        return fetch(API+'/api/v1/orders',{method:'POST',headers:h,body:JSON.stringify({
-          customer_id:cid,customer_name:name,customer_phone:phone,
-          car_brand:brand,car_model:model,car_price:price,
-          loan_amount:loan,down_payment:down,loan_period:60,
-          monthly_payment:monthly,interest_rate:feeRate,
-          bank_name:document.getElementById('aBank').value,
-          created_by:reporter||'管理员',
-          stage_remark:'员工:'+name
-        })}).then(function(r){return r.json();}).then(function(or) {
-          if (or.code===200) {
-            toast('订单提交成功！');
-            document.querySelectorAll('#addDiv input').forEach(function(i){i.value='';});
-            document.getElementById('aPlate').value='陕';
-            switchTab('orders', document.querySelector('.tb'));
-          } else { toast(or.message||'提交失败', true); }
-          btn.disabled=false; btn.textContent='提 交 订 单';
-        });
-      }
-    }).catch(function(e){ toast('提交失败', true); btn.disabled=false; btn.textContent='提 交 订 单'; });
-  });
+// ==================== ADD ORDER ====================
+function renderAddForm() {
+  var div = document.getElementById('addDiv');
+  div.innerHTML = '<div class="fs">' +
+    '<h3>新建订单</h3>' +
+    '<div class="fg">' +
+      '<div class="fp"><label>客户姓名 <span style="color:red">*</span></label><input id="aName" placeholder="客户姓名"></div>' +
+      '<div class="fp"><label>手机号码 <span style="color:red">*</span></label><input id="aPhone" placeholder="11位手机号" maxlength="11"></div>' +
+      '<div class="fp"><label>身份证号</label><input id="aIdNum" placeholder="18位身份证号" maxlength="18"></div>' +
+      '<div class="fp"><label>客户地址</label><input id="aAddr" placeholder="详细地址"></div>' +
+      '<div class="fp"><label>汽车品牌 <span style="color:red">*</span></label><input id="aBrand" placeholder="如：宝马"></div>' +
+      '<div class="fp"><label>车型 <span style="color:red">*</span></label><input id="aModel" placeholder="如：320Li"></div>' +
+      '<div class="fp"><label>车牌号</label><input id="aPlate" placeholder="陕A12345" value="陕"></div>' +
+      '<div class="fp"><label>车价（元） <span style="color:red">*</span></label><input id="aPrice" type="number" placeholder="如：350000"></div>' +
+      '<div class="fp"><label>贷款金额（元） <span style="color:red">*</span></label><input id="aLoan" type="number" placeholder="贷款金额"></div>' +
+      '<div class="fp"><label>首付金额（元）</label><input id="aDown" type="number" placeholder="首付金额"></div>' +
+      '<div class="fp"><label>月供（元）</label><input id="aMonthly" type="number" placeholder="月供"></div>' +
+      '<div class="fp"><label>合作银行</label>' +
+        '<select id="aBank"><option value="">请选择</option><option>工商银行</option><option>建设银行</option><option>中国银行</option><option>农业银行</option><option>招商银行</option><option>平安银行</option><option>秦农银行</option><option>其他</option></select></div>' +
+      '<div class="fp"><label>报单员工</label>' +
+        '<select id="aReporter"><option value="">请选择</option><option value="焦建华(DQ003)">焦建华(DQ003)</option><option value="邹文丽(DQ005)">邹文丽(DQ005)</option></select></div>' +
+    '</div>' +
+    '<button class="sb" id="aSubmitBtn" onclick="submitNewOrder()">提 交 订 单</button>' +
+  '</div>';
+}
+
+async function submitNewOrder() {
+  var name = document.getElementById('aName').value.trim();
+  var phone = document.getElementById('aPhone').value.trim();
+  var brand = document.getElementById('aBrand').value.trim();
+  var model = document.getElementById('aModel').value.trim();
+  var price = parseFloat(document.getElementById('aPrice').value) || 0;
+  var loan = parseFloat(document.getElementById('aLoan').value) || 0;
+  if (!name || !phone || !brand || !model || !price || !loan) { toast('请填写必填项', true); return; }
+  if (phone.length !== 11) { toast('手机号需11位', true); return; }
+  var btn = document.getElementById('aSubmitBtn');
+  btn.disabled = true; btn.textContent = '提交中...';
+  try {
+    var token = await getToken();
+    var h = {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token};
+    var cid = '';
+    var cr = await fetch(API + '/api/v1/customers?phone=' + phone, {headers: h}).then(function(r) { return r.json(); });
+    if (cr.data && cr.data.items && cr.data.items.length > 0) {
+      cid = cr.data.items[0].customer_id;
+    }
+    if (!cid) {
+      var cr2 = await fetch(API + '/api/v1/customers', {method: 'POST', headers: h, body: JSON.stringify({
+        name: name, phone: phone, id_number: document.getElementById('aIdNum').value, address: document.getElementById('aAddr').value
+      })}).then(function(r) { return r.json(); });
+      if (cr2.data && cr2.data.customer) cid = cr2.data.customer.customer_id;
+    }
+    var reporter = document.getElementById('aReporter').value;
+    var feeRate = loan > 0 && price > 0 ? (price - loan) / price * 0.135 : 0.135;
+    var res = await fetch(API + '/api/v1/orders', {method: 'POST', headers: h, body: JSON.stringify({
+      customer_id: cid, customer_name: name, customer_phone: phone,
+      car_brand: brand, car_model: model, car_price: price,
+      plate_number: document.getElementById('aPlate').value.trim(),
+      loan_amount: loan,
+      down_payment: parseFloat(document.getElementById('aDown').value) || 0,
+      loan_period: 60,
+      monthly_payment: parseFloat(document.getElementById('aMonthly').value) || 0,
+      interest_rate: feeRate,
+      bank_name: document.getElementById('aBank').value,
+      created_by: reporter || '管理员',
+      stage: '已提交',
+      stage_remark: '员工:' + (reporter || '管理员')
+    })}).then(function(r) { return r.json(); });
+    if (res.code === 200 || res.code === 201) {
+      toast('订单提交成功！');
+      switchTab('orders');
+    } else {
+      toast(res.message || '提交失败', true);
+    }
+  } catch(e) { toast('提交失败', true); }
+  btn.disabled = false; btn.textContent = '提 交 订 单';
 }
 </script>
 </body>
