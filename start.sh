@@ -1,73 +1,35 @@
 #!/bin/bash
+# 汽车分期智能管理平台 - 一键启动脚本
 
-# MASLAS 飞书小程序 - 一键启动脚本
-
-echo "====================================="
-echo "  MASLAS 飞书小程序启动脚本"
-echo "====================================="
-echo ""
-
-# 检查Node.js
-echo "🔍 检查Node.js..."
-if ! command -v node &> /dev/null; then
-    echo "❌ Node.js未安装，请先安装Node.js"
-    exit 1
-fi
-echo "✅ Node.js版本: $(node -v)"
-echo ""
-
-# 检查MySQL
-echo "🔍 检查MySQL..."
-if ! command -v mysql &> /dev/null; then
-    echo "❌ MySQL未安装，请先安装MySQL"
-    exit 1
-fi
-echo "✅ MySQL已安装"
-echo ""
-
-# 进入项目目录
 cd "$(dirname "$0")"
-PROJECT_DIR="$(pwd)"
 
-echo "📂 项目目录: $PROJECT_DIR"
-echo ""
+echo "======================================"
+echo "🚗 汽车分期智能管理平台"
+echo "======================================"
 
-# 检查是否已安装依赖
-echo "🔍 检查依赖..."
-if [ ! -d "node_modules" ]; then
-    echo "📦 安装依赖..."
-    npm install
-    echo ""
-fi
-echo "✅ 依赖已安装"
-echo ""
-
-# 初始化数据库
-echo "🔍 检查数据库..."
-read -p "是否初始化数据库？(y/n) " -n 1 -r
-echo
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-    echo "🗄️  初始化数据库..."
-    mysql -u root -p < "$PROJECT_DIR/../database_init.sql"
-    echo "✅ 数据库初始化完成"
-    echo ""
+# 检查Python
+if ! command -v python3 &> /dev/null; then
+    echo "❌ 未找到 python3，请先安装 Python 3"
+    exit 1
 fi
 
-# 启动服务器
-echo "🚀 启动服务器..."
+echo "✅ Python 版本: $(python3 --version)"
+
+# 安装依赖
+echo "📦 安装依赖..."
+pip install -r requirements.txt --quiet 2>/dev/null
+
+# 启动服务
 echo ""
-echo "====================================="
-echo "  服务器启动成功！"
-echo "====================================="
+echo "🚀 启动服务..."
+echo "📖 API 文档: http://localhost:8899/docs"
+echo "📖 ReDoc 文档: http://localhost:8899/redoc"
 echo ""
-echo "📡 服务器地址: http://localhost:3000"
-echo "📱 报单表单: http://localhost:3000/feishu-app/loan-form.html"
-echo "📋 我的报单: http://localhost:3000/feishu-app/my-orders.html"
-echo "📊 控制面板: http://localhost:3000/dashboard.html"
+echo "🔐 认证信息："
+echo "  后台管理员：admin / admin123"
+echo "  前台客户：手机号 13800138001 / 密码 123456"
 echo ""
-echo "按 Ctrl+C 停止服务器"
-echo "====================================="
+echo "按 Ctrl+C 停止服务"
 echo ""
 
-# 启动API服务器
-node "$PROJECT_DIR/../api-server-full.js"
+python3 main.py
