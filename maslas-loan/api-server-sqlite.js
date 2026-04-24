@@ -1,366 +1,270 @@
 const express = require('express');
-const cors = require('cors');
-const bodyParser = require('body-parser');
-const Database = require('better-sqlite3');
+const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
+const cors = require('cors');
 
 const app = express();
-const PORT = 3000;
-
-// 中间件
 app.use(cors());
-app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname)));
+app.use(express.json({ limit: '50mb' }));
 
-// SQLite数据库配置
-const db = new Database('maslas_loan_system.db');
+// 数据库
+const db = new sqlite3.Database(path.join(__dirname, 'loan.db'));
 
-// 初始化数据库表
-function initDatabase() {
+// 创建表
+db.serialize(() => {
     // 报单表
-    db.exec(`
-        CREATE TABLE IF NOT EXISTS loan_applications (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            order_id TEXT UNIQUE NOT NULL,
-            name TEXT NOT NULL,
-            phone TEXT NOT NULL,
-            id_card TEXT NOT NULL,
-            salesperson TEXT NOT NULL,
-            car_model TEXT NOT NULL,
-            car_price REAL NOT NULL,
-            down_payment REAL NOT NULL,
-            loan_amount REAL NOT NULL,
-            loan_term INTEGER NOT NULL,
-            notes TEXT,
-            submit_time TEXT NOT NULL,
-            status TEXT DEFAULT 'pending',
-            risk_level TEXT,
-            remarks TEXT,
-            approval_time TEXT,
-            approver TEXT,
-            created_at TEXT DEFAULT CURRENT_TIMESTAMP,
-            updated_at TEXT DEFAULT CURRENT_TIMESTAMP
-        )
-    `);
+    db.run(`CREATE TABLE IF NOT EXISTS loan_applications (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        order_id TEXT UNIQUE,
+        customer_name TEXT,
+        customer_phone TEXT,
+        id_card TEXT,
+        staff_id TEXT,
+        salesperson TEXT,
+        dealer_name TEXT,
+        car_brand TEXT,
+        car_model TEXT,
+        car_color TEXT,
+        car_price REAL,
+        bank TEXT,
+        down_ratio REAL,
+        down_payment REAL,
+        loan_amount REAL,
+        loan_term INTEGER,
+        total_rate REAL,
+        total_interest REAL,
+        monthly_payment REAL,
+        has_gps TEXT,
+        has_mortgage TEXT,
+        funding_date TEXT,
+        reg_cert_photos TEXT,
+        person_car_photos TEXT,
+        notes TEXT,
+        status TEXT DEFAULT 'pending',
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    )`);
+    
+    // 员工表
+    db.run(`CREATE TABLE IF NOT EXISTS employees (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        employee_id TEXT UNIQUE,
+        name TEXT,
+        phone TEXT,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    )`);
+    
+    // 初始化员工
+    const initEmployees = ['DQYD001', 'DQYD002', 'DQYD003'];
+    initEmployees.forEach(id => {
+        db.run(`INSERT OR IGNORE INTO employees (employee_id) VALUES (?)`, [id]);
+    });
+});
 
-    // 业务员表
-    db.exec(`
-        CREATE TABLE IF NOT EXISTS salespersons (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT NOT NULL,
-            phone TEXT UNIQUE NOT NULL,
-            status TEXT DEFAULT 'active',
-            created_at TEXT DEFAULT CURRENT_TIMESTAMP,
-            updated_at TEXT DEFAULT CURRENT_TIMESTAMP
-        )
-    `);
-
-    // 风控规则表
-    db.exec(`
-        CREATE TABLE IF NOT EXISTS risk_rules (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            rule_name TEXT NOT NULL,
-            rule_type TEXT,
-            rule_value TEXT,
-            risk_level TEXT NOT NULL,
-            is_active INTEGER DEFAULT 1,
-            created_at TEXT DEFAULT CURRENT_TIMESTAMP,
-            updated_at TEXT DEFAULT CURRENT_TIMESTAMP
-        )
-    `);
-
-    // 审批日志表
-    db.exec(`
-        CREATE TABLE IF NOT EXISTS approval_logs (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            order_id TEXT NOT NULL,
-            action TEXT NOT NULL,
-            operator TEXT NOT NULL,
-            remarks TEXT,
-            created_at TEXT DEFAULT CURRENT_TIMESTAMP
-        )
-    `);
-
-    // 通知表
-    db.exec(`
-        CREATE TABLE IF NOT EXISTS notifications (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            order_id TEXT NOT NULL,
-            recipient TEXT NOT NULL,
-            type TEXT NOT NULL,
-            title TEXT NOT NULL,
-            content TEXT NOT NULL,
-            is_read INTEGER DEFAULT 0,
-            created_at TEXT DEFAULT CURRENT_TIMESTAMP
-        )
-    `);
-
-    // 创建索引
-    db.exec(`
-        CREATE INDEX IF NOT EXISTS idx_order_id ON loan_applications(order_id);
-        CREATE INDEX IF NOT EXISTS idx_salesperson ON loan_applications(salesperson);
-        CREATE INDEX IF NOT EXISTS idx_status ON loan_applications(status);
-        CREATE INDEX IF NOT EXISTS idx_submit_time ON loan_applications(submit_time);
-    `);
-
-    // 插入示例数据
-    try {
-        const stmt = db.prepare('INSERT INTO salespersons (name, phone) VALUES (?, ?)');
-        stmt.run('张业务员', '13800138001');
-        stmt.run('李业务员', '13800138002');
-        stmt.run('王业务员', '13800138003');
-    } catch (err) {
-        // 如果数据已存在，忽略
-    }
-
-    console.log('✅ SQLite数据库初始化完成');
+// 生成订单ID
+function generateOrderId() {
+    const now = new Date();
+    const date = now.toISOString().slice(0, 10).replace(/-/g, '');
+    const time = now.getTime().toString().slice(-6);
+    return `DQ${date}${time}`;
 }
 
-// 初始化数据库
-initDatabase();
+// ===== API 路由 =====
 
-// API路由
-
-// 1. 提交报单
+// 提交报单
 app.post('/api/loan-application', (req, res) => {
-    try {
-        const {
-            orderId,
-            name,
-            phone,
-            idCard,
-            salesperson,
-            carModel,
-            carPrice,
-            downPayment,
-            loanAmount,
-            loanTerm,
-            notes
-        } = req.body;
-
-        const stmt = db.prepare(`
-            INSERT INTO loan_applications (
-                order_id, name, phone, id_card, salesperson, car_model,
-                car_price, down_payment, loan_amount, loan_term, notes,
-                submit_time, status
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'pending')
-        `);
-
-        stmt.run(
-            orderId,
-            name,
-            phone,
-            idCard,
-            salesperson,
-            carModel,
-            parseFloat(carPrice),
-            parseFloat(downPayment),
-            parseFloat(loanAmount),
-            parseInt(loanTerm),
-            notes || '',
-            new Date().toISOString()
-        );
-
-        // 创建通知
-        const notifyStmt = db.prepare(`
-            INSERT INTO notifications (order_id, recipient, type, title, content)
-            VALUES (?, ?, 'new_order', '新报单待审批', ?)
-        `);
-        notifyStmt.run(orderId, '管理员', `业务员${salesperson}提交了新报单: ${orderId}`);
-
-        res.json({
-            success: true,
-            message: '报单提交成功',
-            orderId: orderId
-        });
-    } catch (err) {
-        console.error('提交报单失败:', err);
-        res.status(500).json({
-            success: false,
-            message: '提交失败: ' + err.message
-        });
-    }
+    const data = req.body;
+    const orderId = generateOrderId();
+    
+    const sql = `INSERT INTO loan_applications (
+        order_id, customer_name, customer_phone, id_card, staff_id, salesperson, dealer_name,
+        car_brand, car_model, car_color, car_price, bank, down_ratio, down_payment,
+        loan_amount, loan_term, total_rate, total_interest, monthly_payment,
+        has_gps, has_mortgage, funding_date, reg_cert_photos, person_car_photos, notes
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+    
+    const params = [
+        orderId,
+        data.customer_name || data.name || null,
+        data.customer_phone || data.phone || null,
+        data.id_card || data.idCard || null,
+        data.staff_id || data.staffId || null,
+        data.salesperson || null,
+        data.dealer_name || data.dealerName || null,
+        data.car_brand || data.carBrand || null,
+        data.car_model || data.carModel || null,
+        data.car_color || data.carColor || null,
+        data.car_price || data.carPrice || null,
+        data.bank || null,
+        data.down_ratio || data.downRatio || null,
+        data.down_payment || data.downPayment || null,
+        data.loan_amount || data.loanAmount || null,
+        data.loan_term || data.loanTerm || null,
+        data.total_rate || data.totalRate || null,
+        data.total_interest || data.totalInterest || null,
+        data.monthly_payment || data.monthlyPayment || null,
+        data.has_gps || data.hasGPS || null,
+        data.has_mortgage || data.hasMortgage || null,
+        data.funding_date || data.fundingDate || null,
+        data.reg_cert_photos || data.regCertPhotos ? JSON.stringify(data.reg_cert_photos || data.regCertPhotos) : null,
+        data.person_car_photos || data.personCarPhotos ? JSON.stringify(data.person_car_photos || data.personCarPhotos) : null,
+        data.notes || null
+    ];
+    
+    db.run(sql, params, function(err) {
+        if (err) {
+            console.error(err);
+            return res.json({ success: false, error: err.message });
+        }
+        res.json({ success: true, orderId });
+    });
 });
 
-// 2. 获取业务员报单列表
+// 我的订单（员工端）
 app.get('/api/my-orders', (req, res) => {
-    try {
-        const { salesperson } = req.query;
-
-        const stmt = db.prepare(`
-            SELECT * FROM loan_applications
-            WHERE salesperson = ?
-            ORDER BY submit_time DESC
-        `);
-
-        const orders = stmt.all(salesperson);
-
-        res.json({
-            success: true,
-            orders: orders
-        });
-    } catch (err) {
-        console.error('获取报单列表失败:', err);
-        res.status(500).json({
-            success: false,
-            message: '获取失败: ' + err.message
-        });
-    }
+    const staffId = req.query.staffId || 'DQYD003';
+    db.all(`SELECT * FROM loan_applications WHERE staff_id = ? ORDER BY created_at DESC`, [staffId], (err, rows) => {
+        if (err) return res.json({ success: false, error: err.message });
+        res.json({ success: true, orders: rows });
+    });
 });
 
-// 3. 获取所有报单（管理员）
+// 所有订单（管理端）
 app.get('/api/all-orders', (req, res) => {
-    try {
-        const stmt = db.prepare(`
-            SELECT * FROM loan_applications
-            ORDER BY submit_time DESC
-        `);
-
-        const orders = stmt.all();
-
-        res.json({
-            success: true,
-            orders: orders
-        });
-    } catch (err) {
-        console.error('获取所有报单失败:', err);
-        res.status(500).json({
-            success: false,
-            message: '获取失败: ' + err.message
-        });
-    }
+    db.all(`SELECT * FROM loan_applications ORDER BY created_at DESC`, [], (err, rows) => {
+        if (err) return res.json({ success: false, error: err.message });
+        res.json({ success: true, orders: rows });
+    });
 });
 
-// 4. 获取统计数据
-app.get('/api/statistics', (req, res) => {
-    try {
-        const today = new Date().toISOString().split('T')[0];
-
-        const stmt = db.prepare(`
-            SELECT
-                COUNT(*) as total,
-                SUM(CASE WHEN status = 'pending' THEN 1 ELSE 0 END) as pending,
-                SUM(CASE WHEN status = 'approved' THEN 1 ELSE 0 END) as approved,
-                SUM(CASE WHEN status = 'rejected' THEN 1 ELSE 0 END) as rejected
-            FROM loan_applications
-            WHERE DATE(submit_time) = ?
-        `);
-
-        const result = stmt.get(today);
-
-        res.json({
-            success: true,
-            statistics: {
-                today: result.total || 0,
-                pending: result.pending || 0,
-                approved: result.approved || 0,
-                rejected: result.rejected || 0,
-                total: result.total || 0
-            }
-        });
-    } catch (err) {
-        console.error('获取统计数据失败:', err);
-        res.status(500).json({
-            success: false,
-            message: '获取失败: ' + err.message
-        });
-    }
-});
-
-// 5. 审批报单
-app.post('/api/approve-order', (req, res) => {
-    try {
-        const { orderId, status, riskLevel, remarks, approver } = req.body;
-
-        const stmt = db.prepare(`
-            UPDATE loan_applications
-            SET status = ?, risk_level = ?, remarks = ?, approver = ?, approval_time = ?
-            WHERE order_id = ?
-        `);
-
-        stmt.run(
-            status,
-            riskLevel || 'low',
-            remarks || '',
-            approver || '管理员',
-            new Date().toISOString(),
-            orderId
-        );
-
-        // 记录审批日志
-        const logStmt = db.prepare(`
-            INSERT INTO approval_logs (order_id, action, operator, remarks)
-            VALUES (?, ?, ?, ?)
-        `);
-        logStmt.run(orderId, status, approver || '管理员', remarks || '');
-
-        // 创建通知
-        const notifyStmt = db.prepare(`
-            INSERT INTO notifications (order_id, recipient, type, title, content)
-            VALUES (?, ?, ?, ?, ?)
-        `);
-        const orderStmt = db.prepare('SELECT salesperson FROM loan_applications WHERE order_id = ?');
-        const order = orderStmt.get(orderId);
-
-        if (order) {
-            notifyStmt.run(
-                orderId,
-                order.salesperson,
-                status,
-                `报单${status === 'approved' ? '已通过' : '已拒绝'}`,
-                `您的报单 ${orderId} ${status === 'approved' ? '已通过审批' : '已被拒绝'}${remarks ? '：' + remarks : ''}`
-            );
-        }
-
-        res.json({
-            success: true,
-            message: '审批成功'
-        });
-    } catch (err) {
-        console.error('审批报单失败:', err);
-        res.status(500).json({
-            success: false,
-            message: '审批失败: ' + err.message
-        });
-    }
-});
-
-// 6. 获取报单详情
+// 单个订单详情
 app.get('/api/order/:orderId', (req, res) => {
-    try {
-        const { orderId } = req.params;
+    db.get(`SELECT * FROM loan_applications WHERE order_id = ?`, [req.params.orderId], (err, row) => {
+        if (err) return res.json({ success: false, error: err.message });
+        res.json({ success: true, order: row });
+    });
+});
 
-        const stmt = db.prepare(`
-            SELECT * FROM loan_applications
-            WHERE order_id = ?
-        `);
+// 统计数据
+app.get('/api/statistics', (req, res) => {
+    const today = new Date().toISOString().slice(0, 10);
+    
+    db.get(`SELECT 
+        COUNT(CASE WHEN date(created_at) = ? THEN 1 END) as today,
+        COUNT(CASE WHEN status = 'pending' THEN 1 END) as pending,
+        COUNT(CASE WHEN status = 'approved' THEN 1 END) as approved,
+        COUNT(CASE WHEN status = 'rejected' THEN 1 END) as rejected,
+        COUNT(CASE WHEN status = 'funded' THEN 1 END) as funded,
+        COUNT(*) as total
+    FROM loan_applications`, [today], (err, row) => {
+        if (err) return res.json({ success: false, error: err.message });
+        res.json({ success: true, statistics: row });
+    });
+});
 
-        const order = stmt.get(orderId);
-
-        if (!order) {
-            return res.status(404).json({
-                success: false,
-                message: '报单不存在'
-            });
+// 审核订单
+app.post('/api/approve-order', (req, res) => {
+    const { orderId, action } = req.body;
+    const status = action === 'approve' ? 'approved' : 'rejected';
+    
+    db.run(`UPDATE loan_applications SET status = ?, updated_at = CURRENT_TIMESTAMP WHERE order_id = ?`, 
+        [status, orderId], 
+        function(err) {
+            if (err) return res.json({ success: false, error: err.message });
+            res.json({ success: true });
         }
+    );
+});
 
-        res.json({
-            success: true,
-            order: order
-        });
-    } catch (err) {
-        console.error('获取报单详情失败:', err);
-        res.status(500).json({
-            success: false,
-            message: '获取失败: ' + err.message
-        });
-    }
+// 删除订单
+app.delete('/api/order/:orderId', (req, res) => {
+    db.run(`DELETE FROM loan_applications WHERE order_id = ?`, [req.params.orderId], function(err) {
+        if (err) return res.json({ success: false, error: err.message });
+        res.json({ success: true });
+    });
+});
+
+// ===== 补充资料 =====
+app.put('/api/order/:orderId/supplement', (req, res) => {
+    const { orderId } = req.params;
+    const { fundingDate, regCertPhotos, personCarPhotos } = req.body;
+    
+    const sql = `UPDATE loan_applications SET 
+        funding_date = ?, 
+        reg_cert_photos = ?, 
+        person_car_photos = ?, 
+        status = 'funded',
+        updated_at = CURRENT_TIMESTAMP 
+        WHERE order_id = ?`;
+    
+    const params = [
+        fundingDate || null,
+        regCertPhotos && regCertPhotos.length > 0 ? JSON.stringify(regCertPhotos) : null,
+        personCarPhotos && personCarPhotos.length > 0 ? JSON.stringify(personCarPhotos) : null,
+        orderId
+    ];
+    
+    db.run(sql, params, function(err) {
+        if (err) {
+            console.error(err);
+            return res.json({ success: false, error: err.message });
+        }
+        if (this.changes === 0) {
+            return res.json({ success: false, error: '订单不存在' });
+        }
+        res.json({ success: true, message: '资料已保存' });
+    });
+});
+
+// ===== 员工管理 =====
+
+// 获取员工列表
+app.get('/api/employees', (req, res) => {
+    db.all(`SELECT * FROM employees ORDER BY created_at DESC`, [], (err, rows) => {
+        if (err) return res.json({ success: false, error: err.message });
+        res.json({ success: true, employees: rows });
+    });
+});
+
+// 添加员工
+app.post('/api/employees', (req, res) => {
+    const { name, phone, position } = req.body;
+    
+    // 自动生成员工编号
+    db.all(`SELECT employee_id FROM employees ORDER BY id DESC LIMIT 1`, [], (err, rows) => {
+        let num = 4;
+        if (!err && rows.length && rows[0].employee_id) {
+            const last = parseInt(rows[0].employee_id.replace('DQYD', ''));
+            if (!isNaN(last)) num = last + 1;
+        }
+        const newId = 'DQYD' + String(num).padStart(3, '0');
+        db.run(`INSERT INTO employees (employee_id, name, phone, position) VALUES (?, ?, ?, ?)`, 
+            [newId, name || '（未填）', phone || '', position || '客户经理'], 
+            function(err2) {
+                if (err2) return res.json({ success: false, error: err2.message });
+                res.json({ success: true, employee_id: newId, name: name || '（未填）', phone, position: position || '客户经理' });
+            }
+        );
+    });
+});
+
+// 删除员工
+app.delete('/api/employees/:employeeId', (req, res) => {
+    db.run(`DELETE FROM employees WHERE employee_id = ?`, [req.params.employeeId], function(err) {
+        if (err) return res.json({ success: false, error: err.message });
+        res.json({ success: true });
+    });
 });
 
 // 启动服务器
+const PORT = 3000;
 app.listen(PORT, () => {
-    console.log('🚀 MASLAS API服务器已启动');
-    console.log(`📍 地址: http://localhost:${PORT}`);
-    console.log(`📱 报单表单: http://localhost:${PORT}/loan-form.html`);
-    console.log(`📊 我的报单: http://localhost:${PORT}/my-orders.html`);
+    console.log(`API Server running on port ${PORT}`);
+});
+
+// DEBUG endpoint
+app.post('/api/debug', (req, res) => {
+    console.log('DEBUG req.body:', typeof req.body, req.body);
+    console.log('DEBUG raw body:', req.rawBody ? req.rawBody.substring(0, 200) : 'none');
+    res.json({ received: req.body, type: typeof req.body });
 });

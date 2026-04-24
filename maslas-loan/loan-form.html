@@ -3,97 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>汽车分期报单系统</title>
+    <title>大秦分期系统 - 员工报单</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            padding: 20px;
+            padding: 15px;
         }
-
         .container {
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto;
             background: white;
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             overflow: hidden;
         }
-
         .header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             padding: 30px 20px;
             text-align: center;
         }
-
         .header h1 {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 700;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
         }
-
-        .header p {
-            font-size: 14px;
+        .header .en-title {
+            font-size: 12px;
             opacity: 0.9;
+            margin-bottom: 10px;
         }
-
-        .form {
-            padding: 30px 20px;
+        .header .date {
+            font-size: 13px;
+            opacity: 0.85;
         }
-
+        .form { padding: 25px 20px; }
+        .section {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .section:last-child { border-bottom: none; }
+        .section-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
-
         .form-group label {
             display: block;
             font-size: 14px;
             font-weight: 600;
             color: #333;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
-
-        .form-group label .required {
-            color: #ef4444;
-            margin-left: 2px;
-        }
-
+        .form-group label .required { color: #ef4444; margin-left: 2px; }
         .form-group input,
-        .form-group select {
+        .form-group select,
+        .form-group textarea {
             width: 100%;
-            padding: 12px 16px;
+            padding: 11px 14px;
             border: 2px solid #e5e7eb;
             border-radius: 10px;
-            font-size: 15px;
+            font-size: 14px;
             transition: all 0.3s;
             background: #f9fafb;
         }
-
         .form-group input:focus,
-        .form-group select:focus {
+        .form-group select:focus,
+        .form-group textarea:focus {
             outline: none;
             border-color: #667eea;
             background: white;
             box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
         }
-
         .form-group select {
             appearance: none;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23666'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
             background-repeat: no-repeat;
             background-position: right 12px center;
-            background-size: 20px;
-            padding-right: 40px;
+            background-size: 18px;
+            padding-right: 38px;
         }
-
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        @media (max-width: 480px) {
+            .form-row { grid-template-columns: 1fr; }
+        }
         .submit-btn {
             width: 100%;
             padding: 16px;
@@ -107,23 +119,16 @@
             transition: all 0.3s;
             box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
         }
-
         .submit-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
         }
-
-        .submit-btn:active {
-            transform: translateY(0);
-        }
-
         .submit-btn:disabled {
             background: #9ca3af;
             cursor: not-allowed;
             transform: none;
             box-shadow: none;
         }
-
         .success-message {
             background: #d1fae5;
             border: 2px solid #10b981;
@@ -133,13 +138,7 @@
             color: #065f46;
             display: none;
         }
-
-        .success-message h3 {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
+        .success-message h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
         .error-message {
             background: #fee2e2;
             border: 2px solid #ef4444;
@@ -149,142 +148,371 @@
             color: #991b1b;
             display: none;
         }
-
         .loading {
             display: none;
             text-align: center;
             padding: 20px;
         }
-
         .loading::after {
             content: "提交中...";
             font-size: 16px;
             color: #667eea;
             animation: pulse 1.5s ease-in-out infinite;
         }
-
         @keyframes pulse {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.5; }
         }
-
-        .hint {
-            font-size: 12px;
-            color: #6b7280;
-            margin-top: 4px;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+        .hint { font-size: 12px; color: #6b7280; margin-top: 4px; }
+        .radio-group {
+            display: flex;
             gap: 15px;
+            flex-wrap: wrap;
         }
-
-        @media (max-width: 480px) {
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-
-            body {
-                padding: 10px;
-            }
-
-            .form {
-                padding: 20px 15px;
-            }
+        .radio-label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .radio-label input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        .file-upload {
+            border: 2px dashed #d1d5db;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: #f9fafb;
+        }
+        .file-upload:hover {
+            border-color: #667eea;
+            background: white;
+        }
+        .file-upload input[type="file"] {
+            display: none;
+        }
+        .file-upload .icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+        .file-upload .text {
+            font-size: 14px;
+            color: #6b7280;
+        }
+        .preview-area {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        .preview-item {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 2px solid #e5e7eb;
+        }
+        .preview-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .preview-item .remove {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            background: rgba(239, 68, 68, 0.9);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .calculation-box {
+            background: #f0f9ff;
+            border: 2px solid #667eea;
+            border-radius: 12px;
+            padding: 15px;
+        }
+        .calc-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        .calc-item:last-child { margin-bottom: 0; }
+        .calc-item .label { color: #667eea; font-weight: 600; }
+        .calc-item .value { font-weight: 700; color: #333; }
+        .calc-item .value.highlight {
+            font-size: 16px;
+            color: #667eea;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>🚗 汽车分期报单系统</h1>
-            <p>MASLAS - 多节点智能体汽车分期协作系统</p>
+            <h1>大秦分期系统</h1>
+            <div class="en-title">DAQIN YIGO AUTO FINANCE SYSTEM</div>
+            <div class="date" id="currentDate"></div>
         </div>
 
         <div class="form">
             <form id="loanForm">
-                <!-- 基本信息 -->
-                <div class="form-group">
-                    <label for="name">客户姓名<span class="required">*</span></label>
-                    <input type="text" id="name" name="name" required placeholder="请输入客户姓名">
+                <!-- 经销商信息 -->
+                <div class="section">
+                    <div class="section-title">🏪 经销商信息</div>
+                    <div class="form-group">
+                        <label for="dealerName">经销商名称</label>
+                        <input type="text" id="dealerName" name="dealerName" value="老大">
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="phone">联系电话<span class="required">*</span></label>
-                    <input type="tel" id="phone" name="phone" required placeholder="请输入11位手机号" pattern="[0-9]{11}">
-                    <div class="hint">必须是11位数字</div>
-                </div>
-
-                <div class="form-group">
-                    <label for="idCard">身份证号<span class="required">*</span></label>
-                    <input type="text" id="idCard" name="idCard" required placeholder="请输入18位身份证号" pattern="[0-9X]{18}">
-                    <div class="hint">必须是18位数字或X结尾</div>
-                </div>
-
-                <div class="form-group">
-                    <label for="salesperson">业务员姓名<span class="required">*</span></label>
-                    <input type="text" id="salesperson" name="salesperson" required placeholder="请输入业务员姓名">
+                <!-- 客户信息 -->
+                <div class="section">
+                    <div class="section-title">👤 客户信息</div>
+                    <div class="form-group">
+                        <label for="customerName">客户姓名<span class="required">*</span></label>
+                        <input type="text" id="customerName" name="customerName" required placeholder="请输入客户姓名">
+                    </div>
+                    <div class="form-group">
+                        <label for="customerPhone">联系电话<span class="required">*</span></label>
+                        <input type="tel" id="customerPhone" name="customerPhone" required placeholder="请输入11位手机号" pattern="[0-9]{11}">
+                        <div class="hint">必须是11位数字</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="idCard">身份证号<span class="required">*</span></label>
+                        <input type="text" id="idCard" name="idCard" required placeholder="请输入18位身份证号" pattern="[0-9X]{18}">
+                        <div class="hint">必须是18位数字或X结尾</div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="salesperson">客户经理</label>
+                            <input type="text" id="salesperson" name="salesperson" placeholder="客户经理姓名">
+                        </div>
+                        <div class="form-group">
+                            <label for="staffId">员工编号</label>
+                            <input type="text" id="staffId" name="staffId" placeholder="员工编号">
+                        </div>
+                    </div>
                 </div>
 
                 <!-- 车辆信息 -->
-                <div class="form-group">
-                    <label for="carModel">车型<span class="required">*</span></label>
-                    <select id="carModel" name="carModel" required>
-                        <option value="">请选择车型</option>
-                        <option value="奥迪A4">奥迪A4</option>
-                        <option value="奥迪A6">奥迪A6</option>
-                        <option value="奥迪Q5">奥迪Q5</option>
-                        <option value="宝马3系">宝马3系</option>
-                        <option value="宝马5系">宝马5系</option>
-                        <option value="宝马X3">宝马X3</option>
-                        <option value="奔驰C级">奔驰C级</option>
-                        <option value="奔驰E级">奔驰E级</option>
-                        <option value="奔驰GLC">奔驰GLC</option>
-                        <option value="其他">其他</option>
-                    </select>
-                </div>
-
-                <!-- 金融信息 -->
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="carPrice">车价（万元）<span class="required">*</span></label>
-                        <input type="number" id="carPrice" name="carPrice" required placeholder="车价" step="0.1" min="1">
+                <div class="section">
+                    <div class="section-title">🚗 车辆信息</div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="carBrand">品牌车型<span class="required">*</span></label>
+                            <select id="carBrand" name="carBrand" required>
+                                <option value="">请选择品牌</option>
+                                <option value="比亚迪">比亚迪</option>
+                                <option value="奥迪">奥迪</option>
+                                <option value="宝马">宝马</option>
+                                <option value="奔驰">奔驰</option>
+                                <option value="大众">大众</option>
+                                <option value="丰田">丰田</option>
+                                <option value="本田">本田</option>
+                                <option value="特斯拉">特斯拉</option>
+                                <option value="其他">其他</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="carModel">具体型号<span class="required">*</span></label>
+                            <input type="text" id="carModel" name="carModel" required placeholder="如：秦、A4、3系">
+                        </div>
                     </div>
-
                     <div class="form-group">
-                        <label for="downPayment">首付（万元）<span class="required">*</span></label>
-                        <input type="number" id="downPayment" name="downPayment" required placeholder="首付" step="0.1" min="1">
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="loanAmount">贷款金额（万元）<span class="required">*</span></label>
-                        <input type="number" id="loanAmount" name="loanAmount" required placeholder="贷款金额" step="0.1" min="1">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="loanTerm">贷款期数<span class="required">*</span></label>
-                        <select id="loanTerm" name="loanTerm" required>
-                            <option value="">请选择期数</option>
-                            <option value="12">12期</option>
-                            <option value="24">24期</option>
-                            <option value="36">36期</option>
-                            <option value="48">48期</option>
-                            <option value="60">60期</option>
+                        <label for="carColor">车辆颜色</label>
+                        <select id="carColor" name="carColor">
+                            <option value="">请选择颜色</option>
+                            <option value="黑">黑</option>
+                            <option value="白">白</option>
+                            <option value="银">银</option>
+                            <option value="红">红</option>
+                            <option value="蓝">蓝</option>
+                            <option value="灰">灰</option>
+                            <option value="其他">其他</option>
                         </select>
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="notes">备注说明</label>
-                    <input type="text" id="notes" name="notes" placeholder="可选：填写备注说明">
-                    <div class="hint">如：特殊要求、附加条件等</div>
+                <!-- 融资方案 -->
+                <div class="section">
+                    <div class="section-title">💰 融资方案</div>
+                    <div class="form-group">
+                        <label for="bank">合作银行<span class="required">*</span></label>
+                        <select id="bank" name="bank" required>
+                            <option value="">请选择银行</option>
+                            <option value="农业银行 5年贴息 6%（等本等金）">农业银行 5年贴息 6%（等本等金）</option>
+                            <option value="农业银行-2%">农业银行-2%</option>
+                            <option value="农业银行-2.7%">农业银行-2.7%</option>
+                            <option value="农业银行-3%">农业银行-3%</option>
+                            <option value="秦农银行">秦农银行</option>
+                            <option value="建设银行">建设银行</option>
+                            <option value="浦发银行">浦发银行</option>
+                            <option value="兴业银行">兴业银行</option>
+                        </select>
+                        <div class="hint" id="bankHint">年费率：6%，利息 = 本金 × 年费率 × 年数</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="carPrice">车价（万元）<span class="required">*</span></label>
+                        <input type="number" id="carPrice" name="carPrice" required placeholder="车价" step="0.1" min="1">
+                    </div>
+                    <div class="form-group">
+                        <label>首付比例<span class="required">*</span></label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="downRatio" value="10" checked> 10%
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="downRatio" value="15"> 15%
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="downRatio" value="20"> 20%
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="downRatio" value="custom"> 自定义
+                            </label>
+                        </div>
+                        <input type="number" id="downPaymentCustom" name="downPaymentCustom" placeholder="自定义首付金额（万元）" step="0.1" style="display: none; margin-top: 10px; width: 100%;">
+                    </div>
+                    <div class="form-group">
+                        <label for="loanAmount">贷款金额（万元）<span class="required">*</span></label>
+                        <input type="number" id="loanAmount" name="loanAmount" required placeholder="自动计算" step="0.1" min="0" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="loanTerm">贷款期限<span class="required">*</span></label>
+                        <select id="loanTerm" name="loanTerm" required>
+                            <option value="">请选择期数</option>
+                            <option value="12">12期（1年）</option>
+                            <option value="24">24期（2年）</option>
+                            <option value="36">36期（3年）</option>
+                            <option value="48">48期（4年）</option>
+                            <option value="60">60期（5年）</option>
+                        </select>
+                    </div>
+
+                    <!-- 还款测算 -->
+                    <div class="calculation-box">
+                        <div class="calc-item">
+                            <span class="label">首付金额：</span>
+                            <span class="value"><span id="calcDownPayment">0</span> 万元</span>
+                        </div>
+                        <div class="calc-item">
+                            <span class="label">贷款本金：</span>
+                            <span class="value"><span id="calcLoanAmount">0</span> 万元</span>
+                        </div>
+                        <div class="calc-item">
+                            <span class="label">年费率：</span>
+                            <span class="value"><span id="calcRate">0</span>%</span>
+                        </div>
+                        <div class="calc-item">
+                            <span class="label">总利息：</span>
+                            <span class="value"><span id="calcTotalInterest">0</span> 元</span>
+                        </div>
+                        <div class="calc-item">
+                            <span class="label">月供：</span>
+                            <span class="value highlight"><span id="calcMonthlyPayment">0</span> 元/月</span>
+                        </div>
+                    </div>
                 </div>
 
-                <button type="submit" class="submit-btn" id="submitBtn">提交报单</button>
-            </form>
+                <!-- 其他选项 -->
+                <div class="section">
+                    <div class="section-title">📋 其他选项</div>
+                    <div class="form-group">
+                        <label>是否安装GPS</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="hasGps" value="是"> 是
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="hasGps" value="否" checked> 否
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>是否抵押</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="hasMortgage" value="是"> 是
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="hasMortgage" value="否" checked> 否
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="fundingDate">放款日期</label>
+                        <input type="date" id="fundingDate" name="fundingDate">
+                    </div>
+                </div>
+
+                <!-- 二次进入资料 -->
+                <div class="section">
+                    <div class="section-title">📎 二次进入资料</div>
+                    <div class="form-group">
+                        <label>车辆登记证书</label>
+                        <div class="file-upload" onclick="document.getElementById('regCertPhotos').click()">
+                            <div class="icon">📷</div>
+                            <div class="text">点击上传车辆登记证书照片</div>
+                            <div class="hint">支持多张图片上传</div>
+                        </div>
+                        <input type="file" id="regCertPhotos" name="regCertPhotos" multiple accept="image/*" style="display: none;">
+                        <div class="preview-area" id="regCertPreview"></div>
+                    </div>
+                    <div class="form-group">
+                        <label>人车合一照片</label>
+                        <div class="file-upload" onclick="document.getElementById('personCarPhotos').click()">
+                            <div class="icon">📷</div>
+                            <div class="text">点击上传人车合一照片</div>
+                            <div class="hint">支持多张图片上传</div>
+                        </div>
+                        <input type="file" id="personCarPhotos" name="personCarPhotos" multiple accept="image/*" style="display: none;">
+                        <div class="preview-area" id="personCarPreview"></div>
+                    </div>
+                </div>
+
+                <!-- 备注说明 -->
+                <div class="section">
+                    <div class="section-title">📝 备注说明</div>
+                    <div class="form-group">
+                        <label for="notes">其他需要说明的事项</label>
+                        <textarea id="notes" name="notes" placeholder="可选：填写备注说明..."></textarea>
+                    </div>
+                </div>
+
+                <!-- 数学验证码 -->
+        <div id="captchaSection" style="margin: 20px 0; padding: 15px; background: #f5f5f5; border-radius: 5px; display: none;">
+            <p style="margin: 0 0 10px 0; font-weight: bold;">安全验证</p>
+            <p style="margin: 0 0 10px 0;">请计算：<span id="captchaNum1"></span> + <span id="captchaNum2"></span> = ?</p>
+            <input type="number" id="captchaAnswer" placeholder="输入答案" style="padding: 8px; border: 1px solid #ccc; border-radius: 4px; width: 100px;">
+            <input type="hidden" id="captchaCorrect" value="">
+            <button type="button" onclick="confirmSubmit()" style="padding: 8px 20px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; margin-left: 10px;">确认提交</button>
+        </div>
+        
+        <button type="button" id="submitBtn" onclick="showCaptchaAndSubmit()" style="padding: 12px 30px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;">提交申请</button>
+        
+        <button type="submit" style="display:none;"> class="submit-btn" id="submitBtn">提交报单</button>
+            
+        <!-- 蜜罐字段 - 正常用户看不到，机器人会填 -->
+        <div style="position:absolute;left:-9999px;opacity:0;pointer-events:none;">
+            <input type="text" name="website" id="honeypot_website" tabindex="-1" autocomplete="off">
+            <input type="text" name="email" id="honeypot_email" tabindex="-1" autocomplete="off">
+        </div>
+</form>
 
             <div class="loading" id="loading"></div>
             <div class="success-message" id="successMessage">
@@ -300,22 +528,253 @@
     </div>
 
     <script>
+        // 设置当前日期
+        document.getElementById('currentDate').textContent = new Date().toLocaleDateString('zh-CN', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+
+        // 存储上传的图片数据
+        let regCertPhotosData = [];
+        let personCarPhotosData = [];
+
+        // 图片上传处理
+        function handleImageUpload(inputElement, previewArea, dataArray) {
+            inputElement.addEventListener('change', function(e) {
+                const files = e.target.files;
+                for (let file of files) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const base64 = e.target.result;
+                        dataArray.push(base64);
+                        addPreview(base64, previewArea, dataArray);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+
+        // 添加预览
+        function addPreview(base64, previewArea, dataArray) {
+            const div = document.createElement('div');
+            div.className = 'preview-item';
+            div.innerHTML = `
+                <img src="${base64}">
+                <button type="button" class="remove" onclick="removeImage(this, '${previewArea.id}', ${dataArray.length - 1})">×</button>
+            `;
+            previewArea.appendChild(div);
+        }
+
+        // 删除图片
+        function removeImage(btn, previewId, index) {
+            const previewArea = document.getElementById(previewId);
+            const item = btn.closest('.preview-item');
+            
+            if (previewId === 'regCertPreview') {
+                const itemIndex = Array.from(previewArea.children).indexOf(item);
+                regCertPhotosData.splice(itemIndex, 1);
+            } else {
+                const itemIndex = Array.from(previewArea.children).indexOf(item);
+                personCarPhotosData.splice(itemIndex, 1);
+            }
+            
+            item.remove();
+        }
+
+        // 绑定图片上传事件
+        handleImageUpload(document.getElementById('regCertPhotos'), document.getElementById('regCertPreview'), regCertPhotosData);
+        handleImageUpload(document.getElementById('personCarPhotos'), document.getElementById('personCarPreview'), personCarPhotosData);
+
+        // 银行费率映射
+        const bankRates = {
+            '农业银行 5年贴息 6%（等本等金）': 6.0,
+            '农业银行-2%': 2.0,
+            '农业银行-2.7%': 2.7,
+            '农业银行-3%': 3.0,
+            '秦农银行': 3.168,
+            '建设银行': 3.0,
+            '浦发银行': 3.0,
+            '兴业银行': 3.0
+        };
+
+        // 银行提示映射
+        const bankHints = {
+            '农业银行 5年贴息 6%（等本等金）': '年费率：6%，利息 = 本金 × 年费率 × 年数',
+            '农业银行-2%': '年费率：2%',
+            '农业银行-2.7%': '年费率：2.7%',
+            '农业银行-3%': '年费率：3%',
+            '秦农银行': '年费率：3.168%',
+            '建设银行': '年费率：3%',
+            '浦发银行': '年费率：3%',
+            '兴业银行': '年费率：3%'
+        };
+
+        // 计算还款信息
+        function calculatePayment() {
+            const carPrice = parseFloat(document.getElementById('carPrice').value) || 0;
+            const loanTerm = parseInt(document.getElementById('loanTerm').value) || 0;
+
+            // 没有车价时清空所有结果
+            if (carPrice <= 0) {
+                document.getElementById('calcDownPayment').textContent = '0.00';
+                document.getElementById('calcLoanAmount').textContent = '0.00';
+                document.getElementById('calcRate').textContent = '0.00';
+                document.getElementById('calcTotalInterest').textContent = '0.00';
+                document.getElementById('calcMonthlyPayment').textContent = '0.00';
+                document.getElementById('loanAmount').value = '';
+                return;
+            }
+            const bank = document.getElementById('bank').value;
+            
+            // 获取首付比例
+            const downRatioRadios = document.getElementsByName('downRatio');
+            let downRatio = 10;
+            let isCustom = false;
+            for (let radio of downRatioRadios) {
+                if (radio.checked) {
+                    if (radio.value === 'custom') {
+                        isCustom = true;
+                    } else {
+                        downRatio = parseInt(radio.value);
+                    }
+                    break;
+                }
+            }
+
+            // 显示/隐藏自定义输入框
+            const customInput = document.getElementById('downPaymentCustom');
+            if (isCustom) {
+                customInput.style.display = 'block';
+            } else {
+                customInput.style.display = 'none';
+            }
+
+            let downPayment = 0;
+            if (isCustom) {
+                downPayment = parseFloat(customInput.value) || 0;
+            } else {
+                downPayment = carPrice * downRatio / 100;
+            }
+
+            // 计算贷款金额（即使没选期限也能算）
+            const loanAmount = Math.max(0, carPrice - downPayment);
+
+            // 更新贷款金额输入框
+            document.getElementById('loanAmount').value = loanAmount.toFixed(2);
+
+            // 更新计算结果：首付和贷款本金一定显示
+            document.getElementById('calcDownPayment').textContent = downPayment.toFixed(2);
+            document.getElementById('calcLoanAmount').textContent = loanAmount.toFixed(2);
+
+            // 利息和月供需要期限，没选时显示 --
+            if (loanTerm <= 0) {
+                document.getElementById('calcRate').textContent = '--';
+                document.getElementById('calcTotalInterest').textContent = '--';
+                document.getElementById('calcMonthlyPayment').textContent = '--';
+                return;
+            }
+
+            // 计算利息
+            const rate = bankRates[bank] || 0;
+            const totalInterest = loanAmount * 10000 * rate / 100;
+            const totalPayment = loanAmount * 10000 + totalInterest;
+            const monthlyPayment = totalPayment / loanTerm;
+
+            document.getElementById('calcRate').textContent = rate.toFixed(2);
+            document.getElementById('calcTotalInterest').textContent = totalInterest.toFixed(2);
+            document.getElementById('calcMonthlyPayment').textContent = monthlyPayment.toFixed(2);
+        }
+
+        // 监听输入变化
+        document.getElementById('carPrice').addEventListener('input', calculatePayment);
+        document.getElementById('downPaymentCustom').addEventListener('input', calculatePayment);
+        document.getElementById('bank').addEventListener('change', function() {
+            document.getElementById('bankHint').textContent = bankHints[this.value] || '';
+            calculatePayment();
+        });
+        document.getElementById('loanTerm').addEventListener('change', calculatePayment);
+
+        // 监听首付比例变化
+        const downRatioRadios = document.getElementsByName('downRatio');
+        for (let radio of downRatioRadios) {
+            radio.addEventListener('change', calculatePayment);
+        }
+
+
+        // 显示验证码并准备提交
+        function showCaptchaAndSubmit() {
+            // 检查蜜罐字段，如果被填充则拒绝提交（机器人）
+            const honeypot = document.getElementById("honeypot_website");
+            if (honeypot && honeypot.value !== "") {
+                showError("检测到异常提交，请刷新页面重试。");
+                return;
+            }
+            
+            // 显示验证码
+            document.getElementById("captchaSection").style.display = "block";
+            const num1 = Math.floor(Math.random() * 10) + 1;
+            const num2 = Math.floor(Math.random() * 10) + 1;
+            document.getElementById("captchaNum1").textContent = num1;
+            document.getElementById("captchaNum2").textContent = num2;
+            document.getElementById("captchaCorrect").value = num1 + num2;
+            document.getElementById("captchaAnswer").value = "";
+            document.getElementById("captchaAnswer").focus();
+        }
+
+        // 确认提交（验证码通过后）
+        function confirmSubmit() {
+            const userAnswer = parseInt(document.getElementById("captchaAnswer").value);
+            const correctAnswer = parseInt(document.getElementById("captchaCorrect").value);
+            
+            if (isNaN(userAnswer)) {
+                showError("请输入答案");
+                return;
+            }
+            
+            if (userAnswer !== correctAnswer) {
+                showError("答案错误，请重新计算");
+                // 生成新的验证码
+                const num1 = Math.floor(Math.random() * 10) + 1;
+                const num2 = Math.floor(Math.random() * 10) + 1;
+                document.getElementById("captchaNum1").textContent = num1;
+                document.getElementById("captchaNum2").textContent = num2;
+                document.getElementById("captchaCorrect").value = num1 + num2;
+                document.getElementById("captchaAnswer").value = "";
+                return;
+            }
+            
+            // 验证通过，提交表单
+            document.getElementById("loanForm").dispatchEvent(new Event("submit"));
+        }
         // 表单提交处理
         document.getElementById('loanForm').addEventListener('submit', async function(e) {
             e.preventDefault();
 
             // 获取表单数据
             const formData = new FormData(this);
-            const data = Object.fromEntries(formData.entries());
+            const data = {};
 
-            // 验证数据
-            if (!data.name || !data.phone || !data.idCard || !data.carModel) {
+            // 处理普通字段
+            for (let [key, value] of formData.entries()) {
+                if (key !== 'downPaymentCustom' && key !== 'regCertPhotos' && key !== 'personCarPhotos') {
+                    data[key] = value;
+                }
+            }
+
+            // 处理单选按钮
+            data.downRatio = formData.get('downRatio') === 'custom' ? 0 : parseInt(formData.get('downRatio'));
+            data.hasGps = formData.get('hasGps');
+            data.hasMortgage = formData.get('hasMortgage');
+
+            // 验证必填项
+            if (!data.customerName || !data.customerPhone || !data.idCard || !data.carBrand || !data.carModel || !data.bank || !data.carPrice || !data.loanTerm) {
                 showError('请填写所有必填项');
                 return;
             }
 
             // 手机号验证
-            if (!/^1[3-9]\d{9}$/.test(data.phone)) {
+            if (!/^1[3-9]\d{9}$/.test(data.customerPhone)) {
                 showError('手机号格式不正确');
                 return;
             }
@@ -326,6 +785,22 @@
                 return;
             }
 
+            // 添加图片数据
+            data.regCertPhotos = regCertPhotosData.join(',');
+            data.personCarPhotos = personCarPhotosData.join(',');
+
+            // 添加计算结果
+            const rate = bankRates[data.bank] || 0;
+            const years = data.loanTerm / 12;
+            const loanAmount = parseFloat(data.loanAmount);
+            const totalInterest = loanAmount * 10000 * rate / 100;
+            const totalPayment = loanAmount * 10000 + totalInterest;
+            const monthlyPayment = data.loanTerm > 0 ? (totalPayment / data.loanTerm) : 0;
+
+            data.totalRate = rate;
+            data.totalInterest = totalInterest;
+            data.monthlyPayment = monthlyPayment;
+
             // 显示加载状态
             document.getElementById('loading').style.display = 'block';
             document.getElementById('submitBtn').disabled = true;
@@ -335,10 +810,11 @@
                 const orderId = 'ORD' + Date.now();
                 data.orderId = orderId;
                 data.submitTime = new Date().toISOString();
-                data.status = 'pending';
 
                 // 发送到后端API
-                const response = await fetch('/api/loan-application', {
+                // DEBUG: log payload
+                console.log("=== FORM DATA ===", JSON.stringify(data).substring(0, 2000));
+                const response = await fetch('https://api.daqinegoglobal.com/api/loan-application', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -356,14 +832,14 @@
 
                     // 3秒后重定向到我的报单页面
                     setTimeout(() => {
-                        window.location.href = '/my-orders.html';
+                        window.location.href = 'https://admin.daqinegoglobal.com/staff/my-orders.html';
                     }, 3000);
                 } else {
                     showError(result.message || '提交失败，请重试');
                 }
             } catch (error) {
                 console.error('提交错误:', error);
-                showError('网络错误，请稍后重试');
+                alert('提交错误: ' + error.message + '\\n' + (error.stack||'').substring(0,500)); showError('网络错误: ' + error.message);
             } finally {
                 document.getElementById('loading').style.display = 'none';
                 document.getElementById('submitBtn').disabled = false;
@@ -378,21 +854,7 @@
                 document.getElementById('errorMessage').style.display = 'none';
             }, 5000);
         }
-
-        // 自动计算贷款金额
-        document.getElementById('carPrice').addEventListener('input', function() {
-            const carPrice = parseFloat(this.value) || 0;
-            const downPayment = parseFloat(document.getElementById('downPayment').value) || 0;
-            const loanAmount = Math.max(0, carPrice - downPayment);
-            document.getElementById('loanAmount').value = loanAmount.toFixed(1);
-        });
-
-        document.getElementById('downPayment').addEventListener('input', function() {
-            const carPrice = parseFloat(document.getElementById('carPrice').value) || 0;
-            const downPayment = parseFloat(this.value) || 0;
-            const loanAmount = Math.max(0, carPrice - downPayment);
-            document.getElementById('loanAmount').value = loanAmount.toFixed(1);
-        });
     </script>
+<script>window.formLoadTimestamp = Date.now();</script>
 </body>
 </html>
