@@ -9,6 +9,7 @@ import pandas as pd
 import numpy as np
 import json
 import os
+import requests
 from datetime import datetime, timedelta
 import sys
 
@@ -19,6 +20,18 @@ from strategy.core import (
 )
 
 STATE_FILE = "/home/ubuntu/TrendMatrix/live/sim_positions.json"
+WEBHOOK_KEY = "589a7c03-a8a0-4040-9b66-0c5a6fb9f3f0"
+
+# ===================== 企业微信推送 =====================
+def wecom_push(content: str) -> bool:
+    url = f"https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key={WEBHOOK_KEY}"
+    payload = {"msgtype": "text", "text": {"content": content, "mentioned_list": []}}
+    try:
+        r = requests.post(url, json=payload, timeout=10)
+        return r.json().get("errcode") == 0
+    except Exception as e:
+        print(f"[推送失败] {e}")
+        return False
 
 # ===================== 数据获取 =====================
 def get_data(code: str, count: int = 30) -> pd.DataFrame:
@@ -72,8 +85,8 @@ def run_daily_analysis():
     latest_mkt = mkt.iloc[-1]
     prev_mkt = mkt.iloc[-2]
     market_ok = latest_mkt["close"] > latest_mkt["ma10"] and prev_mkt["close"] > prev_mkt["ma10"]
-    print(f"\n[大盘] 沪深300: {latest_mkt['close']:.2f}  MA10: {latest_mkt['ma10']:.2f}")
-    print(f"      {'✓ 在MA10之上' if market_ok else '✗ 在MA10之下'}")
+    mkt_status = f"✓ 在MA10之上" if market_ok else f"✗ 在MA10之下"
+    print(f"\n[大盘] 沪深300: {latest_mkt['close']:.2f}  MA10: {latest_mkt['ma10']:.2f}  {mkt_status}")
 
     # 处理现有持仓
     print(f"\n[持仓] 当前现金: {cash:.2f}")
@@ -170,15 +183,46 @@ def run_daily_analysis():
     state["positions"] = positions
     save_state(state)
 
-    # 汇总
+    # 构建推送内容
+    lines = [f"📊 TrendMatrix 每日模拟实盘 {today}"]
+    lines.append(f"\n大盘: 沪深300 {latest_mkt['close']:.2f}  {mkt_status}")
+
+    # 持仓
+    if positions:
+        lines.append(f"\n持仓 ({len(positions)}只) 现金: {cash:.2f}")
+        for code, pos in positions.items():
+            df_ref = get_data(code, 2)
+            if not df_ref.empty:
+                curr_price = df_ref.iloc[-1]["close"]
+                pnl = (curr_price / pos["entry_price"] - 1) * 100
+                flag = "🟡半仓" if pos.get("half_sold") else "🟢持仓"
+                lines.append(f"  {flag} {pos['name']}: {curr_price:.2f}({pnl:+.2f}%)")
+    else:
+        lines.append(f"\n持仓: 空仓 现金: {cash:.2f}")
+
+    # 今日操作
+    if closed_trades:
+        lines.append(f"\n出场: {len(closed_trades)}笔")
+        for t in closed_trades:
+            lines.append(f"  {t['name']} {t['reason']} {t['pnl']:+.2f}%")
+    if new_positions:
+        lines.append(f"\n入场: {len(new_positions)}笔")
+        for name in new_positions:
+            lines.append(f"  + {name}")
+
+    if not closed_trades and not new_positions:
+        lines.append(f"\n今日无操作")
+
+    report = "\n".join(lines)
     print(f"\n{'='*60}")
-    print(f"[汇总] 日期: {today}")
-    print(f"  现金: {cash:.2f}")
-    print(f"  持仓: {len(positions)}只")
-    for code, pos in positions.items():
-        pnl = (df.iloc[-1]["close"] / pos["entry_price"] - 1) * 100 if code in [c for c, _ in STOCKS.items()] else 0
-        print(f"    {pos['name']}: {pos['entry_price']:.2f} x {pos['volume']}股")
+    print(report)
     print(f"{'='*60}")
+
+    # 推送企业微信
+    pushed = wecom_push(report)
+    print(f"\n[推送] {'成功' if pushed else '失败'}")
+
+    return report
 
 if __name__ == "__main__":
     run_daily_analysis()
