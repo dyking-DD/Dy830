@@ -166,7 +166,6 @@ def run_backtest():
         )
 
     # 回测
-    print("\n[3] 运行回测...")
     results = {}
 
     for code, (name, pos_type) in STOCKS.items():
@@ -175,9 +174,12 @@ def run_backtest():
         capital = init_cap
         position = None
         trades = []
+        cooldown = 0  # 出场后冷却 Bar 数（防立即重新入场）
 
         for i in range(MA_PERIOD, len(df)):
             row = df.iloc[i]
+            if cooldown > 0:
+                cooldown -= 1
 
             # 大盘不在 MA10 上，跳过（大盘择时）
             if row["close_mkt"] <= row["ma10_mkt"]:
@@ -193,10 +195,13 @@ def run_backtest():
                     capital = capital * (1 + exit_info["pnl"] / 100)
                     trades.append(exit_info)
                     position = None
+                    cooldown = 3  # 强制出场后冷却3根
                 continue
 
             if position is None:
-                # 入场检查
+                # cooldown 未结束，禁止入场
+                if cooldown > 0:
+                    continue
                 prev = df.iloc[i - 1]
                 if check_entry_signal(prev):
                     position = {
@@ -228,17 +233,15 @@ def run_backtest():
                     }
                     trades.append(trade)
 
-                    # 分批止盈：出半仓，保留半仓
+                    # 分批止盈：出半仓，保留半仓跑移动止损
                     if exit_info.get("half"):
-                        position["half_sold"] = True
-                        half_pnl = (exit_price / position["entry_price"] - 1) * 100
-                        # 半仓资金先锁定，剩余半仓继续跑移动止损
                         locked_capital = init_cap * 0.5 * (1 + pnl / 100)
-                        init_cap = init_cap * 0.5  # 剩余半仓继续
-                        capital = locked_capital + init_cap
-                        position = None
+                        capital = locked_capital + init_cap * 0.5
+                        position["half_sold"] = True
+                        # 不清position，保留半仓继续跑；不出 cooldown，继续持
                     else:
                         position = None
+                        cooldown = 3  # 全仓退出后冷却3根
 
         # 最后仍未卖出，按最后收盘结算
         if position is not None:
